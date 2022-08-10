@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { FsFrameToolbarComponent } from './components/ui-frame-toolbar/frame-toolbar.component';
 import { FsFrameContentComponent } from './components/ui-frame-content/frame-content.component';
 import { FsUiFrameComponent } from './components/ui-frame/ui-frame.component';
@@ -29,6 +30,7 @@ import { FrameToolbarTitleDirective } from './components/ui-frame-toolbar/direct
     BrowserAnimationsModule,
     RouterModule,
     MatIconModule,
+    MatInputModule,
     MatButtonModule,
     MatDividerModule,
     MatMenuModule,

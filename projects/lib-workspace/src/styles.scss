@@ -50,3 +50,18 @@ $dark-theme: mat.define-dark-theme(
   @include mat.all-component-themes($light-theme);
   @include frame-theme($light-theme);
 }
+
+.mat-form-field:not(.mat-form-field-has-label) .mat-form-field-infix {
+  border-top-width: 0;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.mat-form-field-label-wrapper {
+  padding-top: 0px;
+}
+
