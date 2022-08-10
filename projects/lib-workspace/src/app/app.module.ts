@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,12 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatButtonModule,
     MatBadgeModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_BASE_HREF,
+      useValue: ".",
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

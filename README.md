@@ -19,6 +19,12 @@ And install it:
     npm install @fullstack-devops/ng-mat-components
     ```
 
+## Documentation
+
+Live Demo with all current modules at https://fullstack-devops.github.io/ng-mat-components (still in dev)
+
+Documentation will be done later when the api is fixed.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
