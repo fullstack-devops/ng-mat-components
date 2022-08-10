@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ng-mat-components": {
+      "projectType": "library",
+      "root": "projects/ng-mat-components",
+      "sourceRoot": "projects/ng-mat-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng-mat-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-mat-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-mat-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-mat-components/src/test.ts",
+            "tsConfig": "projects/ng-mat-components/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-mat-components/karma.conf.js"
+          }
+        }
+      }
+    },
+    "lib-workspace": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/lib-workspace",
+      "sourceRoot": "projects/lib-workspace/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lib-workspace",
+            "index": "projects/lib-workspace/src/index.html",
+            "main": "projects/lib-workspace/src/main.ts",
+            "polyfills": "projects/lib-workspace/src/polyfills.ts",
+            "tsConfig": "projects/lib-workspace/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/lib-workspace/src/favicon.ico",
+              "projects/lib-workspace/src/assets"
+            ],
+            "styles": [
+              "projects/lib-workspace/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/lib-workspace/src/environments/environment.ts",
+                  "with": "projects/lib-workspace/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "lib-workspace:build:production"
+            },
+            "development": {
+              "browserTarget": "lib-workspace:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lib-workspace:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lib-workspace/src/test.ts",
+            "polyfills": "projects/lib-workspace/src/polyfills.ts",
+            "tsConfig": "projects/lib-workspace/tsconfig.spec.json",
+            "karmaConfig": "projects/lib-workspace/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/lib-workspace/src/favicon.ico",
+              "projects/lib-workspace/src/assets"
+            ],
+            "styles": [
+              "projects/lib-workspace/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ng-mat-components"
+}
