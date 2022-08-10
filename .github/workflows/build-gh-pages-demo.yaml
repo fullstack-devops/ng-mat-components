@@ -30,8 +30,9 @@ jobs:
 
       - name: Clean out old dist and copy new dist
         run: |
-          rm -rf gh-pages-demo/dist/*
-          cp -R dist/lib-workspace/* gh-pages-demo/dist
+          rm -rf gh-pages-demo/*
+          cp -R dist/lib-workspace/* gh-pages-demo/*
+          touch gh-pages-demo/$(date "+%d-%m-%Y_%H-%m-%S")-dummyfile
 
       - name: push chages to branch
         working-directory: gh-pages-demo
