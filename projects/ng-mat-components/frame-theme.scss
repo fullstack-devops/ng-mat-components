@@ -1,0 +1,52 @@
+// Import all the tools needed to customize the theme and extract parts of it
+@import "~@angular/material/theming";
+
+// Define a mixin that accepts a theme and outputs the color styles for the component.
+@mixin frame-theme($theme) {
+  // Extract whichever individual palettes you need from the theme.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  // Gets the standard material maps of fore/background
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  // Use mat-color to extract individual colors from a palette as necessary.
+  .svg-icon svg {
+    fill: mat-color($foreground, text);
+  }
+
+  .frame-toolbar-logo,
+  .frame-toolbar-logo .logo-span {
+    background-color: mat-color($background, app-bar);
+    color: mat-color($foreground, text);
+  }
+
+  .frame-toolbar {
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, text);
+  }
+
+  .sidebar {
+    background-color: mat-color($background, app-bar);
+    color: mat-color($foreground, text);
+    border-top: 1px solid mat-color($foreground, divider);
+  }
+  .sidebar .profile {
+    border-top: 1px solid mat-color($foreground, divider);
+  }
+
+  .sidebar .nav-links li .active {
+    border-left: 4px mat-color($primary, default) inset;
+    background-color: rgba($color: mat-color($primary, default), $alpha: 0.1);
+  }
+
+  .sidebar .nav-links li button:not(.active) {
+    border-left: 4px transparent inset;
+    // background-color: rgba($color:  mat-color($primary, default), $alpha: 0.1);
+  }
+
+  .frame-content {
+    color: mat-color($foreground, text);
+    background-color: lighten($color: mat-color($background, background), $amount: 3%);
+  }
+}
