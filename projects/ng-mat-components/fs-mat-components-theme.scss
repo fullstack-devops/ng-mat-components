@@ -1,0 +1,123 @@
+// Import all the tools needed to customize the theme and extract parts of it
+@import "~@angular/material/theming";
+
+// Define a mixin that accepts a theme and outputs the color styles for the component.
+@mixin fs-mat-components-theme($theme) {
+  // Extract whichever individual palettes you need from the theme.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  // Gets the standard material maps of fore/background
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  // Use mat-color to extract individual colors from a palette as necessary.
+  .svg-icon svg {
+    fill: mat-color($foreground, text);
+  }
+
+  .frame-toolbar-logo,
+  .frame-toolbar-logo .logo-span {
+    background-color: mat-color($background, app-bar);
+    color: mat-color($foreground, text);
+  }
+
+  .frame-toolbar {
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, text);
+  }
+
+  .sidebar {
+    background-color: mat-color($background, app-bar);
+    color: mat-color($foreground, text);
+    border-top: 1px solid mat-color($foreground, divider);
+  }
+  .sidebar .profile {
+    border-top: 1px solid mat-color($foreground, divider);
+  }
+
+  .sidebar .nav-links li .active {
+    border-left: 4px mat-color($primary, default) inset;
+    background-color: rgba($color: mat-color($primary, default), $alpha: 0.1);
+  }
+
+  .sidebar .nav-links li button:not(.active) {
+    border-left: 4px transparent inset;
+    // background-color: rgba($color:  mat-color($primary, default), $alpha: 0.1);
+  }
+
+  .frame-content {
+    color: mat-color($foreground, text);
+    background-color: lighten($color: mat-color($background, background), $amount: 3%);
+  }
+
+  // Use mat-color to extract individual colors from a palette as necessary.
+  .fs-calendar-body-today {
+    border: 1px solid mat-color($foreground, secondary-text);
+  }
+
+  .fs-calendar-month {
+    background-color: mat-color($background, dialog);
+  }
+
+  .fs-calendar-switches svg {
+    fill: mat-color($foreground, base);
+  }
+
+  .placeholderDay {
+    color: mat-color($foreground, hint-text);
+  }
+
+  .fs-calendar-table-header tr:first-child {
+    border-bottom: solid 1px mat-color($foreground, divider);
+    color: mat-color($foreground, secondary-text);
+  }
+  .kw {
+    border-right: solid 1px mat-color($foreground, divider);
+    color: mat-color($foreground, secondary-text);
+  }
+
+  .clickable:hover {
+    background-color: mat-color($primary, lighter);
+  }
+
+  .weekend {
+    background-color: mat-color($foreground, divider);
+  }
+
+  .date-between::after,
+  .selected-start::after,
+  .selected-end::after {
+    border-top: dashed 1px mat-color($foreground, secondary-text);
+    border-bottom: dashed 1px mat-color($foreground, secondary-text);
+  }
+
+  .selected-set.date-between {
+    color: mat-color($primary, lighter-contrast);
+  }
+
+  .selected-set.date-between::after,
+  .selected-set.selected-start::after,
+  .selected-set.selected-end::after {
+    background-color: mat-color($primary, lighter);
+  }
+  .selected-set.selected-start,
+  .selected-set.selected-end {
+    color: mat-color($primary, secondary-text);
+  }
+
+  .selected-start::before,
+  .selected-end::before {
+    background-color: mat-color($primary);
+  }
+
+  .blured-days::after {
+    content: "";
+    background: radial-gradient(
+      circle at center,
+      mat-color($background, background) 0,
+      mat-color($background, background) 12px,
+      transparent 14px,
+      transparent 100%
+    );
+  }
+}

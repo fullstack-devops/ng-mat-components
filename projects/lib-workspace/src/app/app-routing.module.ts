@@ -1,3 +1,4 @@
+import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { FrameRoutes } from 'projects/ng-mat-components/src/public-api';
@@ -29,6 +30,14 @@ export const routes: FrameRoutes = [
       displaySidemenu: true,
       sidenavIcon: 'dashboard',
       sidenavText: 'Dashboard'
+    },
+  },
+  {
+    path: 'calendar-showcase', component: CalenderShowcaseComponent,
+    data: {
+      displaySidemenu: true,
+      sidenavIcon: 'calendar_month',
+      sidenavText: 'Calendar'
     },
   },
 ];

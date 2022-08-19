@@ -1,0 +1,148 @@
+.fs-calendar-helper {
+  flex-flow: row wrap;
+  display: flex;
+  place-content: center space-around;
+}
+
+.fs-calendar-month {
+  margin: 8px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.month-header {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fs-calendar-table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.seven {
+  width: 14.2857%;
+  padding: 7.14285714286% 0;
+}
+
+.eight {
+  width: 12.5%;
+  padding: 6.25% 0;
+}
+
+.kw {
+  min-height: 10px;
+}
+
+.fs-calendar-table-header th {
+  text-align: center;
+  padding: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.fs-calendar-body {
+  min-width: 224px;
+  font-size: 13px;
+}
+
+.fs-calendar-table thead tr td button {
+  visibility: hidden;
+}
+.fs-calendar-table:first-child thead tr td:first-child button {
+  visibility: visible;
+}
+.fs-calendar-table:last-child thead tr td:last-child button {
+  visibility: visible;
+}
+
+.fs-calendar-body-cell {
+  position: relative;
+  height: 0;
+  line-height: 0;
+  text-align: center;
+  outline: none;
+  z-index: 1;
+}
+
+.fs-calendar-body-cell-content,
+.fs-calendar-body-cell-content::before,
+.fs-calendar-body-cell-content::after {
+  position: absolute;
+  top: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fs-calendar-body-cell-content::before {
+  content: "";
+  z-index: -1;
+}
+.fs-calendar-body-cell-content::after {
+  content: "";
+  z-index: -2;
+}
+
+.selected-set.date-between::after,
+.selected-set.selected-start::after,
+.selected-set.selected-end::after {
+  border-style: none;
+}
+
+.selected-start::before,
+.selected-end::before {
+  border-radius: 47%; // because the background shine effect
+}
+
+.selected-start::after {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.selected-end::after {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.fs-calendar-body-today,
+.clickable:hover {
+  border-radius: 50%;
+}
+
+.fs-calendar-badge {
+  position: absolute;
+  top: -11px;
+  right: -11px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  text-overflow: ellipsis;
+  display: inline-block;
+  border-radius: 50%;
+  transition: transform 200ms ease-in-out;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  color: white;
+  background: lightcoral;
+  font-weight: 600;
+  font-size: 12px;
+  transform: none;
+  line-height: 22px;
+}
+
+::ng-deep .tooltip-helper {
+  font-size: 12px;
+  white-space: pre-line;
+}

@@ -1,3 +1,4 @@
+import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -5,13 +6,14 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 
 import { NgMatComponentsModule } from 'projects/ng-mat-components/src/public-api';
 import { HomeComponent } from './content/home/home.component';
 import { SubComponent } from './content/home/sub/sub.component';
 import { TestComponent } from './content/test/test.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { TestComponent } from './content/test/test.component';
     HomeComponent,
     TestComponent,
     SubComponent,
+    CalenderShowcaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,8 @@ import { TestComponent } from './content/test/test.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
     NgMatComponentsModule,
   ],
   providers: [

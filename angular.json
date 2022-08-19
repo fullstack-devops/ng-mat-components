@@ -57,6 +57,9 @@
             "polyfills": "projects/lib-workspace/src/polyfills.ts",
             "tsConfig": "projects/lib-workspace/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "moment"
+            ],
             "assets": [
               "projects/lib-workspace/src/favicon.ico",
               "projects/lib-workspace/src/assets"
@@ -73,11 +76,11 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "3kb",
                   "maximumError": "4kb"
                 }
               ],

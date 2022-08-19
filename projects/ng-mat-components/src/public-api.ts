@@ -4,6 +4,8 @@
 
 export * from './lib/ng-mat-components.module';
 export * from './lib/modules/ui-frame.modules';
+export * from './lib/modules/calendar';
+export * from './lib/components/calendar/calendar.component';
 export * from './lib/components/ui-frame/ui-frame.component';
 export * from './lib/components/ui-frame-content/frame-content.component';
 export * from './lib/components/ui-frame-toolbar/frame-toolbar.component';
