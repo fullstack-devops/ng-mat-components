@@ -2,11 +2,6 @@ name: Build PR
 
 on:
   pull_request:
-    paths-ignore:
-      - "README.md"
-      - 'docs/**'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/PULL_REQUEST_TEMPLATE.md'
 
 jobs:
   generate_infos:
@@ -19,14 +14,23 @@ jobs:
     needs: generate_infos
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
-          
+          node-version: "16.x"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@fullstack-devops"
+
       - name: install packages
         run: yarn
       - name: build applikation
         run: yarn run build
+
+      - name: npm publish
+        working-directory: dist/ng-mat-components
+        run: |
+          npm version ${{ needs.create_release.outputs.version }}
+          npm publish -dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

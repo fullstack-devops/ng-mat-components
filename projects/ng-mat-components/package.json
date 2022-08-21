@@ -1,11 +1,28 @@
 {
   "name": "ng-mat-components",
   "version": "0.0.0",
+  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^13.2.0",
-    "@angular/core": "^13.2.0"
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0",
+    "moment": "^2.29.0",
+    "@angular/material": ">=13.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fullstack-devops/ng-mat-components.git"
+  },
+  "homepage": "https://github.com/fullstack-devops/ng-mat-components",
+  "description": "Zentral component repo for angular applications",
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 7.0.0",
+    "yarn": ">= 1.13.0"
+  },
+  "bugs": {
+    "url": "https://github.com/fullstack-devops/ng-mat-components/issues"
   }
 }

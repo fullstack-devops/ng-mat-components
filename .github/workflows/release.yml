@@ -21,11 +21,11 @@ jobs:
     needs: create_release
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup awesome-ci
         uses: fullstack-devops/awesome-ci-action@main
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16.x"
           registry-url: "https://npm.pkg.github.com"
@@ -35,6 +35,10 @@ jobs:
         run: yarn
       - name: build applikation
         run: yarn run build
+
+      - name: set publish config
+        shell: bash
+        run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.GITHUB_TOKEN }}
 
       - name: npm publish
         working-directory: dist/ng-mat-components
