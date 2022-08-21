@@ -1,5 +1,5 @@
 {
-  "name": "ng-mat-components",
+  "name": "@fullstack-devops/ng-mat-components",
   "version": "0.0.0",
   "license": "MIT",
   "peerDependencies": {
