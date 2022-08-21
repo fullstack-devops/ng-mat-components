@@ -36,9 +36,9 @@ jobs:
       - name: build applikation
         run: yarn run build
 
-      - name: set publish config
-        shell: bash
-        run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.GITHUB_TOKEN }}
+      # - name: set publish config
+      #   shell: bash
+      #   run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.GITHUB_TOKEN }}
 
       - name: npm publish
         working-directory: dist/ng-mat-components
