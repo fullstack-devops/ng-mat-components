@@ -1,7 +1,5 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { CalendarConfig, calendarSelected, Day, selectedDate } from 'projects/ng-mat-components/src/public-api';
+import { CalendarConfig, Day, calendarSelected } from 'projects/ng-mat-components/src/public-api';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-calender-showcase',
@@ -9,11 +7,7 @@ import { CalendarConfig, calendarSelected, Day, selectedDate } from 'projects/ng
   styleUrls: ['./calender-showcase.component.scss']
 })
 export class CalenderShowcaseComponent implements OnInit {
-
-  // Theming
-  toggleControl = new FormControl(false);
-  @HostBinding('class') className = '';
-
+  docsApi = "./assets/docs/calendar/api.md"
   range: any
 
   placeholder = false // boolean
@@ -62,18 +56,8 @@ export class CalenderShowcaseComponent implements OnInit {
     }
   ]
 
-  constructor(private overlay: OverlayContainer) { }
+  constructor() { }
   ngOnInit(): void {
-    this.toggleControl.valueChanges.subscribe((darkMode) => {
-      const darkClassName = 'darkMode';
-      this.className = darkMode ? darkClassName : '';
-      if (darkMode) {
-        this.overlay.getContainerElement().classList.add(darkClassName);
-      } else {
-        this.overlay.getContainerElement().classList.remove(darkClassName);
-      }
-    });
-
     console.log(this.dataSource)
     this.isLoading = false
   }
@@ -82,10 +66,10 @@ export class CalenderShowcaseComponent implements OnInit {
     switch (event.type) {
       case "range":
         this.range = event;
-      break;
+        break;
       case "date":
         this.range = event;
-      break;
+        break;
     }
     console.log(event)
   }

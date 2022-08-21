@@ -1,14 +1,14 @@
 import { Injectable, LOCALE_ID, Inject } from '@angular/core';
 import * as moment_ from 'moment';
 import 'moment/min/locales';
-import { Calendar, Month, Day } from '../modules/calendar';
+import { Calendar, Month, Day } from './calendar.models';
 
 export const moment = moment_
 
 @Injectable({
   providedIn: 'root'
 })
-export class CalendarService {
+export class FsCalendarService {
 
   constructor(@Inject(LOCALE_ID) public locale: string) { }
 

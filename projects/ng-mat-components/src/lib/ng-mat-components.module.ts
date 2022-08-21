@@ -1,4 +1,3 @@
-import { FsCalendarComponent } from './components/calendar/calendar.component';
 import { MatInputModule } from '@angular/material/input';
 import { FsFrameToolbarComponent } from './components/ui-frame-toolbar/frame-toolbar.component';
 import { FsFrameContentComponent } from './components/ui-frame-content/frame-content.component';
@@ -22,7 +21,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FsUiFrameComponent,
     FsFrameContentComponent,
     FsFrameToolbarComponent,
-    FsCalendarComponent,
     /* Direktives */
     FrameToolbarTitleDirective,
     FrameToolbarCenterDirective,
@@ -43,7 +41,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FsUiFrameComponent,
     FsFrameContentComponent,
     FsFrameToolbarComponent,
-    FsCalendarComponent,
     /* Direktives */
     FrameToolbarTitleDirective,
     FrameToolbarCenterDirective,
