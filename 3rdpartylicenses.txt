@@ -93,6 +93,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 
 ng-mat-components
+MIT
 
 rxjs
 Apache-2.0
