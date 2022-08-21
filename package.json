@@ -9,6 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "cp README.md projects/ng-mat-components/",
     "build": "ng build",
     "build:workspace": "ng build --project lib-workspace",
     "watch": "ng build --watch --configuration development",
