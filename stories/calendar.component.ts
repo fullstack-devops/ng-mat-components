@@ -1,22 +1,27 @@
+import { Component, Input, Output } from '@angular/core';
 import { CalendarConfig, Day, calendarSelected } from 'projects/ng-mat-components/src/public-api';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-calender-showcase',
-  templateUrl: './calender-showcase.component.html',
-  styleUrls: ['./calender-showcase.component.scss']
+  selector: 'storybook-fs-calender',
+  template: `
+  <div style="height: 80%;">
+  <fs-calendar [placeholderDay]="placeholder" [dataSource]="dataSource" [year]="2022" [month]="3"
+    [monthsBefore]="monthsBefore" [monthsAfter]="monthsAfter" [config]="calendarConfig"
+    (selectedDate)="testMethod($event)">
+  </fs-calendar>
+  </div>`,
+  //styleUrls: ['../projects/lib-workspace/src/styles.scss']
 })
-export class CalenderShowcaseComponent implements OnInit {
-  range: any
+export default class StoryFsCalendarComponent {
+  @Input()
+  placeholder: boolean = false // boolean
 
-  placeholder = false // boolean
-  isLoading = true
-  latestEvent: Object | undefined
+  @Input()
+  monthsBefore: number = 2;
+  @Input()
+  monthsAfter: number = 0;
 
-  monthsAfterBefore = Array(5).fill(0).map((x, i) => i);
-  monthsBefore = 2;
-  monthsAfter = 0;
-
+  @Input()
   calendarConfig: CalendarConfig = {
     renderMode: 'monthly', // 'annual' | 'monthly'
     selectMode: 'range',  // 'click' | 'range'
@@ -29,6 +34,7 @@ export class CalenderShowcaseComponent implements OnInit {
     markWeekend: true // default: true
   }
 
+  @Input()
   dataSource: Day[] = [
     {
       date: new Date(1634594400000),
@@ -55,19 +61,15 @@ export class CalenderShowcaseComponent implements OnInit {
     }
   ]
 
-  constructor() { }
-  ngOnInit(): void {
-    console.log(this.dataSource)
-    this.isLoading = false
-  }
-
+  @Output()
   testMethod(event: calendarSelected) {
+    let range
     switch (event.type) {
       case "range":
-        this.range = event;
+        range = event;
         break;
       case "date":
-        this.range = event;
+        range = event;
         break;
     }
     console.log(event)

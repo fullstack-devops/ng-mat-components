@@ -14,7 +14,8 @@
     "paths": {
       "ng-mat-components": [
         "dist/ng-mat-components/ng-mat-components",
-        "dist/ng-mat-components"
+        "dist/ng-mat-components",
+        "projects/ng-mat-components/src/public-api"
       ]
     },
     "declaration": false,
