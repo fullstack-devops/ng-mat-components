@@ -5,6 +5,6 @@
     "entryFile": "src/public-api.ts"
   },
   "assets": [
-    "./fs-mat-components-theme.scss"
+    "./src/fs-mat-components-theme.scss"
   ]
 }

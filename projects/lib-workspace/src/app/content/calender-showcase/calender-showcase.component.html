@@ -1,41 +1,30 @@
-<mat-tab-group>
-  <mat-tab label="Overview">
+<div style="display: flex; justify-content: space-around;">
+  <mat-slide-toggle [(ngModel)]="placeholder">
+    Days placeholder
+  </mat-slide-toggle>
+</div>
 
-  </mat-tab>
-  <mat-tab label="API">
-    <div style="margin-top: 16px;" markdown [src]="docsApi"></div>
-  </mat-tab>
-  <mat-tab label="Examples">
-    <div style="display: flex; justify-content: space-around;">
-      <mat-slide-toggle [(ngModel)]="placeholder">
-        Days placeholder
-      </mat-slide-toggle>
-    </div>
+<div class="selection">
+  <mat-form-field>
+    <mat-label>Months before</mat-label>
+    <mat-select [(ngModel)]="monthsBefore">
+      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{num}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Months after</mat-label>
+    <mat-select [(ngModel)]="monthsAfter">
+      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{num}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <p>Selected range: {{range | json}}</p>
+  </div>
+</div>
 
-    <div class="selection">
-      <mat-form-field>
-        <mat-label>Months before</mat-label>
-        <mat-select [(ngModel)]="monthsBefore">
-          <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{num}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Months after</mat-label>
-        <mat-select [(ngModel)]="monthsAfter">
-          <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{num}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <p>Selected range: {{range | json}}</p>
-      </div>
-    </div>
-
-    <div style="height: 80%;">
-      <fs-calendar [placeholderDay]="placeholder" [dataSource]="dataSource" [year]="2022" [month]="3"
-        [monthsBefore]="monthsBefore" [monthsAfter]="monthsAfter" [config]="calendarConfig"
-        (selectedDate)="testMethod($event)">
-      </fs-calendar>
-    </div>
-
-  </mat-tab>
-</mat-tab-group>
+<div style="height: 80%;">
+  <fs-calendar [placeholderDay]="placeholder" [dataSource]="dataSource" [year]="2022" [month]="3"
+    [monthsBefore]="monthsBefore" [monthsAfter]="monthsAfter" [config]="calendarConfig"
+    (selectedDate)="testMethod($event)">
+  </fs-calendar>
+</div>

@@ -1,4 +1,4 @@
-<div class="frame-toolbar-logo" [class.opened]="!isClosed">
+<div class="fs-ui-frame-toolbar-logo" [class.opened]="!isClosed">
   <div class="logo-span">
       <div class="logo">
           <button mat-icon-button (click)="toggleSidemenu()">
@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<ng-content select="frame-toolbar"></ng-content>
+<ng-content select="fs-ui-frame-toolbar"></ng-content>
 
 
 <div class="sidebar" [class.opened]="!isClosed">
@@ -49,7 +49,7 @@
           </span>
       </div> -->
 
-      <div class="frame-pic-button-wrapper">
+      <div class="fs-ui-frame-pic-button-wrapper">
           <button mat-icon-button (click)="toggleSidemenu()">
               <div class="pic" *ngIf="navUser.profilePicture != ''"
                   style="background-image: url('{{ navUser.profilePicture }}');">
@@ -81,4 +81,4 @@
 </div>
 
 
-<ng-content select="frame-content"></ng-content>
+<ng-content select="fs-ui-frame-content"></ng-content>

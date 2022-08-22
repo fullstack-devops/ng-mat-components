@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { FrameEvent, NavUser, FrameRoutes, FrameConfig, FrameEvents } from '../../modules/ui-frame.modules';
-import { UiFrameService } from '../../services/ui-frame.service';
+import { FrameEvent, NavUser, FrameRoutes, FrameConfig, FrameEvents } from './fs-ui-frame.modules';
+import { FsUiFrameService } from './fs-ui-frame.service';
 
 @Component({
   selector: 'fs-ui-frame',
-  templateUrl: './ui-frame.component.html',
-  styleUrls: ['./ui-frame.component.scss'],
+  templateUrl: './fs-ui-frame.component.html',
+  styleUrls: ['./fs-ui-frame.component.scss'],
   host: {
-    'class': 'ui-frame',
+    'class': 'fs-ui-frame',
   },
 })
 export class FsUiFrameComponent implements OnInit {
@@ -28,7 +28,7 @@ export class FsUiFrameComponent implements OnInit {
   isActivePath: string = ''
   navList: FrameRoutes = []
 
-  constructor(private frameService: UiFrameService,
+  constructor(private frameService: FsUiFrameService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 

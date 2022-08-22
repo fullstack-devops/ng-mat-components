@@ -3,7 +3,7 @@ import * as moment_ from 'moment';
 import 'moment/min/locales';
 import { Calendar, Month, Day } from './calendar.models';
 
-export const moment = moment_
+export const moment = moment_;
 
 @Injectable({
   providedIn: 'root'

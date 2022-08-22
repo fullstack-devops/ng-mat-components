@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { CalendarConfig, Day, Calendar, calendarSelected } from './calendar.models';
 import { FsCalendarService } from './fs-calendar.service';
-import * as moment from 'moment';
+import { moment } from './fs-calendar.service';
 
 @Component({
   selector: 'fs-calendar',
