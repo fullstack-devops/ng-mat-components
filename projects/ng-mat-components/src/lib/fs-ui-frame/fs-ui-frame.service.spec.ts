@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CalendarService } from './calendar.service';
+import { FsUiFrameService } from './fs-ui-frame.service';
 
-describe('CalendarService', () => {
-  let service: CalendarService;
+describe('UiFrameService', () => {
+  let service: FsUiFrameService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CalendarService);
+    service = TestBed.inject(FsUiFrameService);
   });
 
   it('should be created', () => {

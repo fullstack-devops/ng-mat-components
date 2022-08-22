@@ -16,7 +16,7 @@ body {
 }
 
 @include mat.core();
-@import "../../ng-mat-components/fs-mat-components-theme.scss";
+@import "../../ng-mat-components/src/fs-mat-components-theme.scss";
 
 // Define a light theme
 $light-primary: mat.define-palette(mat.$indigo-palette);

@@ -1,13 +1,12 @@
-import { FormControl, FormGroup } from '@angular/forms';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import * as moment from 'moment';
-import { CalendarConfig, Day, Calendar, calendarSelected } from '../../modules/calendar';
-import { CalendarService } from '../../services/calendar.service';
+import { CalendarConfig, Day, Calendar, calendarSelected } from './calendar.models';
+import { FsCalendarService } from './fs-calendar.service';
+import { moment } from './fs-calendar.service';
 
 @Component({
   selector: 'fs-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+  templateUrl: './fs-calendar.component.html',
+  styleUrls: ['./fs-calendar.component.scss'],
   host: {
     'class': 'fs-calendar',
   },
@@ -117,7 +116,7 @@ export class FsCalendarComponent implements OnInit {
     }
   }
 
-  constructor(private calendarService: CalendarService) { }
+  constructor(private calendarService: FsCalendarService) { }
 
   ngOnInit() {
     this.isLoading = false

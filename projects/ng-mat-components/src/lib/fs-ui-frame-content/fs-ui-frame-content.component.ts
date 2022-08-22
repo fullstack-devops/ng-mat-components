@@ -1,21 +1,20 @@
-import { UiFrameService } from './../../services/ui-frame.service';
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
+import { FsUiFrameService } from '../fs-ui-frame/fs-ui-frame.service';
 
 @Component({
-  selector: 'frame-content',
-  templateUrl: './frame-content.component.html',
-  styleUrls: ['./frame-content.component.scss'],
+  selector: 'fs-ui-frame-content',
+  templateUrl: './fs-ui-frame-content.component.html',
+  styleUrls: ['./fs-ui-frame-content.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'class': 'frame-content',
+    'class': 'fs-ui-frame-content',
   },
 })
-export class FsFrameContentComponent implements OnInit {
-
+export class FsUiFrameContentComponent implements OnInit {
   @HostBinding('class') openedClass = '';
 
-  constructor(private frameService: UiFrameService) {
+  constructor(private frameService: FsUiFrameService) {
     this.frameService.isMenuClosed.subscribe((bool: Boolean) => {
       if (bool) {
         this.openedClass = ""

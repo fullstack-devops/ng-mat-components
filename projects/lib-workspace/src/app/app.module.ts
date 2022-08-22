@@ -9,12 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 
-import { NgMatComponentsModule } from 'projects/ng-mat-components/src/public-api';
+import {
+  FsCalendarModule,
+  FsUiFrameModule,
+  FsUiFrameContentModule,
+  FsUiFrameToolbarModule
+} from 'projects/ng-mat-components/src/public-api';
 import { HomeComponent } from './content/home/home.component';
 import { SubComponent } from './content/home/sub/sub.component';
 import { TestComponent } from './content/test/test.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
 
 @NgModule({
   declarations: [
@@ -25,14 +28,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CalenderShowcaseComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
+    MaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
-    NgMatComponentsModule,
+    /* Lib modules */
+    FsUiFrameModule,
+    FsUiFrameContentModule,
+    FsUiFrameToolbarModule,
+    FsCalendarModule,
   ],
   providers: [
     {

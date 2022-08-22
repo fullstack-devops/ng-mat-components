@@ -15,13 +15,13 @@
     fill: mat-color($foreground, text);
   }
 
-  .frame-toolbar-logo,
-  .frame-toolbar-logo .logo-span {
+  .fs-ui-frame-toolbar-logo,
+  .fs-ui-frame-toolbar-logo .logo-span {
     background-color: mat-color($background, app-bar);
     color: mat-color($foreground, text);
   }
 
-  .frame-toolbar {
+  .fs-ui-frame-toolbar {
     background-color: mat-color($background, background);
     color: mat-color($foreground, text);
   }
@@ -45,7 +45,7 @@
     // background-color: rgba($color:  mat-color($primary, default), $alpha: 0.1);
   }
 
-  .frame-content {
+  .fs-ui-frame-content {
     color: mat-color($foreground, text);
     background-color: lighten($color: mat-color($background, background), $amount: 3%);
   }
