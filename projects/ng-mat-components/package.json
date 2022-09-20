@@ -6,7 +6,7 @@
     "@angular/common": "^13.0.0",
     "@angular/core": "^13.0.0",
     "moment": "^2.29.0",
-    "@angular/material": ">=13.0.0"
+    "@angular/material": "^13.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
@@ -24,5 +24,16 @@
   },
   "bugs": {
     "url": "https://github.com/fullstack-devops/ng-mat-components/issues"
+  },
+  "exports": {
+    ".": {
+      "sass": "./_index.scss"
+    },
+    "./theming": {
+      "sass": "./_theming.scss"
+    },
+    "./_theming": {
+      "sass": "./_theming.scss"
+    }
   }
 }
