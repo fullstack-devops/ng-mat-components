@@ -2,7 +2,7 @@
 @import "~@angular/material/theming";
 
 // Define a mixin that accepts a theme and outputs the color styles for the component.
-@mixin fs-mat-components-theme($theme) {
+@mixin theme($theme) {
   // Extract whichever individual palettes you need from the theme.
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);

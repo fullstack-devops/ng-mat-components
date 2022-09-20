@@ -1,6 +1,5 @@
-@use '@angular/material' as mat;
-
-mat.$theme-ignore-duplication-warnings: true;
+@use "@angular/material" as mat;
+@use "../../ng-mat-components" as fs-components;
 
 body {
   margin: 0;
@@ -16,7 +15,7 @@ body {
 }
 
 @include mat.core();
-@import "../../ng-mat-components/src/fs-mat-components-theme.scss";
+@import "../../ng-mat-components";
 
 // Define a light theme
 $light-primary: mat.define-palette(mat.$indigo-palette);
@@ -44,13 +43,13 @@ $dark-theme: mat.define-dark-theme(
 
 // Apply the dark theme by default
 @include mat.all-component-themes($dark-theme);
-@include fs-mat-components-theme($dark-theme);
+@include fs-components.all-component-themes($dark-theme);
 
 // Apply the light theme only when the `.my-light-theme` CSS class is applied
 // to an ancestor element of the components (such as `body`).
 .my-light-theme {
-  @include mat.all-component-themes($light-theme);
-  @include fs-mat-components-theme($light-theme);
+  @include mat.all-component-colors($light-theme);
+  @include fs-components.all-component-themes($light-theme);
 }
 
 .mat-form-field:not(.mat-form-field-has-label) .mat-form-field-infix {
@@ -66,4 +65,3 @@ $dark-theme: mat.define-dark-theme(
 .mat-form-field-label-wrapper {
   padding-top: 0px;
 }
-
