@@ -20,8 +20,8 @@ $toolbar-width-opened: 264px;
   transition: all 0.3s ease-in-out;
   right: 0;
   height: $toolbar-height;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 ::ng-deep .fs-ui-frame-content.opened,
@@ -93,7 +93,8 @@ $toolbar-width-opened: 264px;
   bottom: 0;
   width: $toolbar-width-closed;
   transition: all 0.3s ease-in-out;
-  box-shadow: 5px 2px 4px -1px rgba(0, 0, 0, 0.2), 4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+  box-shadow: 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.14);
 }
 
 .sidebar .nav-links {
@@ -153,7 +154,6 @@ $toolbar-width-opened: 264px;
 .nav-links li button {
   width: 100%;
   height: 64px;
-  border-radius: unset;
 }
 
 .nav-links li button {
@@ -162,17 +162,8 @@ $toolbar-width-opened: 264px;
   align-items: center;
 }
 
-.custom-list-button {
-  padding: 0 6px 0 6px;
-  margin: 6px 8px 6px 8px;
-  min-width: 88px;
-  border-radius: 3px;
-  font-size: 14px;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: none;
-  outline: none;
+.nav-links li button .material-icons {
+  padding-left: 4px;
 }
 
 .nav-links li button .link-name {
