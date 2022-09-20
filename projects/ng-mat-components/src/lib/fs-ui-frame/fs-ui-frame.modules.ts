@@ -1,4 +1,4 @@
-import { Data, Route } from "@angular/router";
+import { Data, Route } from '@angular/router';
 
 /**
  *  @interface NavItem
@@ -8,14 +8,14 @@ import { Data, Route } from "@angular/router";
  *  @logo                {string}     link to logo, can be relative or full URL
  */
 export interface FrameConfig {
-    appName: string
-    appNameShort?: StringOfLength<0, 6>
-    logo: string
+  appName: string;
+  appNameShort?: StringOfLength<0, 6>;
+  logo: string;
 }
 
 export enum FrameEvents {
-    MANAGE_ACCOUNT = 'EVENT_MANAGE_ACCOUNT',
-    LOGOUT = 'EVENT_LOGOUT'
+  MANAGE_ACCOUNT = 'EVENT_MANAGE_ACCOUNT',
+  LOGOUT = 'EVENT_LOGOUT',
 }
 
 /**
@@ -25,8 +25,8 @@ export enum FrameEvents {
  *  @data                {string}     data which get send with event
  */
 export interface FrameEvent {
-    type: string;
-    data: any;
+  type: FrameEvents;
+  data: any;
 }
 
 /**
@@ -37,65 +37,63 @@ export interface FrameEvent {
  *  @profilePicture       {string}     profile Picture (can be empty)
  */
 export interface NavUser {
-    name: string
-    role: string
-    profilePicture: string
+  name: string;
+  role: string;
+  profilePicture: string;
 }
 
 interface FrameRouteData extends Data {
-    /**
-     * sould this route be visable in sidenav
-     */
-    displaySidemenu: boolean;
-    /**
-    * displayed text, shows only in opened mode
-    */
-    sidenavText: string;
-    /**
-    * displayed icon, use **only** material-icons!
-    */
-    sidenavIcon: string;
-    /**
-    * ...
-    */
-    roles?: string[];
-    /**
-    * App title dynamic
-    */
-    title?: string;
+  /**
+   * sould this route be visable in sidenav
+   */
+  displaySidemenu: boolean;
+  /**
+   * displayed text, shows only in opened mode
+   */
+  sidenavText: string;
+  /**
+   * displayed icon, use **only** material-icons!
+   */
+  sidenavIcon: string;
+  /**
+   * ...
+   */
+  roles?: string[];
+  /**
+   * App title dynamic
+   */
+  title?: string;
 }
 interface FrameRoute extends Route {
-    data?: FrameRouteData;
+  data?: FrameRouteData;
 }
 export type FrameRoutes = FrameRoute[];
 
-
-
 type StringOfLength<Min, Max> = string & {
-    readonly StringOfLength: unique symbol // this is the phantom type
+  readonly StringOfLength: unique symbol; // this is the phantom type
 };
 
 // This is a type guard function which can be used to assert that a string
 // is of type StringOfLength<Min,Max>
 const isStringOfLength = <Min extends number, Max extends number>(
-    str: string,
-    min: Min,
-    max: Max
+  str: string,
+  min: Min,
+  max: Max
 ): str is StringOfLength<Min, Max> => str.length >= min && str.length <= max;
 
 // type constructor function
 export const stringOfLength = <Min extends number, Max extends number>(
-    input: unknown,
-    min: Min,
-    max: Max
+  input: unknown,
+  min: Min,
+  max: Max
 ): StringOfLength<Min, Max> => {
-    if (typeof input !== "string") {
-        throw new Error("invalid input");
-    }
+  if (typeof input !== 'string') {
+    throw new Error('invalid input');
+  }
 
-    if (!isStringOfLength(input, min, max)) {
-        throw new Error("input is not between specified min and max");
-    }
+  if (!isStringOfLength(input, min, max)) {
+    throw new Error('input is not between specified min and max');
+  }
 
-    return input; // the type of input here is now StringOfLength<Min,Max>
+  return input; // the type of input here is now StringOfLength<Min,Max>
 };
