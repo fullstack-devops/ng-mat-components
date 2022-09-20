@@ -20,8 +20,8 @@ $toolbar-width-opened: 264px;
   transition: all 0.3s ease-in-out;
   right: 0;
   height: $toolbar-height;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  // box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+  //   0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 ::ng-deep .fs-ui-frame-content.opened,
@@ -93,8 +93,8 @@ $toolbar-width-opened: 264px;
   bottom: 0;
   width: $toolbar-width-closed;
   transition: all 0.3s ease-in-out;
-  box-shadow: 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+  // box-shadow: 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
+  //  4px 4px 5px 0px rgba(0, 0, 0, 0.14);
 }
 
 .sidebar .nav-links {
@@ -179,4 +179,6 @@ $toolbar-width-opened: 264px;
   padding: 16px;
   transition: all 0.3s ease-in-out;
   overflow: auto;
+  box-shadow: inset 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.14);
 }
