@@ -1,5 +1,5 @@
 import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { APP_BASE_HREF } from '@angular/common';
@@ -13,7 +13,7 @@ import {
   FsCalendarModule,
   FsUiFrameModule,
   FsUiFrameContentModule,
-  FsUiFrameToolbarModule
+  FsUiFrameToolbarModule,
 } from 'projects/ng-mat-components/src/public-api';
 import { HomeComponent } from './content/home/home.component';
 import { SubComponent } from './content/home/sub/sub.component';
@@ -43,9 +43,10 @@ import { TestComponent } from './content/test/test.component';
   providers: [
     {
       provide: APP_BASE_HREF,
-      useValue: ".",
+      useValue: '.',
     },
+    { provide: LOCALE_ID, useValue: 'de-DE' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
