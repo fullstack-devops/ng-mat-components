@@ -9,18 +9,23 @@ export const moment = moment_;
   providedIn: 'root',
 })
 export class FsCalendarService {
-  constructor(@Inject(LOCALE_ID) private appLocale: string) {
-    moment.locale(this.appLocale.substring(0, 2));
-  }
-
-  monthNames = moment.monthsShort();
-  dayNames = moment.weekdaysShort();
-  dayNamesEn = moment.weekdaysShort();
-  dayNamesDeVor = JSON.parse(JSON.stringify(this.dayNamesEn));
-  dayNamesDe = this.dayNamesDeVor.push(this.dayNamesDeVor.shift());
+  monthNames: string[];
+  dayNames: string[];
+  dayNamesEn: string[];
+  dayNamesDeVor: any;
+  dayNamesDe: any;
 
   dataSourceCustom: Day[] = [];
   daysAbsolute: Date[] = [];
+
+  constructor(@Inject(LOCALE_ID) private appLocale: string) {
+    moment.locale(this.appLocale.substring(0, 2));
+    this.monthNames = moment.monthsShort();
+    this.dayNames = moment.weekdaysShort();
+    this.dayNamesEn = moment.weekdaysShort();
+    this.dayNamesDeVor = JSON.parse(JSON.stringify(this.dayNamesEn));
+    this.dayNamesDe = this.dayNamesDeVor.push(this.dayNamesDeVor.shift());
+  }
 
   /**
    * @param {String}     mode             calendar mode (monthly|annual)
