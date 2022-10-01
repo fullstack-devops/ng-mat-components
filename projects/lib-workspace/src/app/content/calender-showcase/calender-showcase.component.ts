@@ -1,76 +1,86 @@
-import { CalendarConfig, Day, calendarSelected } from 'projects/ng-mat-components/src/public-api';
 import { Component, OnInit } from '@angular/core';
+import {
+  CalendarConfig,
+  calendarSelected,
+  Day,
+} from 'projects/ng-mat-components/src/public-api';
 
 @Component({
   selector: 'lib-calender-showcase',
   templateUrl: './calender-showcase.component.html',
-  styleUrls: ['./calender-showcase.component.scss']
+  styleUrls: ['./calender-showcase.component.scss'],
 })
 export class CalenderShowcaseComponent implements OnInit {
-  docsApi = "./assets/docs/calendar/api.md"
-  range: any
+  docsApi = './assets/docs/calendar/api.md';
+  range: any;
 
-  placeholder = false // boolean
-  isLoading = true
-  latestEvent: Object | undefined
+  placeholder = false; // boolean
+  isLoading = true;
+  latestEvent: Object | undefined;
 
-  monthsAfterBefore = Array(5).fill(0).map((x, i) => i);
-  monthsBefore = 2;
-  monthsAfter = 0;
+  today = new Date();
+  todayMonth = this.today.getMonth();
+  todayYear = this.today.getFullYear();
+
+  monthsAfterBefore = Array(5)
+    .fill(0)
+    .map((x, i) => i);
+  monthsBefore = 1;
+  monthsAfter = 1;
 
   calendarConfig: CalendarConfig = {
     renderMode: 'monthly', // 'annual' | 'monthly'
-    selectMode: 'range',  // 'click' | 'range'
+    selectMode: 'range', // 'click' | 'range'
     displayYear: true,
     firstDayOfWeekMonday: true,
-    calendarWeek: false,
+    calendarWeek: true,
     switches: true,
     panelWidth: '300px',
     bluredDays: false, // default: false
-    markWeekend: true // default: true
-  }
+    markWeekend: true, // default: true
+  };
 
   dataSource: Day[] = [
     {
       date: new Date(1634594400000),
       backgroundColor: '#0167c7',
       toolTip: 'Test ToolTip First',
-      dayNumber: ''
+      dayNumber: '',
     },
     {
       date: new Date(1634594400000),
       backgroundColor: 'rgb(6, 182, 0)',
       toolTip: 'Test ToolTip Second',
-      dayNumber: ''
+      dayNumber: '',
     },
     {
       date: new Date(1634853600000),
       backgroundColor: 'rgb(6, 182, 0)',
       toolTip: 'Test ToolTip 2',
-      dayNumber: ''
+      dayNumber: '',
     },
     {
       date: new Date(1635544800000),
       backgroundColor: 'lightblue',
-      dayNumber: ''
-    }
-  ]
+      dayNumber: '',
+    },
+  ];
 
-  constructor() { }
+  constructor() {}
   ngOnInit(): void {
-    console.log(this.dataSource)
-    this.isLoading = false
+    console.log(this.dataSource);
+    this.isLoading = false;
   }
 
   testMethod(event: calendarSelected) {
     switch (event.type) {
-      case "range":
+      case 'range':
         this.range = event;
         break;
-      case "date":
+      case 'date':
         this.range = event;
         break;
     }
-    console.log(event)
+    console.log(event);
   }
 }

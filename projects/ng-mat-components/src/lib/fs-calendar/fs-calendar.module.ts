@@ -1,16 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FsCalendarComponent } from './fs-calendar.component';
+import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FsCalendarComponent } from './fs-calendar.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatTooltipModule
-  ],
+  imports: [CommonModule, MatTooltipModule, MatButtonModule],
   exports: [FsCalendarComponent],
-  declarations: [FsCalendarComponent]
+  declarations: [FsCalendarComponent],
 })
-export class FsCalendarModule { }
-
-
+export class FsCalendarModule {}

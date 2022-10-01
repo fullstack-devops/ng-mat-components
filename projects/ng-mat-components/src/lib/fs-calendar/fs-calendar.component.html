@@ -1,62 +1,109 @@
 <div class="fs-calendar-helper">
-  <ng-container *ngFor="let month of calendar.months, let iMonth = index">
+  <ng-container *ngFor="let month of calendar.months; let iMonth = index">
     <div class="fs-calendar-month mat-elevation-z4">
       <div class="month-header">
-        <button mat-icon-button (click)="onMonthBackward()" class="fs-calendar-switches"
-          *ngIf="config.switches && config.renderMode != 'annual' && iMonth == 0; else elseAfterBackward">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+        <button
+          mat-icon-button
+          (click)="onMonthBackward()"
+          class="fs-calendar-switches"
+          *ngIf="
+            config.switches && config.renderMode != 'annual' && iMonth == 0;
+            else elseAfterBackward
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24px"
+            height="24px"
+          >
             <path d="M0 0h24v24H0V0z" fill="none" />
-            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+            <path
+              d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+            />
           </svg>
         </button>
         <ng-template #elseAfterBackward>
-          <div style="width: 40px;"> </div>
+          <div style="width: 40px"></div>
         </ng-template>
-        <div>{{month.name | uppercase}} {{config.displayYear? month.year: ''}}</div>
-        <button mat-icon-button (click)="onMonthForward()" class="fs-calendar-switches"
-          *ngIf="config.switches && config.renderMode != 'annual' && calendar.months.length == (iMonth+1); else elseAfterForward">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+        <div>
+          {{ month.name | uppercase }}
+          {{ config.displayYear ? month.year : "" }}
+        </div>
+        <button
+          mat-icon-button
+          (click)="onMonthForward()"
+          class="fs-calendar-switches"
+          *ngIf="
+            config.switches &&
+              config.renderMode != 'annual' &&
+              calendar.months.length == iMonth + 1;
+            else elseAfterForward
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24px"
+            height="24px"
+          >
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
           </svg>
         </button>
         <ng-template #elseAfterForward>
-          <div style="width: 40px;"> </div>
+          <div style="width: 40px"></div>
         </ng-template>
       </div>
       <table class="fs-calendar-table" [style.width]="config.panelWidth">
-
         <thead class="fs-calendar-table-header">
           <tr>
-            <th scope="col" *ngIf="config.calendarWeek"> </th>
+            <th scope="col" *ngIf="config.calendarWeek"></th>
             <th *ngFor="let dayname of calendar.dayNames" scope="col">
-              {{dayname}}
+              {{ dayname }}
             </th>
           </tr>
           <tr>
             <th scope="col" *ngIf="config.calendarWeek" class="kw"></th>
-            <th scope="col" style="height: 10px;"></th>
+            <th scope="col" style="height: 10px"></th>
           </tr>
         </thead>
         <tbody role="grid" class="fs-calendar-body">
-
-          <ng-container *ngFor="let row of month.render, let iRender = index">
+          <ng-container *ngFor="let row of month.render; let iRender = index">
             <tr role="row">
-              <ng-container *ngFor="let day of row, let iDay = index">
-                <td role="gridcell" class="fs-calendar-body-cell clickable tooltip" [matTooltip]="day.toolTip ? day.toolTip: ''"
-                  matTooltipClass="tooltip-helper" tabindex="-1" *ngIf="day.type == 'date'"
-                  [ngClass]="config.calendarWeek? 'eight' : 'seven'" (click)="onClick(day, 'date')"
-                  (mouseenter)="onMouseOver(day.date)">
-                  <div class="fs-calendar-body-cell-content" [class.fs-calendar-body-today]="isToday(day.date)"
+              <ng-container *ngFor="let day of row; let iDay = index">
+                <td
+                  role="gridcell"
+                  class="fs-calendar-body-cell clickable tooltip"
+                  [matTooltip]="day.toolTip ? day.toolTip : ''"
+                  matTooltipClass="tooltip-helper"
+                  tabindex="-1"
+                  *ngIf="day.type == 'date'"
+                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                  (click)="onClick(day, 'date')"
+                  (mouseenter)="onMouseOver(day.date)"
+                >
+                  <div
+                    class="fs-calendar-body-cell-content"
+                    [class.fs-calendar-body-today]="isToday(day.date)"
                     [class.selected-set]="getCanIBeHighlighted(day.date)"
                     [class.selected-start]="isSelectedDayStart(day.date)"
-                    [class.selected-end]="isSelectedDayEnd(day.date)" [class.date-between]="getAmIBetween(day.date)">
-                    {{day.dayNumber}}
+                    [class.selected-end]="isSelectedDayEnd(day.date)"
+                    [class.date-between]="getAmIBetween(day.date)"
+                  >
+                    {{ day.dayNumber }}
                   </div>
-                  <div class="fs-calendar-body-cell-content" style="z-index: -3;border-radius: 4px;"
-                    [class.weekend]="day.isWeekendDay && day.backgroundColor != '' && markWeekend"
+                  <div
+                    class="fs-calendar-body-cell-content"
+                    style="z-index: -3; border-radius: 4px"
+                    [class.weekend]="
+                      day.isWeekendDay &&
+                      day.backgroundColor != '' &&
+                      markWeekend
+                    "
                     [class.blured-days]="bluredDays && day.backgroundColor"
-                    [ngStyle]="{'background': day.backgroundColor}">
+                    [ngStyle]="{ background: day.backgroundColor }"
+                  >
                     <!-- <ng-container
                         *ngIf="day.hasOwnProperty('badgeMode') && day.date != selectedDayStart && day.date != selectedDayEnd">
                         <span class="fs-calendar-badge fs-calendar-badge-int" *ngIf="day.badgeMode == 'Int'">
@@ -71,33 +118,52 @@
                     </ng-container> -->
                   </div>
                 </td>
-                <td role="gridcell" class="fs-calendar-body-cell kw" tabindex="-1" *ngIf="day.type == 'kw'"
-                  [ngClass]="config.calendarWeek? 'eight' : 'seven'">
-                  <div *ngIf="row[iDay+1].type == 'placeholderDay' && iRender != 0; else normalKW">
-                    {{placeholderDay? day.kw : ''}}
+                <td
+                  role="gridcell"
+                  class="fs-calendar-body-cell kw"
+                  tabindex="-1"
+                  *ngIf="day.type == 'kw'"
+                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                >
+                  <div
+                    *ngIf="
+                      row[iDay + 1].type == 'placeholderDay' && iRender != 0;
+                      else normalKW
+                    "
+                  >
+                    {{ placeholderDay ? day.kw : "" }}
                   </div>
                   <ng-template #normalKW>
-                    <div>{{day.kw}}</div>
+                    <div>{{ day.kw }}</div>
                   </ng-template>
                 </td>
                 <!-- PalceholderDays -->
-                <td role="gridcell" class="fs-calendar-body-cell clickable placeholderDay" tabindex="-1"
-                  (click)="onClick(day, 'placeholderDay')" *ngIf="day.type == 'placeholderDay' && placeholderDay"
-                  [ngClass]="config.calendarWeek? 'eight' : 'seven'">
+                <td
+                  role="gridcell"
+                  class="fs-calendar-body-cell clickable placeholderDay"
+                  tabindex="-1"
+                  (click)="onClick(day, 'placeholderDay')"
+                  *ngIf="day.type == 'placeholderDay' && placeholderDay"
+                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                >
                   <div class="fs-calendar-body-cell-content">
                     {{ day.dayNumber }}
                   </div>
                 </td>
-                <td role="gridcell" class="fs-calendar-body-cell" tabindex="-1"
+                <td
+                  role="gridcell"
+                  class="fs-calendar-body-cell"
+                  tabindex="-1"
                   *ngIf="day.type == 'placeholderDay' && !placeholderDay"
-                  [ngClass]="config.calendarWeek? 'eight' : 'seven'">
+                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                >
                   <div></div>
                 </td>
               </ng-container>
             </tr>
             <tr>
               <th scope="col" *ngIf="config.calendarWeek" class="kw"></th>
-              <th scope="col" style="height: 5px;"></th>
+              <th scope="col" style="height: 5px"></th>
             </tr>
           </ng-container>
         </tbody>
