@@ -125,4 +125,9 @@
       transparent 100%
     );
   }
+
+  .month-header button {
+    border: 1px solid mat-color($foreground, "divider");
+    border-radius: 4px;
+  }
 }

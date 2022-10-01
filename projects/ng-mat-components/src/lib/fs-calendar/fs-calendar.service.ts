@@ -1,31 +1,20 @@
-import { Injectable, LOCALE_ID, Inject } from '@angular/core';
-import * as moment_ from 'moment';
-import 'moment/min/locales';
-import { Calendar, Month, Day } from './calendar.models';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import * as dateFns_ from 'date-fns';
+import { Calendar, Day, Month } from './calendar.models';
 
-export const moment = moment_;
+export const dateFns = dateFns_;
 
 @Injectable({
   providedIn: 'root',
 })
 export class FsCalendarService {
-  monthNames: string[];
-  dayNames: string[];
-  dayNamesEn: string[];
   dayNamesDeVor: any;
   dayNamesDe: any;
 
   dataSourceCustom: Day[] = [];
   daysAbsolute: Date[] = [];
 
-  constructor(@Inject(LOCALE_ID) private appLocale: string) {
-    moment.locale(this.appLocale.substring(0, 2));
-    this.monthNames = moment.monthsShort();
-    this.dayNames = moment.weekdaysShort();
-    this.dayNamesEn = moment.weekdaysShort();
-    this.dayNamesDeVor = JSON.parse(JSON.stringify(this.dayNamesEn));
-    this.dayNamesDe = this.dayNamesDeVor.push(this.dayNamesDeVor.shift());
-  }
+  constructor(@Inject(LOCALE_ID) private appLocale: string) {}
 
   /**
    * @param {String}     mode             calendar mode (monthly|annual)
@@ -37,7 +26,7 @@ export class FsCalendarService {
    * @param {Number}     monthsAfter      months after the selected month, default 0
    */
   generateMatrix(
-    mode: string,
+    mode: 'monthly' | 'annual',
     calendarWeek: boolean,
     dataSource: Day[],
     year: number,
@@ -90,36 +79,37 @@ export class FsCalendarService {
         Object.assign(day, { type: 'date' });
       });
       let render: Day[] = month.days;
-      const firstMonthDay = month.days[0];
-      let currMonth = moment(month.days[0].date);
-      const dayOfWeek = currMonth.day() == 0 ? 7 : currMonth.day();
-      const nextMonth = moment(currMonth.add(1, 'M'));
-      const nextMonthDay: Day = this.generateDay(nextMonth);
+      let firstDayOfMonth = month.days[0].date;
+      let dayOfWeek = dateFns.getDay(firstDayOfMonth);
+      let nextMonth = dateFns.addMonths(firstDayOfMonth, 1);
       // Vormonat
       for (let i = 0; i < dayOfWeek - 1; i++) {
         render.splice(
-          i,
           0,
-          this.makeWJObjekt(firstMonthDay, 'placeholderDay', dayOfWeek - 1 - i)
+          0,
+          this.makeWJObjekt(
+            dateFns.subDays(firstDayOfMonth, i + 1),
+            'placeholderDay'
+          )
         );
       }
       // Nachmonat
-      for (let i = 0; render.length < 42; i--) {
+      for (let i = 0; render.length < 42; i++) {
         render.splice(
-          render.length + 1,
+          render.length,
           0,
-          this.makeWJObjekt(nextMonthDay, 'placeholderDay', i)
+          this.makeWJObjekt(dateFns.addDays(nextMonth, i), 'placeholderDay')
         );
       }
       // Kalenderwochen && tr rows
       let renderTr = [];
       if (calendarWeek) {
-        render.splice(0, 0, this.makeWJObjekt(render[0], 'kw'));
-        render.splice(8, 0, this.makeWJObjekt(render[8], 'kw'));
-        render.splice(16, 0, this.makeWJObjekt(render[16], 'kw'));
-        render.splice(24, 0, this.makeWJObjekt(render[24], 'kw'));
-        render.splice(32, 0, this.makeWJObjekt(render[32], 'kw'));
-        render.splice(40, 0, this.makeWJObjekt(render[40], 'kw'));
+        render.splice(0, 0, this.makeWJObjekt(render[0].date, 'kw'));
+        render.splice(8, 0, this.makeWJObjekt(render[8].date, 'kw'));
+        render.splice(16, 0, this.makeWJObjekt(render[16].date, 'kw'));
+        render.splice(24, 0, this.makeWJObjekt(render[24].date, 'kw'));
+        render.splice(32, 0, this.makeWJObjekt(render[32].date, 'kw'));
+        render.splice(40, 0, this.makeWJObjekt(render[40].date, 'kw'));
         renderTr.push(render.slice(0, 8));
         renderTr.push(render.slice(8, 16));
         renderTr.push(render.slice(16, 24));
@@ -142,84 +132,74 @@ export class FsCalendarService {
     return cal;
   }
 
-  makeWJObjekt(day: Day, type: string, dateBack?: number): Day {
+  makeWJObjekt(date: Date, type: 'kw' | 'placeholderDay'): Day {
     let newDay: Day;
-    let newMDate: moment.Moment;
-    if (dateBack) {
-      newMDate = moment(day.date).subtract(dateBack, 'days');
-    } else {
-      newMDate = moment(day.date);
-    }
     switch (type) {
       case 'kw':
         newDay = {
           dayNumber: '',
-          date: newMDate.toDate(),
-          kw: day.kw,
+          date: date,
+          kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
           type: 'kw',
         };
         break;
       case 'placeholderDay':
         newDay = {
-          dayNumber: newMDate.format('D'),
-          date: newMDate.toDate(),
-          kw: newMDate.week(),
+          dayNumber: dateFns.format(date, 'd'),
+          date: date,
+          kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
           type: 'placeholderDay',
-          isWeekendDay: this.isWeekend(newMDate),
+          isWeekendDay: dateFns.isWeekend(date),
         };
         break;
-      default:
-        newDay = {
-          dayNumber: newMDate.format('D'),
-          date: newMDate.toDate(),
-          kw: day.kw,
-          type: 'not-set',
-        };
     }
     return newDay;
   }
 
   generateCal(year: number): Calendar {
     const months = [];
-    for (let index = 0; index < this.monthNames.length; index++) {
+    for (let index = 0; index < 12; index++) {
       months.push(this.generateMonth(index, year));
     }
     return {
       year: year,
-      dayNames: this.dayNames,
+      dayNames: [],
       months: months,
       daysAbsolute: this.daysAbsolute,
     };
   }
 
   generateMonth(monthNumber: number, year: number): Month {
-    const monthDay = moment(`${year}-${monthNumber + 1}`, 'YYYY-MM');
-    const daysInMonth = monthDay.daysInMonth();
+    const firstDayInMonth = new Date(year, monthNumber, 1);
+    const daysInMonth = dateFns.getDaysInMonth(firstDayInMonth);
+
     const days: Day[] = [];
     for (let index = 0; index < daysInMonth; index++) {
-      const currentDay = new Date(year, monthNumber, index + 1);
-      days.push(this.generateDay(moment(currentDay)));
+      const date = new Date(year, monthNumber, index + 1);
+      days.push(this.generateDay(date));
     }
+
     return {
-      name: this.monthNames[monthNumber],
+      name: dateFns.format(days[0].date, 'LLLL'),
       year: year,
       days: days,
       render: [[]],
     };
   }
 
-  generateDay(currentDay: moment.Moment): Day {
+  generateDay(dateToGenerate: Date): Day {
     let tmpDay = this.dataSourceCustom;
     let day: Day;
 
     if (tmpDay != null) {
       // Filter nach vorhandenem override
       const filter = tmpDay.filter((obj) => {
-        return currentDay.isSame(obj.date, 'day');
+        return dateFns.isSameDay(dateToGenerate, obj.date);
       });
       if (filter.length > 0) {
         let backgroundColor = '';
         let toolTip = '';
+
         switch (filter.length) {
           case 2:
             backgroundColor = `linear-gradient(110deg, ${filter[0].backgroundColor} 49%, ${filter[1].backgroundColor} 51%)`;
@@ -249,34 +229,31 @@ export class FsCalendarService {
             }
             break;
         }
+
         day = filter[0];
         day.backgroundColor = backgroundColor;
         day.toolTip = toolTip;
-        day['kw'] = currentDay.week();
-        day.date = currentDay.toDate();
-        day.dayNumber = currentDay.format('D');
-        day['isWeekendDay'] = this.isWeekend(currentDay);
+        day['kw'] = dateFns.getWeek(dateToGenerate);
+        day.date = dateToGenerate;
+        day.dayNumber = dateFns.format(dateToGenerate, 'd');
+        day['isWeekendDay'] = dateFns.isWeekend(dateToGenerate);
       } else {
         day = {
-          kw: currentDay.week(),
-          dayNumber: currentDay.format('D'),
-          date: currentDay.toDate(),
-          isWeekendDay: this.isWeekend(currentDay),
+          kw: dateFns.getWeek(dateToGenerate),
+          dayNumber: dateFns.format(dateToGenerate, 'd'),
+          date: dateToGenerate,
+          isWeekendDay: dateFns.isWeekend(dateToGenerate),
         };
       }
     } else {
       day = {
-        kw: currentDay.week(),
-        dayNumber: currentDay.format('D'),
-        date: currentDay.toDate(),
-        isWeekendDay: this.isWeekend(currentDay),
+        kw: dateFns.getWeek(dateToGenerate),
+        dayNumber: dateFns.format(dateToGenerate, 'd'),
+        date: dateToGenerate,
+        isWeekendDay: dateFns.isWeekend(dateToGenerate),
       };
     }
-    this.daysAbsolute.push(currentDay.toDate());
+    this.daysAbsolute.push(dateToGenerate);
     return day;
-  }
-
-  isWeekend(date: moment.Moment): boolean {
-    return parseInt(date.format('E'), 0) > 5;
   }
 }
