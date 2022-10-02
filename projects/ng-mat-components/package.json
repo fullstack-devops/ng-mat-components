@@ -5,8 +5,8 @@
   "peerDependencies": {
     "@angular/common": "^13.0.0",
     "@angular/core": "^13.0.0",
-    "moment": "^2.29.0",
-    "@angular/material": "^13.0.0"
+    "@angular/material": "^13.0.0",
+    "date-fns": "^2.29.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"
