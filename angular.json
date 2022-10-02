@@ -12,6 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
+            "tsConfig": "projects/ng-mat-components/tsconfig.lib.json",
             "project": "projects/ng-mat-components/ng-package.json"
           },
           "configurations": {

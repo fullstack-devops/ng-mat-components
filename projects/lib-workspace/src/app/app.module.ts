@@ -1,18 +1,20 @@
-import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
 
 import { APP_BASE_HREF } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { de } from 'date-fns/locale';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 
 import {
   FsCalendarModule,
-  FsUiFrameModule,
+  FsCalendarService,
   FsUiFrameContentModule,
+  FsUiFrameModule,
   FsUiFrameToolbarModule,
 } from 'projects/ng-mat-components/src/public-api';
 import { HomeComponent } from './content/home/home.component';
@@ -46,6 +48,11 @@ import { TestComponent } from './content/test/test.component';
       useValue: '.',
     },
     { provide: LOCALE_ID, useValue: 'de-DE' },
+    {
+      provide: 'FS_DATE_LOCALE',
+      useClass: FsCalendarService,
+      useValue: de,
+    },
   ],
   bootstrap: [AppComponent],
 })

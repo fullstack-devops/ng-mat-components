@@ -1,20 +1,16 @@
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import * as dateFns_ from 'date-fns';
+import { Inject, Injectable } from '@angular/core';
+import * as dateFns from 'date-fns';
 import { Calendar, Day, Month } from './calendar.models';
-
-export const dateFns = dateFns_;
 
 @Injectable({
   providedIn: 'root',
 })
 export class FsCalendarService {
-  dayNamesDeVor: any;
-  dayNamesDe: any;
-
+  dayNames: string[] = this.getWeekDayNames();
   dataSourceCustom: Day[] = [];
   daysAbsolute: Date[] = [];
 
-  constructor(@Inject(LOCALE_ID) private appLocale: string) {}
+  constructor(@Inject('FS_DATE_LOCALE') private appLocale: dateFns.Locale) {}
 
   /**
    * @param {String}     mode             calendar mode (monthly|annual)
@@ -65,7 +61,7 @@ export class FsCalendarService {
       }
       cal = {
         months: months,
-        dayNames: this.dayNamesDeVor,
+        dayNames: this.dayNames,
         year: year,
         daysAbsolute: this.daysAbsolute,
       };
@@ -145,7 +141,7 @@ export class FsCalendarService {
         break;
       case 'placeholderDay':
         newDay = {
-          dayNumber: dateFns.format(date, 'd'),
+          dayNumber: dateFns.format(date, 'd', { locale: this.appLocale }),
           date: date,
           kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
           type: 'placeholderDay',
@@ -163,7 +159,7 @@ export class FsCalendarService {
     }
     return {
       year: year,
-      dayNames: [],
+      dayNames: this.dayNames,
       months: months,
       daysAbsolute: this.daysAbsolute,
     };
@@ -180,7 +176,7 @@ export class FsCalendarService {
     }
 
     return {
-      name: dateFns.format(days[0].date, 'LLLL'),
+      name: dateFns.format(days[0].date, 'MMMM', { locale: this.appLocale }),
       year: year,
       days: days,
       render: [[]],
@@ -235,12 +231,16 @@ export class FsCalendarService {
         day.toolTip = toolTip;
         day['kw'] = dateFns.getWeek(dateToGenerate);
         day.date = dateToGenerate;
-        day.dayNumber = dateFns.format(dateToGenerate, 'd');
+        day.dayNumber = dateFns.format(dateToGenerate, 'd', {
+          locale: this.appLocale,
+        });
         day['isWeekendDay'] = dateFns.isWeekend(dateToGenerate);
       } else {
         day = {
           kw: dateFns.getWeek(dateToGenerate),
-          dayNumber: dateFns.format(dateToGenerate, 'd'),
+          dayNumber: dateFns.format(dateToGenerate, 'd', {
+            locale: this.appLocale,
+          }),
           date: dateToGenerate,
           isWeekendDay: dateFns.isWeekend(dateToGenerate),
         };
@@ -248,12 +248,27 @@ export class FsCalendarService {
     } else {
       day = {
         kw: dateFns.getWeek(dateToGenerate),
-        dayNumber: dateFns.format(dateToGenerate, 'd'),
+        dayNumber: dateFns.format(dateToGenerate, 'd', {
+          locale: this.appLocale,
+        }),
         date: dateToGenerate,
         isWeekendDay: dateFns.isWeekend(dateToGenerate),
       };
     }
     this.daysAbsolute.push(dateToGenerate);
     return day;
+  }
+
+  getWeekDayNames(): string[] {
+    let now = new Date();
+    let arr = dateFns.eachDayOfInterval({
+      start: dateFns.startOfWeek(now, { weekStartsOn: 1 }),
+      end: dateFns.endOfWeek(now, { weekStartsOn: 1 }),
+    });
+    let arrOfDays: string[] = [];
+    arr.map((a) =>
+      arrOfDays.push(dateFns.format(a, 'EEEEEE', { locale: this.appLocale }))
+    );
+    return arrOfDays;
   }
 }

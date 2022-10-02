@@ -6,13 +6,14 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import * as dateFns from 'date-fns';
 import {
   Calendar,
   CalendarConfig,
   calendarSelected,
   Day,
 } from './calendar.models';
-import { dateFns, FsCalendarService } from './fs-calendar.service';
+import { FsCalendarService } from './fs-calendar.service';
 
 @Component({
   selector: 'fs-calendar',
@@ -168,10 +169,11 @@ export class FsCalendarComponent implements OnInit {
       this.selectedDayStart != undefined &&
       this.selectedDayEnd == undefined
     ) {
+      console.log(this.selectedDayStart, dateComp);
       this.selectedDayBetween = this.calendar.daysAbsolute.filter((date) => {
         return (
-          dateFns.isBefore(date, this.selectedDayStart as Date) &&
-          dateFns.isAfter(date, dateComp)
+          dateFns.isAfter(date, this.selectedDayStart as Date) &&
+          dateFns.isBefore(date, dateComp)
         );
       });
     }
