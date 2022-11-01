@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { FrameRoutes } from 'projects/ng-mat-components/src/public-api';
+import { CalendarTableComponent } from './content/calendar-table/calendar-table.component';
 import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
 import { HomeComponent } from './content/home/home.component';
 import { SubComponent } from './content/home/sub/sub.component';
@@ -38,6 +39,15 @@ export const routes: FrameRoutes = [
       displaySidemenu: true,
       sidenavIcon: 'calendar_month',
       sidenavText: 'Calendar',
+    },
+  },
+  {
+    path: 'calendar-table',
+    component: CalendarTableComponent,
+    data: {
+      displaySidemenu: true,
+      sidenavIcon: 'event_note',
+      sidenavText: 'Calendar Table',
     },
   },
   {
