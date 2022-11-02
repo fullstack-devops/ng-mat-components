@@ -9,10 +9,10 @@ import { de } from 'date-fns/locale';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {
   FsCalendarModule,
   FsCalendarService,
-  FsCalendarTableModule,
   FsMaterialFullModule,
   FsUiFrameContentModule,
   FsUiFrameModule,
@@ -44,7 +44,6 @@ import { TestComponent } from './content/test/test.component';
     FsUiFrameContentModule,
     FsUiFrameToolbarModule,
     FsCalendarModule,
-    FsCalendarTableModule,
   ],
   providers: [
     {
@@ -52,6 +51,7 @@ import { TestComponent } from './content/test/test.component';
       useValue: '.',
     },
     { provide: LOCALE_ID, useValue: 'de-DE' },
+    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
     {
       provide: 'FS_DATE_LOCALE',
       useClass: FsCalendarService,

@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+  text-align: left;
+}
+
+table tr th:not(:first-child),
+table tr td:not(:first-child) {
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+.box {
+  width: 24px;
+  height: 24px;
+  background: lightblue;
+  border-radius: 4px;
+  margin: 4px;
+}
