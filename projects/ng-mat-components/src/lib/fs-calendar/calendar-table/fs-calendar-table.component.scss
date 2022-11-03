@@ -1,5 +1,20 @@
 table {
   width: 100%;
+  padding: 8px;
+}
+
+table tr th {
+  font-weight: normal;
+}
+
+table thead,
+table tbody {
+  background: inherit;
+}
+
+table thead {
+  position: sticky;
+  inset-block-start: 0;
 }
 
 table tr th:first-child,
@@ -17,7 +32,10 @@ table tr td:not(:first-child) {
 .box {
   width: 24px;
   height: 24px;
-  background: lightblue;
+  // background: lightblue;
   border-radius: 4px;
   margin: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 23px;
 }

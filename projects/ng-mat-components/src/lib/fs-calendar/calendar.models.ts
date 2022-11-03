@@ -73,3 +73,26 @@ export interface Day {
   badgeIcon?: string;
   toolTip?: string;
 }
+
+export interface CalendarTable {
+  nameCol: string;
+  entries: CalendarTableEntry[];
+}
+export interface CalendarTableEntry {
+  name: string;
+  data: CalendarExtendedDay[];
+}
+export interface CalendarExtendedDay {
+  date: Date;
+  colors?: {
+    backgroundColor: string;
+    color: string;
+  };
+  toolTip?: string;
+  char?: string;
+  badge?: {
+    badgeMode?: string;
+    badgeInt?: number;
+    badgeIcon?: string;
+  };
+}
