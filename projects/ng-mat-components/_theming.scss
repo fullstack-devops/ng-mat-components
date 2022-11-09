@@ -131,11 +131,14 @@
     border-radius: 4px;
   }
 
-  .fs-calendar-table table tr:first-child {
+  .fs-calendar-table table thead tr th {
     border-bottom: solid 1px mat-color($foreground, "divider");
   }
-  .fs-calendar-table table {
-    background-color: mat-color($background, "app-bar");
+  .fs-calendar-table {
+    background-color: lighten(
+      $color: mat-color($background, "background"),
+      $amount: 3%
+    );
   }
   .fs-calendar-table .box-base {
     background-color: mat-color($foreground, "divider");

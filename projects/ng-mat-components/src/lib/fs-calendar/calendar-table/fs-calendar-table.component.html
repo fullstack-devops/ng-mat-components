@@ -1,5 +1,5 @@
 <table *ngIf="!isLoading">
-  <thead>
+  <thead role="rowgroup">
     <tr>
       <th>{{ tableData?.nameCol }}</th>
       <th>
@@ -48,7 +48,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody role="rowgroup">
     <tr *ngFor="let entry of tableData?.entries">
       <td colspan="2">{{ entry.name }}</td>
       <td *ngFor="let day of matchMonthData(entry.data)">

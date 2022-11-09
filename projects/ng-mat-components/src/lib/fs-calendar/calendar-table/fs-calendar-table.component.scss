@@ -1,6 +1,8 @@
 table {
   width: 100%;
   padding: 8px;
+  border-spacing: 0;
+  background-color: inherit;
 }
 
 table tr th {
@@ -8,13 +10,21 @@ table tr th {
 }
 
 table thead,
-table tbody {
+table thead tr,
+table tbody,
+table tbody tr {
   background: inherit;
 }
 
-table thead {
+table thead tr {
+  height: 56px;
+}
+
+table thead tr th {
   position: sticky;
-  inset-block-start: 0;
+  top: 0px;
+  z-index: 100;
+  background: inherit;
 }
 
 table tr th:first-child,
