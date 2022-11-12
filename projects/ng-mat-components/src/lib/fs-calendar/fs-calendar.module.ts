@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FsCalendarPanelsComponent } from './calendar-panels/calendar-panels.component';
 import { FsCalendarTableComponent } from './calendar-table/fs-calendar-table.component';
-import { FsCalendarComponent } from './fs-calendar.component';
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { FsCalendarComponent } from './fs-calendar.component';
     MatTooltipModule,
     MatTableModule,
   ],
-  exports: [FsCalendarComponent, FsCalendarTableComponent],
-  declarations: [FsCalendarComponent, FsCalendarTableComponent],
+  exports: [FsCalendarPanelsComponent, FsCalendarTableComponent],
+  declarations: [FsCalendarPanelsComponent, FsCalendarTableComponent],
 })
 export class FsCalendarModule {}

@@ -12,18 +12,18 @@ import {
   CalendarConfig,
   calendarSelected,
   Day,
-} from './calendar.models';
-import { FsCalendarService } from './fs-calendar.service';
+} from '../calendar.models';
+import { FsCalendarService } from '../services/fs-calendar.service';
 
 @Component({
-  selector: 'fs-calendar',
-  templateUrl: './fs-calendar.component.html',
-  styleUrls: ['./fs-calendar.component.scss'],
+  selector: 'fs-calendar-panels',
+  templateUrl: './calendar-panels.component.html',
+  styleUrls: ['./calendar-panels.component.css'],
   host: {
     class: 'fs-calendar',
   },
 })
-export class FsCalendarComponent implements OnInit {
+export class FsCalendarPanelsComponent implements OnInit {
   private _config: CalendarConfig = {
     renderMode: 'monthly',
     selectMode: 'click',

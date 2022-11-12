@@ -27,7 +27,7 @@
 </div>
 
 <div style="height: 80%">
-  <fs-calendar
+  <fs-calendar-panels
     [placeholderDay]="placeholder"
     [dataSource]="dataSource"
     [year]="todayYear"
@@ -37,5 +37,5 @@
     [config]="calendarConfig"
     (selectedDate)="testMethod($event)"
   >
-  </fs-calendar>
+  </fs-calendar-panels>
 </div>

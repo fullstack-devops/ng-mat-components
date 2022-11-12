@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as dateFns from 'date-fns';
 import { CalendarExtendedDay, CalendarTable, Month } from '../calendar.models';
-import { FsCalendarService } from '../fs-calendar.service';
+import { FsCalendarService } from '../services/fs-calendar.service';
 
 @Component({
   selector: 'fs-calendar-table',
