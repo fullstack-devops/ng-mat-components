@@ -1,11 +1,13 @@
 import { Inject, Injectable } from '@angular/core';
 import * as dateFns from 'date-fns';
 import {
-  Calendar,
   CalendarExtendedDay,
   CalendarMonth,
-  Day,
-  Month,
+  CalendarPanel,
+  CalendarPanelRender,
+  CalendarPanelsPlaceholderDay,
+  CalendarPanelSum,
+  CalendarPanelsWeekNumber,
 } from '../calendar.models';
 
 @Injectable({
@@ -13,23 +15,20 @@ import {
 })
 export class FsCalendarService {
   dayNames: string[] = this.getWeekDayNames();
-  dataSourceCustom: Day[] = [];
-  daysAbsolute: Date[] = [];
+  oneYearOfMonths: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   constructor(@Inject('FS_DATE_LOCALE') private appLocale: dateFns.Locale) {}
 
   generateMatrix(
     mode: 'monthly' | 'annual',
     calendarWeek: boolean,
-    dataSource: Day[],
+    customDays: CalendarExtendedDay[],
     year: number,
     currMonth: number,
     monthsBefore: number,
     monthsAfter: number
-  ): Calendar {
-    let cal: Calendar;
-    this.dataSourceCustom = dataSource;
-    this.daysAbsolute = [];
+  ): CalendarPanelSum {
+    let cal: CalendarPanelSum;
 
     monthsAfter = monthsAfter
       ? parseInt(monthsAfter.toString(), 10)
@@ -38,227 +37,188 @@ export class FsCalendarService {
       ? parseInt(monthsBefore.toString(), 10)
       : monthsBefore;
     currMonth = currMonth ? parseInt(currMonth.toString(), 10) : currMonth;
+
     // Standard calendar
     if (mode === 'monthly') {
-      const months: Month[] = [];
-      months.push(this.generateMonth(currMonth, year));
+      let calendarPanels: CalendarPanel[] = [];
       for (let index = 0; index < monthsBefore; index++) {
         const calculatedMonth = currMonth - monthsBefore + index;
         const actualYear = calculatedMonth + 1 < 1 ? year - 1 : year;
         const actualMonth =
           calculatedMonth + 1 < 1 ? 12 + calculatedMonth : calculatedMonth;
-        months.splice(index, 0, this.generateMonth(actualMonth, actualYear));
+        calendarPanels.push(
+          this.generatePanel(actualYear, actualMonth, calendarWeek, customDays)
+        );
       }
+      calendarPanels.push(
+        this.generatePanel(year, currMonth, calendarWeek, customDays)
+      );
       for (let index = 0; index < monthsAfter; index++) {
         const calculatedMonth = currMonth + index + 1;
         const actualYear = calculatedMonth > 11 ? year + 1 : year;
         const actualMonth =
           calculatedMonth > 11 ? calculatedMonth - 12 : calculatedMonth;
-        months.push(this.generateMonth(actualMonth, actualYear));
+        calendarPanels.push(
+          this.generatePanel(actualYear, actualMonth, calendarWeek, customDays)
+        );
       }
+
+      let daysAbsolute: Date[] = [];
+      calendarPanels.forEach((panel) => {
+        panel.days.forEach((day) => {
+          daysAbsolute.push(day.date);
+        });
+      });
       cal = {
-        months: months,
-        dayNames: this.dayNames,
         year: year,
-        daysAbsolute: this.daysAbsolute,
+        dayNames: this.dayNames,
+        daysAbsolute: daysAbsolute,
+        calendarPanels: calendarPanels,
       };
     } else {
       // Calendar is a full year
-      cal = this.generateCal(year);
-    }
-
-    cal.months.forEach((month: { days: any[] }, index: any) => {
-      month.days.forEach((day) => {
-        Object.assign(day, { type: 'date' });
+      let calendarPanels = this.generatePanels(
+        year,
+        this.oneYearOfMonths,
+        calendarWeek,
+        customDays
+      );
+      let daysAbsolute: Date[] = [];
+      calendarPanels.forEach((panel) => {
+        panel.days.forEach((day) => {
+          daysAbsolute.push(day.date);
+        });
       });
-      let render: Day[] = month.days;
-      let firstDayOfMonth = month.days[0].date;
-      let dayOfWeek = dateFns.getDay(firstDayOfMonth);
-      let nextMonth = dateFns.addMonths(firstDayOfMonth, 1);
-      // Vormonat
-      for (let i = 0; i < dayOfWeek - 1; i++) {
-        render.splice(
-          0,
-          0,
-          this.makeWJObjekt(
-            dateFns.subDays(firstDayOfMonth, i + 1),
-            'placeholderDay'
-          )
-        );
-      }
-      // Nachmonat
-      for (let i = 0; render.length < 42; i++) {
-        render.splice(
-          render.length,
-          0,
-          this.makeWJObjekt(dateFns.addDays(nextMonth, i), 'placeholderDay')
-        );
-      }
-      // Kalenderwochen && tr rows
-      let renderTr = [];
-      if (calendarWeek) {
-        render.splice(0, 0, this.makeWJObjekt(render[0].date, 'kw'));
-        render.splice(8, 0, this.makeWJObjekt(render[8].date, 'kw'));
-        render.splice(16, 0, this.makeWJObjekt(render[16].date, 'kw'));
-        render.splice(24, 0, this.makeWJObjekt(render[24].date, 'kw'));
-        render.splice(32, 0, this.makeWJObjekt(render[32].date, 'kw'));
-        render.splice(40, 0, this.makeWJObjekt(render[40].date, 'kw'));
-        renderTr.push(render.slice(0, 8));
-        renderTr.push(render.slice(8, 16));
-        renderTr.push(render.slice(16, 24));
-        renderTr.push(render.slice(24, 32));
-        renderTr.push(render.slice(32, 40));
-        renderTr.push(render.slice(40, 48));
-      } else {
-        renderTr.push(render.slice(0, 7));
-        renderTr.push(render.slice(7, 14));
-        renderTr.push(render.slice(14, 21));
-        renderTr.push(render.slice(21, 28));
-        renderTr.push(render.slice(28, 35));
-        renderTr.push(render.slice(35, 42));
-      }
-
-      Object.assign(month, { render: renderTr });
-      cal.daysAbsolute = this.daysAbsolute;
-      // month.days = []
-    });
+      cal = {
+        year: year,
+        dayNames: this.dayNames,
+        daysAbsolute: daysAbsolute,
+        calendarPanels: calendarPanels,
+      };
+    }
     return cal;
   }
 
-  makeWJObjekt(date: Date, type: 'kw' | 'placeholderDay'): Day {
-    let newDay: Day;
-    switch (type) {
-      case 'kw':
-        newDay = {
-          dayNumber: '',
-          date: date,
-          kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
-          type: 'kw',
-        };
-        break;
-      case 'placeholderDay':
-        newDay = {
-          dayNumber: dateFns.format(date, 'd', { locale: this.appLocale }),
-          date: date,
-          kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
-          type: 'placeholderDay',
-          isWeekendDay: dateFns.isWeekend(date),
-        };
-        break;
-    }
-    return newDay;
+  generatePanels(
+    year: number,
+    months: number[],
+    calendarWeek: boolean,
+    customDays: CalendarExtendedDay[]
+  ): CalendarPanel[] {
+    let tmpPanels: CalendarPanel[] = [];
+    months.forEach((month) => {
+      tmpPanels.push(this.generatePanel(year, month, calendarWeek, customDays));
+    });
+    return tmpPanels;
   }
 
-  generateCal(year: number): Calendar {
-    const months = [];
-    for (let index = 0; index < 12; index++) {
-      months.push(this.generateMonth(index, year));
-    }
-    return {
+  generatePanel(
+    year: number,
+    month: number,
+    calendarWeek: boolean,
+    customDays: CalendarExtendedDay[]
+  ): CalendarPanel {
+    const filtedCustomDays = customDays.filter((day) => {
+      return dateFns.isSameMonth(new Date(year, month, 1), day.date);
+    });
+    let tmpMonth = this.generateMonth(year, month, filtedCustomDays);
+    let tmpMonthRenderer: CalendarPanel = {
       year: year,
-      dayNames: this.dayNames,
-      months: months,
-      daysAbsolute: this.daysAbsolute,
-    };
-  }
-
-  generateMonth(monthNumber: number, year: number): Month {
-    const firstDayInMonth = new Date(year, monthNumber, 1);
-    const daysInMonth = dateFns.getDaysInMonth(firstDayInMonth);
-
-    const days: Day[] = [];
-    for (let index = 0; index < daysInMonth; index++) {
-      const date = new Date(year, monthNumber, index + 1);
-      days.push(this.generateDay(date));
-    }
-
-    return {
-      name: dateFns.format(days[0].date, 'MMMM', { locale: this.appLocale }),
-      year: year,
-      days: days,
+      month: month,
+      monthName: tmpMonth.name,
+      days: tmpMonth.days,
       render: [[]],
     };
+    let tmpPreRender: CalendarPanelRender = tmpMonth.days;
+    let firstDayOfMonth = tmpMonth.days[0].date;
+    let dayOfWeek = dateFns.getDay(firstDayOfMonth);
+    let nextMonth = dateFns.addMonths(firstDayOfMonth, 1);
+    // previous month
+    for (let i = 0; i < dayOfWeek - 1; i++) {
+      tmpPreRender.splice(
+        0,
+        0,
+        this.generatePlaceholder(dateFns.subDays(firstDayOfMonth, i + 1))
+      );
+    }
+    // post month
+    for (let i = 0; tmpPreRender.length < 42; i++) {
+      tmpPreRender.splice(
+        tmpPreRender.length,
+        0,
+        this.generatePlaceholder(dateFns.addDays(nextMonth, i))
+      );
+    }
+    // CalendarWeekDays && tr rows
+    if (calendarWeek) {
+      tmpPreRender.splice(0, 0, this.generateWeekNumber(tmpPreRender[0].date));
+      tmpPreRender.splice(8, 0, this.generateWeekNumber(tmpPreRender[8].date));
+      tmpPreRender.splice(
+        16,
+        0,
+        this.generateWeekNumber(tmpPreRender[16].date)
+      );
+      tmpPreRender.splice(
+        24,
+        0,
+        this.generateWeekNumber(tmpPreRender[24].date)
+      );
+      tmpPreRender.splice(
+        32,
+        0,
+        this.generateWeekNumber(tmpPreRender[32].date)
+      );
+      tmpPreRender.splice(
+        40,
+        0,
+        this.generateWeekNumber(tmpPreRender[40].date)
+      );
+      tmpMonthRenderer.render.push(tmpPreRender.slice(0, 8));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(8, 16));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(16, 24));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(24, 32));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(32, 40));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(40, 48));
+    } else {
+      tmpMonthRenderer.render.push(tmpPreRender.slice(0, 7));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(7, 14));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(14, 21));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(21, 28));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(28, 35));
+      tmpMonthRenderer.render.push(tmpPreRender.slice(35, 42));
+    }
+    return tmpMonthRenderer;
   }
 
-  generateDay(dateToGenerate: Date): Day {
-    let tmpDay = this.dataSourceCustom;
-    let day: Day;
-
-    if (tmpDay != null) {
-      // Filter nach vorhandenem override
-      const filter = tmpDay.filter((obj) => {
-        return dateFns.isSameDay(dateToGenerate, obj.date);
-      });
-      if (filter.length > 0) {
-        let backgroundColor = '';
-        let toolTip = '';
-
-        switch (filter.length) {
-          case 2:
-            backgroundColor = `linear-gradient(110deg, ${filter[0].backgroundColor} 49%, ${filter[1].backgroundColor} 51%)`;
-            toolTip = `${filter[0].toolTip} \n ${filter[1].toolTip}`;
-            break;
-          case 3:
-            backgroundColor = `linear-gradient(110deg,
-                ${filter[0].backgroundColor}, ${filter[0].backgroundColor} 31%,
-                ${filter[1].backgroundColor} 32%, ${filter[1].backgroundColor} 65%,
-                ${filter[2].backgroundColor} 66%)`;
-            toolTip = `${filter[0].toolTip} \n ${filter[1].toolTip} \n ${filter[2].toolTip}`;
-            break;
-          case 4:
-            backgroundColor = `linear-gradient(110deg,
-              ${filter[0].backgroundColor}, ${filter[0].backgroundColor} 24%,
-              ${filter[1].backgroundColor} 26%, ${filter[1].backgroundColor} 49%,
-              ${filter[2].backgroundColor} 51%, ${filter[2].backgroundColor} 74%,
-              ${filter[3].backgroundColor} 76%)`;
-            toolTip = `${filter[0].toolTip} \n ${filter[1].toolTip} \n ${filter[2].toolTip} \n ${filter[3].toolTip}`;
-            break;
-          default:
-            if (filter[0].backgroundColor) {
-              backgroundColor = filter[0].backgroundColor;
-            }
-            if (filter[0].toolTip) {
-              toolTip = filter[0].toolTip;
-            }
-            break;
-        }
-
-        day = filter[0];
-        day.backgroundColor = backgroundColor;
-        day.toolTip = toolTip;
-        day['kw'] = dateFns.getWeek(dateToGenerate);
-        day.date = dateToGenerate;
-        day.dayNumber = dateFns.format(dateToGenerate, 'd', {
-          locale: this.appLocale,
-        });
-        day['isWeekendDay'] = dateFns.isWeekend(dateToGenerate);
-      } else {
-        day = {
-          kw: dateFns.getWeek(dateToGenerate),
-          dayNumber: dateFns.format(dateToGenerate, 'd', {
-            locale: this.appLocale,
-          }),
-          date: dateToGenerate,
-          isWeekendDay: dateFns.isWeekend(dateToGenerate),
-        };
-      }
-    } else {
-      day = {
-        kw: dateFns.getWeek(dateToGenerate),
-        dayNumber: dateFns.format(dateToGenerate, 'd', {
+  generatePlaceholder(date: Date): CalendarPanelsPlaceholderDay {
+    return {
+      date: date,
+      _meta: {
+        kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
+        isWeekendDay: dateFns.isWeekend(date),
+        dayNumber: dateFns.format(date, 'd', {
           locale: this.appLocale,
         }),
-        date: dateToGenerate,
-        isWeekendDay: dateFns.isWeekend(dateToGenerate),
-      };
-    }
-    this.daysAbsolute.push(dateToGenerate);
-    return day;
+      },
+    };
   }
 
-  newgenerateMonth(
-    month: number,
+  generateWeekNumber(date: Date): CalendarPanelsWeekNumber {
+    return {
+      date: date,
+      _meta: {
+        kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
+        isWeekendDay: dateFns.isWeekend(date),
+        dayNumber: dateFns.format(date, 'd', {
+          locale: this.appLocale,
+        }),
+      },
+    };
+  }
+
+  generateMonth(
     year: number,
+    month: number,
     customDays: CalendarExtendedDay[]
   ): CalendarMonth {
     const firstDayInMonth = new Date(year, month, 1);
@@ -270,7 +230,7 @@ export class FsCalendarService {
       const filtedCustomDays = customDays.filter((day) => {
         return dateFns.isSameDay(date, day.date);
       });
-      days.push(this.newgenerateDay(date, filtedCustomDays));
+      days.push(this.generateDay(date, filtedCustomDays));
     }
 
     return {
@@ -280,14 +240,13 @@ export class FsCalendarService {
     };
   }
 
-  newgenerateDay(
+  generateDay(
     dateToGenerate: Date,
     customDays: CalendarExtendedDay[]
   ): CalendarExtendedDay {
     if (customDays.length == 0) {
       return {
         date: dateToGenerate,
-        char: '',
         _meta: {
           kw: dateFns.getWeek(dateToGenerate, { weekStartsOn: 4 }),
           isWeekendDay: dateFns.isWeekend(dateToGenerate),
@@ -330,7 +289,8 @@ export class FsCalendarService {
       }
       return {
         date: dateToGenerate,
-        char: '',
+        badge: customDays[0].badge,
+        char: customDays[0].char,
         colors: {
           backgroundColor: backgroundColor,
         },

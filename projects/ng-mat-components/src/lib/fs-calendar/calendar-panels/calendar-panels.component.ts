@@ -8,10 +8,10 @@ import {
 } from '@angular/core';
 import * as dateFns from 'date-fns';
 import {
-  Calendar,
   CalendarEvent,
   CalendarExtendedDay,
   CalendarPanels,
+  CalendarPanelSum,
 } from '../calendar.models';
 import { FsCalendarService } from '../services/fs-calendar.service';
 
@@ -44,7 +44,7 @@ export class FsCalendarPanelsComponent implements OnInit {
   private _monthsBefore: number = 0;
   private _monthsAfter: number = 0;
 
-  calendar: Calendar = new Calendar();
+  calendar: CalendarPanelSum;
   today = new Date();
   selectedDayStart: Date | undefined;
   selectedDayBetween: Date[] = [];

@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { CalendarExtendedDay, CalendarTable, Month } from '../calendar.models';
+import {
+  CalendarExtendedDay,
+  CalendarMonth,
+  CalendarTable,
+} from '../calendar.models';
 import { FsCalendarService } from '../services/fs-calendar.service';
 
 @Component({
@@ -14,7 +18,7 @@ import { FsCalendarService } from '../services/fs-calendar.service';
 export class FsCalendarTableComponent implements OnInit {
   isLoading: boolean = true;
 
-  currentMonth: Month | undefined;
+  currentMonth: CalendarMonth | undefined;
   tableData: CalendarTable | undefined;
 
   private _monthNumber: number = dateFns.getMonth(new Date());
@@ -23,48 +27,47 @@ export class FsCalendarTableComponent implements OnInit {
   @Input()
   set dataSource(data: CalendarTable) {
     this.tableData = data;
-    // this.generateX();
+    this.genMonthData();
   }
 
   @Input()
   set month(data: number) {
     this._monthNumber = data;
-    // this.generateX();
+    this.genMonthData();
   }
   @Input()
   set year(data: number) {
     this._yearNumber = data;
-    // this.generateX();
+    this.genMonthData();
   }
 
   constructor(private calendarService: FsCalendarService) {}
 
   ngOnInit() {
     this.genMonthData();
-    console.log(this.tableData);
     this.isLoading = false;
   }
 
   genMonthData() {
-    this.currentMonth = this.calendarService.generateMonth(
+    this.currentMonth = this.calendarService.newgenerateMonth(
       this._monthNumber,
-      this._yearNumber
+      this._yearNumber,
+      []
     );
   }
 
   matchMonthData(customData: CalendarExtendedDay[]): CalendarExtendedDay[] {
     let result: CalendarExtendedDay[] = [];
     this.currentMonth?.days.forEach((dayInMonth) => {
-      let index = customData.findIndex((obj) => {
-        return dateFns.isSameDay(obj.date, dayInMonth.date);
+      let index = customData.findIndex((day) => {
+        return dateFns.isSameDay(day.date, dayInMonth.date);
       });
 
       if (index == -1) {
-        result.push({
-          date: dayInMonth.date,
-          char: '',
-        });
+        result.push(dayInMonth);
       } else {
+        let tmpDay = dayInMonth;
+        tmpDay.toolTip = customData[index].toolTip;
         result.push({
           date: dayInMonth.date,
           toolTip: customData[index].toolTip,

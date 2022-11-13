@@ -1,14 +1,38 @@
-export class Calendar {
-  year: number = 2022;
-  dayNames: String[] = [''];
-  months: Month[] = [];
-  daysAbsolute: Date[] = [];
-}
-export interface Month {
-  name: string;
-  days: Day[];
+export interface CalendarPanelSum {
   year: number;
-  render: [Day[]];
+  dayNames: String[];
+  daysAbsolute: Date[];
+  calendarPanels: CalendarPanel[];
+}
+
+export interface CalendarPanel {
+  year: number;
+  month: number;
+  monthName: string;
+  days: CalendarExtendedDay[];
+  render: [CalendarPanelRender];
+}
+
+export type CalendarPanelRender =
+  | CalendarExtendedDay[]
+  | CalendarPanelsWeekNumber[]
+  | CalendarPanelsPlaceholderDay[];
+
+export interface CalendarPanelsWeekNumber {
+  date: Date;
+  _meta?: {
+    kw: number;
+    dayNumber: string;
+    isWeekendDay: boolean;
+  };
+}
+export interface CalendarPanelsPlaceholderDay {
+  date: Date;
+  _meta?: {
+    kw: number;
+    dayNumber: string;
+    isWeekendDay: boolean;
+  };
 }
 
 export interface CalendarMonth {
@@ -118,7 +142,7 @@ export interface CalendarTableEntry {
  */
 export interface CalendarExtendedDay {
   date: Date;
-  char: string;
+  char?: string;
   colors?: {
     backgroundColor: string;
     color?: string;
