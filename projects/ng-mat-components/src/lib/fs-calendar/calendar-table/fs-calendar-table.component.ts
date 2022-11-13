@@ -62,6 +62,7 @@ export class FsCalendarTableComponent implements OnInit {
       if (index == -1) {
         result.push({
           date: dayInMonth.date,
+          char: '',
         });
       } else {
         result.push({

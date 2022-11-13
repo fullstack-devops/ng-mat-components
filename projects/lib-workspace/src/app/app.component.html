@@ -1,4 +1,9 @@
-<fs-ui-frame [frameConfig]="frameConfig" [navUser]="navUser" [appRoutes]="appRoutes" (event)="onEvent($event)">
+<fs-ui-frame
+  [frameConfig]="frameConfig"
+  [navUser]="navUser"
+  [appRoutes]="appRoutes"
+  (event)="onEvent($event)"
+>
   <fs-ui-frame-toolbar>
     <fs-ui-frame-toolbar-title>Current App Title</fs-ui-frame-toolbar-title>
 
@@ -17,15 +22,13 @@
     <fs-ui-frame-toolbar-side>
       <!-- <a>Test the side</a> -->
       <mat-form-field appearance="outline">
-        <input matInput placeholder="Search" type="search">
+        <input matInput placeholder="Search" type="search" />
         <!-- <mat-icon matSuffix>close</mat-icon> -->
       </mat-form-field>
     </fs-ui-frame-toolbar-side>
-
   </fs-ui-frame-toolbar>
 
   <fs-ui-frame-content>
     <router-outlet></router-outlet>
   </fs-ui-frame-content>
-
 </fs-ui-frame>

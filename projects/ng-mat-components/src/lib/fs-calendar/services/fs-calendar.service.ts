@@ -1,6 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { Calendar, Day, Month } from './calendar.models';
+import {
+  Calendar,
+  CalendarExtendedDay,
+  CalendarMonth,
+  Day,
+  Month,
+} from '../calendar.models';
 
 @Injectable({
   providedIn: 'root',
@@ -12,15 +18,6 @@ export class FsCalendarService {
 
   constructor(@Inject('FS_DATE_LOCALE') private appLocale: dateFns.Locale) {}
 
-  /**
-   * @param {String}     mode             calendar mode (monthly|annual)
-   * @param {boolean}    calendarWeek     Display calendar week
-   * @param {DayCustom}  dataSource       Custom dates, Model 'DayCustom'
-   * @param {Number}     year             Gerarate calender for one year
-   * @param {Number}     currMonth        current selected month
-   * @param {Number}     monthsBefore     months before the selected month, default 0
-   * @param {Number}     monthsAfter      months after the selected month, default 0
-   */
   generateMatrix(
     mode: 'monthly' | 'annual',
     calendarWeek: boolean,
@@ -257,6 +254,96 @@ export class FsCalendarService {
     }
     this.daysAbsolute.push(dateToGenerate);
     return day;
+  }
+
+  newgenerateMonth(
+    month: number,
+    year: number,
+    customDays: CalendarExtendedDay[]
+  ): CalendarMonth {
+    const firstDayInMonth = new Date(year, month, 1);
+    const daysInMonth = dateFns.getDaysInMonth(firstDayInMonth);
+
+    const days: CalendarExtendedDay[] = [];
+    for (let index = 0; index < daysInMonth; index++) {
+      const date = new Date(year, month, index + 1);
+      const filtedCustomDays = customDays.filter((day) => {
+        return dateFns.isSameDay(date, day.date);
+      });
+      days.push(this.newgenerateDay(date, filtedCustomDays));
+    }
+
+    return {
+      name: dateFns.format(days[0].date, 'MMMM', { locale: this.appLocale }),
+      year: year,
+      days: days,
+    };
+  }
+
+  newgenerateDay(
+    dateToGenerate: Date,
+    customDays: CalendarExtendedDay[]
+  ): CalendarExtendedDay {
+    if (customDays.length == 0) {
+      return {
+        date: dateToGenerate,
+        char: '',
+        _meta: {
+          kw: dateFns.getWeek(dateToGenerate, { weekStartsOn: 4 }),
+          isWeekendDay: dateFns.isWeekend(dateToGenerate),
+          dayNumber: dateFns.format(dateToGenerate, 'd', {
+            locale: this.appLocale,
+          }),
+        },
+      };
+    } else {
+      let backgroundColor = '';
+      let toolTip = '';
+      switch (customDays.length) {
+        case 2:
+          backgroundColor = `linear-gradient(110deg, ${customDays[0].colors?.backgroundColor} 49%, ${customDays[1].colors?.backgroundColor} 51%)`;
+          toolTip = `${customDays[0].toolTip} \n ${customDays[1].toolTip}`;
+          break;
+        case 3:
+          backgroundColor = `linear-gradient(110deg,
+                ${customDays[0].colors?.backgroundColor}, ${customDays[0].colors?.backgroundColor} 31%,
+                ${customDays[1].colors?.backgroundColor} 32%, ${customDays[1].colors?.backgroundColor} 65%,
+                ${customDays[2].colors?.backgroundColor} 66%)`;
+          toolTip = `${customDays[0].toolTip} \n ${customDays[1].toolTip} \n ${customDays[2].toolTip}`;
+          break;
+        case 4:
+          backgroundColor = `linear-gradient(110deg,
+              ${customDays[0].colors?.backgroundColor}, ${customDays[0].colors?.backgroundColor} 24%,
+              ${customDays[1].colors?.backgroundColor} 26%, ${customDays[1].colors?.backgroundColor} 49%,
+              ${customDays[2].colors?.backgroundColor} 51%, ${customDays[2].colors?.backgroundColor} 74%,
+              ${customDays[3].colors?.backgroundColor} 76%)`;
+          toolTip = `${customDays[0].toolTip} \n ${customDays[1].toolTip} \n ${customDays[2].toolTip} \n ${customDays[3].toolTip}`;
+          break;
+        default:
+          if (customDays[0].colors?.backgroundColor) {
+            backgroundColor = customDays[0].colors?.backgroundColor;
+          }
+          if (customDays[0].toolTip) {
+            toolTip = customDays[0].toolTip;
+          }
+          break;
+      }
+      return {
+        date: dateToGenerate,
+        char: '',
+        colors: {
+          backgroundColor: backgroundColor,
+        },
+        toolTip: toolTip,
+        _meta: {
+          kw: dateFns.getWeek(dateToGenerate, { weekStartsOn: 4 }),
+          isWeekendDay: dateFns.isWeekend(dateToGenerate),
+          dayNumber: dateFns.format(dateToGenerate, 'd', {
+            locale: this.appLocale,
+          }),
+        },
+      };
+    }
   }
 
   getWeekDayNames(): string[] {

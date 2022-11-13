@@ -33,7 +33,7 @@ export const routes: FrameRoutes = [
     },
   },
   {
-    path: 'calendar-showcase',
+    path: 'calendar-panels',
     component: CalenderShowcaseComponent,
     data: {
       displaySidemenu: true,

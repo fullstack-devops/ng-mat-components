@@ -60,10 +60,6 @@
     border: 1px solid mat-color($foreground, "secondary-text");
   }
 
-  .fs-calendar-month {
-    background-color: mat-color($background, "dialog");
-  }
-
   .fs-calendar-switches svg {
     fill: mat-color($foreground, "base");
   }
@@ -126,11 +122,6 @@
     );
   }
 
-  .month-header button {
-    border: 1px solid mat-color($foreground, "divider");
-    border-radius: 4px;
-  }
-
   .fs-calendar-table table thead tr th {
     border-bottom: solid 1px mat-color($foreground, "divider");
   }
@@ -148,4 +139,50 @@
     border-radius: 4px;
     color: mat-color($primary, "secondary-text");
   }
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  min-width: 120px;
+  width: auto;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  border-radius: 4px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+/* .tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+} */
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }

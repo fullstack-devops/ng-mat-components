@@ -42,25 +42,25 @@ export class CalenderShowcaseComponent implements OnInit {
 
   dataSource: Day[] = [
     {
-      date: new Date(1634594400000),
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
       backgroundColor: '#0167c7',
       toolTip: 'Test ToolTip First',
       dayNumber: '',
     },
     {
-      date: new Date(1634594400000),
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
       backgroundColor: 'rgb(6, 182, 0)',
       toolTip: 'Test ToolTip Second',
       dayNumber: '',
     },
     {
-      date: new Date(1634853600000),
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 12),
       backgroundColor: 'rgb(6, 182, 0)',
       toolTip: 'Test ToolTip 2',
       dayNumber: '',
     },
     {
-      date: new Date(1635544800000),
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 25),
       backgroundColor: 'lightblue',
       dayNumber: '',
     },

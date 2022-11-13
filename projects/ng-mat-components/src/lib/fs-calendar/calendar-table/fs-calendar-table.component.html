@@ -1,7 +1,7 @@
 <table *ngIf="!isLoading">
   <thead role="rowgroup">
     <tr>
-      <th>{{ tableData?.nameCol }}</th>
+      <th><ng-content select="fs-calendar-table-name"></ng-content></th>
       <th>
         <button
           mat-icon-button
@@ -51,8 +51,11 @@
   <tbody role="rowgroup">
     <tr *ngFor="let entry of tableData?.entries">
       <td colspan="2">{{ entry.name }}</td>
-      <td *ngFor="let day of matchMonthData(entry.data)">
-        <!-- {{ day.dayNumber }} -->
+      <td
+        *ngFor="let day of matchMonthData(entry.data)"
+        [class.tooltip]="day.toolTip"
+      >
+        <span class="tooltiptext" *ngIf="day.toolTip">{{ day.toolTip }}</span>
         <div
           class="box box-base"
           [style.backgroundColor]="day.colors?.backgroundColor"

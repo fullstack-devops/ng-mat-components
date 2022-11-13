@@ -7,7 +7,9 @@
           (click)="onMonthBackward()"
           class="fs-calendar-switches"
           *ngIf="
-            config.switches && config.renderMode != 'annual' && iMonth == 0;
+            dataSource.config.switches &&
+              dataSource.config.renderMode != 'annual' &&
+              iMonth == 0;
             else elseAfterBackward
           "
         >
@@ -28,15 +30,15 @@
         </ng-template>
         <div>
           {{ month.name }}
-          {{ config.displayYear ? month.year : "" }}
+          {{ dataSource.config.displayYear ? month.year : "" }}
         </div>
         <button
           mat-icon-button
           (click)="onMonthForward()"
           class="fs-calendar-switches"
           *ngIf="
-            config.switches &&
-              config.renderMode != 'annual' &&
+            dataSource.config.switches &&
+              dataSource.config.renderMode != 'annual' &&
               calendar.months.length == iMonth + 1;
             else elseAfterForward
           "
@@ -55,16 +57,23 @@
           <div style="width: 40px"></div>
         </ng-template>
       </div>
-      <table class="fs-calendar-table" [style.width]="config.panelWidth">
+      <table
+        class="fs-calendar-table"
+        [style.width]="dataSource.config.panelWidth"
+      >
         <thead class="fs-calendar-table-header">
           <tr>
-            <th scope="col" *ngIf="config.calendarWeek"></th>
+            <th scope="col" *ngIf="dataSource.config.calendarWeek"></th>
             <th *ngFor="let dayname of calendar.dayNames" scope="col">
               {{ dayname }}
             </th>
           </tr>
           <tr>
-            <th scope="col" *ngIf="config.calendarWeek" class="kw"></th>
+            <th
+              scope="col"
+              *ngIf="dataSource.config.calendarWeek"
+              class="kw"
+            ></th>
             <th scope="col" style="height: 10px"></th>
           </tr>
         </thead>
@@ -75,14 +84,15 @@
                 <td
                   role="gridcell"
                   class="fs-calendar-body-cell clickable tooltip"
-                  [matTooltip]="day.toolTip ? day.toolTip : ''"
-                  matTooltipClass="tooltip-helper"
                   tabindex="-1"
                   *ngIf="day.type == 'date'"
-                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
                   (click)="onClick(day, 'date')"
                   (mouseenter)="onMouseOver(day.date)"
                 >
+                  <span class="tooltiptext" *ngIf="day.toolTip">{{
+                    day.toolTip
+                  }}</span>
                   <div
                     class="fs-calendar-body-cell-content"
                     [class.fs-calendar-body-today]="isToday(day.date)"
@@ -123,7 +133,7 @@
                   class="fs-calendar-body-cell kw"
                   tabindex="-1"
                   *ngIf="day.type == 'kw'"
-                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
                 >
                   <div
                     *ngIf="
@@ -144,7 +154,7 @@
                   tabindex="-1"
                   (click)="onClick(day, 'placeholderDay')"
                   *ngIf="day.type == 'placeholderDay' && placeholderDay"
-                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
                 >
                   <div class="fs-calendar-body-cell-content">
                     {{ day.dayNumber }}
@@ -155,14 +165,18 @@
                   class="fs-calendar-body-cell"
                   tabindex="-1"
                   *ngIf="day.type == 'placeholderDay' && !placeholderDay"
-                  [ngClass]="config.calendarWeek ? 'eight' : 'seven'"
+                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
                 >
                   <div></div>
                 </td>
               </ng-container>
             </tr>
             <tr>
-              <th scope="col" *ngIf="config.calendarWeek" class="kw"></th>
+              <th
+                scope="col"
+                *ngIf="dataSource.config.calendarWeek"
+                class="kw"
+              ></th>
               <th scope="col" style="height: 5px"></th>
             </tr>
           </ng-container>

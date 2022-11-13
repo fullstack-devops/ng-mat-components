@@ -1,26 +1,3 @@
-/**
- * @param {string}    renderMode              choose render mode ('annual' or 'monthly')
- * @param {string}    selectMode              choose select mode ('click' or 'range')
- * @param {boolean}   calendarWeek            display the calendar week
- * @param {boolean}   displayYear             displays the year next to the Month name
- * @param {boolean}   switches                show arrows to navigate an month forward or backwards
- * @param {boolean}   bluredDays              make an circle around the number of the day
- * @param {boolean}   markWeekend             highlight weekends
- * @param {boolean}   firstDayOfWeekMonday    set first day of week (monday or sunday)
- * @param {string}    panelWidth              set a with for an single panel
- */
-export interface CalendarConfig {
-  renderMode: 'monthly' | 'annual';
-  selectMode: string;
-  calendarWeek: boolean;
-  displayYear?: boolean;
-  switches?: boolean;
-  bluredDays?: boolean;
-  markWeekend?: boolean;
-  firstDayOfWeekMonday?: boolean;
-  panelWidth?: string;
-}
-
 export class Calendar {
   year: number = 2022;
   dayNames: String[] = [''];
@@ -34,32 +11,36 @@ export interface Month {
   render: [Day[]];
 }
 
-export interface selectedRange {
-  type: String;
+export interface CalendarMonth {
+  name: string;
+  year: number;
+  days: CalendarExtendedDay[];
+}
+
+/**
+ * selectedRange for Calendar Panels
+ * @param {string}    type                    type of event, in this case 'range'
+ * @param {string}    start                   first day of selected range
+ * @param {string}    end                     last day of selected range
+ */
+export interface CalendarSelectedRange {
+  type: 'range';
   start: Date;
   end: Date;
 }
-export interface selectedDate {
-  type: String;
-  date: Date;
-}
-export type calendarSelected = selectedRange | selectedDate;
 
 /**
- * Use this to customize your data in the calendar
- * @param {number}   day              number of day (override not allowed)
- * @param {Date}     date             Date to match
- * @param {number}   kw               calendar week (override not allowed)
- * @param {boolean}  isWeekendDay     Boolean if day weekend (override not allowed)
- * @param {string}   color            set a custom color (hex, string, or var)
- * @param {string}   backgroundColor  set a custom Background Color (hex, string, or var)
- * @param {boolean}  badge            if you want to use a Badge
- * @param {string}   badgeMode        badgeMode options: 'Int' or 'Icon'
- * @param {number}   badgeInt         if badgeMode == 'Int', set our Number here
- * @param {string}   badgeIcon        if badgeMode == 'Icon', set Icon (Matireal-Icons)
- * @param {string}   toolTip          if set, this displays a mat-tooltip
+ * selectedDate for Calendar Panels
+ * @param {string}    type                    type of event, in this case 'click'
+ * @param {string}    date                    selected date
  */
-export interface Day {
+export interface CalendarSelectedDate {
+  type: 'click';
+  date: Date;
+}
+export type CalendarEvent = CalendarSelectedRange | CalendarSelectedDate;
+
+export interface DayX {
   dayNumber: string;
   date: Date;
   kw?: number;
@@ -74,6 +55,44 @@ export interface Day {
   toolTip?: string;
 }
 
+/**
+ * dataSource for Calendar Panels
+ * @param {string}    config                  configurate your calendar panels
+ * @param {string}    data                    set custom days CalendarExtendedDay[]
+ */
+export interface CalendarPanels {
+  config: CalendarPanelsConfig;
+  data: CalendarExtendedDay[];
+}
+
+/**
+ * @param {string}    renderMode              @default monthly choose render mode ('annual' or 'monthly')
+ * @param {string}    selectMode              @default click choose select mode ('click' or 'range')
+ * @param {boolean}   calendarWeek            @default false display the calendar week
+ * @param {boolean}   displayYear             @default true displays the year next to the Month name
+ * @param {boolean}   switches                @default true show arrows to navigate an month forward or backwards
+ * @param {boolean}   bluredDays              @default false make an circle around the number of the day
+ * @param {boolean}   markWeekend             @default true highlight weekends
+ * @param {boolean}   firstDayOfWeekMonday    @default true set first day of week (monday or sunday)
+ * @param {string}    panelWidth              @default 350px set a with for an single panel
+ */
+export interface CalendarPanelsConfig {
+  renderMode: 'monthly' | 'annual';
+  selectMode: 'click' | 'range';
+  calendarWeek: boolean;
+  displayYear?: boolean;
+  switches?: boolean;
+  bluredDays?: boolean;
+  markWeekend?: boolean;
+  firstDayOfWeekMonday?: boolean;
+  panelWidth?: string;
+}
+
+/**
+ * dataSource for Calendar Table
+ * @param {string}    nameCol                 configurate first coloum name
+ * @param {string}    data                    set custom days CalendarExtendedDay[]
+ */
 export interface CalendarTable {
   nameCol: string;
   entries: CalendarTableEntry[];
@@ -82,17 +101,37 @@ export interface CalendarTableEntry {
   name: string;
   data: CalendarExtendedDay[];
 }
+
+/**
+ * Use this to customize your data in the calendar
+ * For Calendar Table and Panels
+ * @param {Date}     date                     Date to match
+ * @param {number}   char                     single charater will be displayed in day
+ * @param {string}   colors.backgroundColor   set a custom css backgroundColor for your date
+ * @param {string}   colors.color             set a custom css color for your date
+ * @param {boolean}  isWeekendDay             Boolean if day weekend (override not allowed)
+ * @param {string}   toolTip                  if set, this displays a mat-tooltip
+ * @param {boolean}  badge.badgeMode          if you want to use a Badge, options: 'int' or 'icon'
+ * @param {number}   badge.badgeInt           if badgeMode == 'int', set our Number here
+ * @param {string}   badge.badgeIcon          if badgeMode == 'icon', set Icon (Material-Icons)
+ * @param {Object}   _meta                    can be ignored
+ */
 export interface CalendarExtendedDay {
   date: Date;
+  char: string;
   colors?: {
     backgroundColor: string;
-    color: string;
+    color?: string;
   };
   toolTip?: string;
-  char?: string;
   badge?: {
-    badgeMode?: string;
+    badgeMode: 'int' | 'icon';
     badgeInt?: number;
     badgeIcon?: string;
+  };
+  _meta?: {
+    kw: number;
+    dayNumber: string;
+    isWeekendDay: boolean;
   };
 }
