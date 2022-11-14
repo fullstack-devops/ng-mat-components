@@ -2,7 +2,7 @@
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "all",
   "prettier.arrowParens": "avoid",
-  "prettier.printWidth": 120,
+  "prettier.printWidth": 130,
   "editor.tabSize": 2,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,

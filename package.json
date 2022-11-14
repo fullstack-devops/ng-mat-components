@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "prebuild": "cp README.md projects/ng-mat-components/",
-    "build": "ng build",
+    "build": "ng build --project ng-mat-components",
     "build:workspace": "ng build --project lib-workspace",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

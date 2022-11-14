@@ -1,7 +1,7 @@
 @use "sass:color";
 @use "sass:map";
 
-@use './theming';
+@use "./theming";
 
 @forward "./_theming.scss" show all-component-themes;
 

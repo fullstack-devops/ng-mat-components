@@ -1,0 +1,51 @@
+table {
+  width: 100%;
+  padding: 8px;
+  border-spacing: 0;
+  background-color: inherit;
+}
+
+table tr th {
+  font-weight: normal;
+}
+
+table thead,
+table thead tr,
+table tbody,
+table tbody tr {
+  background: inherit;
+}
+
+table thead tr {
+  height: 56px;
+}
+
+table thead tr th {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background: inherit;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+  text-align: left;
+}
+
+table tr th:not(:first-child),
+table tr td:not(:first-child) {
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+.box {
+  width: 24px;
+  height: 24px;
+  // background: lightblue;
+  border-radius: 4px;
+  margin: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 23px;
+}

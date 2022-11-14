@@ -1,0 +1,67 @@
+<table *ngIf="!isLoading">
+  <thead role="rowgroup">
+    <tr>
+      <th><ng-content select="fs-calendar-table-name"></ng-content></th>
+      <th>
+        <button
+          mat-icon-button
+          class="fs-calendar-switches"
+          (click)="onMonthBackward()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24px"
+            height="24px"
+          >
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+            />
+          </svg>
+        </button>
+      </th>
+      <th
+        *ngFor="let day of currentMonth.days"
+        [class.date-today]="isToday(day.date)"
+      >
+        {{ day._meta?.dayNumber }} <br />
+        {{ day.date | date: "EEEEEE" }}
+      </th>
+      <th>
+        <button
+          mat-icon-button
+          class="fs-calendar-switches"
+          (click)="onMonthForward()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24px"
+            height="24px"
+          >
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+          </svg>
+        </button>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody role="rowgroup">
+    <tr *ngFor="let entry of tableData">
+      <td colspan="2">{{ entry.name }}</td>
+      <td *ngFor="let day of entry.data" [class.tooltip]="day.toolTip">
+        <span class="tooltiptext" *ngIf="day.toolTip">{{ day.toolTip }}</span>
+        <div
+          class="box box-base"
+          [style.backgroundColor]="day.colors?.backgroundColor"
+          [style.color]="day.colors?.color"
+        >
+          {{ day.char }}
+        </div>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
