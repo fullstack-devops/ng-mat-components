@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  CalendarConfig,
-  calendarSelected,
-  Day,
+  CalendarEvent,
+  CalendarPanels,
 } from 'projects/ng-mat-components/src/public-api';
 
 @Component({
@@ -28,43 +27,48 @@ export class CalenderShowcaseComponent implements OnInit {
   monthsBefore = 1;
   monthsAfter = 1;
 
-  calendarConfig: CalendarConfig = {
-    renderMode: 'monthly', // 'annual' | 'monthly'
-    selectMode: 'range', // 'click' | 'range'
-    displayYear: true,
-    firstDayOfWeekMonday: true,
-    calendarWeek: true,
-    switches: true,
-    panelWidth: '300px',
-    bluredDays: false, // default: false
-    markWeekend: true, // default: true
+  dataSource: CalendarPanels = {
+    config: {
+      renderMode: 'monthly', // 'annual' | 'monthly'
+      selectMode: 'range', // 'click' | 'range'
+      displayYear: true,
+      firstDayOfWeekMonday: true,
+      calendarWeek: true,
+      switches: true,
+      panelWidth: '300px',
+      bluredDays: false, // default: false
+      markWeekend: true, // default: true
+    },
+    data: [
+      {
+        date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
+        colors: {
+          backgroundColor: '#0167c7',
+        },
+        toolTip: 'Test ToolTip First',
+      },
+      {
+        date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
+        colors: {
+          backgroundColor: 'rgb(6, 182, 0)',
+        },
+        toolTip: 'Test ToolTip Second',
+      },
+      {
+        date: new Date(this.today.getFullYear(), this.today.getMonth(), 12),
+        colors: {
+          backgroundColor: 'rgb(6, 182, 0)',
+        },
+        toolTip: 'Test ToolTip 2',
+      },
+      {
+        date: new Date(this.today.getFullYear(), this.today.getMonth(), 25),
+        colors: {
+          backgroundColor: 'lightblue',
+        },
+      },
+    ],
   };
-
-  dataSource: Day[] = [
-    {
-      date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
-      backgroundColor: '#0167c7',
-      toolTip: 'Test ToolTip First',
-      dayNumber: '',
-    },
-    {
-      date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
-      backgroundColor: 'rgb(6, 182, 0)',
-      toolTip: 'Test ToolTip Second',
-      dayNumber: '',
-    },
-    {
-      date: new Date(this.today.getFullYear(), this.today.getMonth(), 12),
-      backgroundColor: 'rgb(6, 182, 0)',
-      toolTip: 'Test ToolTip 2',
-      dayNumber: '',
-    },
-    {
-      date: new Date(this.today.getFullYear(), this.today.getMonth(), 25),
-      backgroundColor: 'lightblue',
-      dayNumber: '',
-    },
-  ];
 
   constructor() {}
   ngOnInit(): void {
@@ -72,12 +76,12 @@ export class CalenderShowcaseComponent implements OnInit {
     this.isLoading = false;
   }
 
-  testMethod(event: calendarSelected) {
+  testMethod(event: CalendarEvent) {
     switch (event.type) {
       case 'range':
         this.range = event;
         break;
-      case 'date':
+      case 'click':
         this.range = event;
         break;
     }

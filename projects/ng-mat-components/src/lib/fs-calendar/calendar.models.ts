@@ -10,29 +10,7 @@ export interface CalendarPanel {
   month: number;
   monthName: string;
   days: CalendarExtendedDay[];
-  render: [CalendarPanelRender];
-}
-
-export type CalendarPanelRender =
-  | CalendarExtendedDay[]
-  | CalendarPanelsWeekNumber[]
-  | CalendarPanelsPlaceholderDay[];
-
-export interface CalendarPanelsWeekNumber {
-  date: Date;
-  _meta?: {
-    kw: number;
-    dayNumber: string;
-    isWeekendDay: boolean;
-  };
-}
-export interface CalendarPanelsPlaceholderDay {
-  date: Date;
-  _meta?: {
-    kw: number;
-    dayNumber: string;
-    isWeekendDay: boolean;
-  };
+  render: [CalendarExtendedDay[]];
 }
 
 export interface CalendarMonth {
@@ -121,6 +99,11 @@ export interface CalendarTable {
   nameCol: string;
   entries: CalendarTableEntry[];
 }
+/**
+ * dataSource for Calendar Table
+ * @param {string}    name                    configurate first coloum name
+ * @param {CalendarExtendedDay[]}    data     set custom days CalendarExtendedDay[]
+ */
 export interface CalendarTableEntry {
   name: string;
   data: CalendarExtendedDay[];
@@ -155,6 +138,7 @@ export interface CalendarExtendedDay {
   };
   _meta?: {
     kw: number;
+    type: 'cw' | 'plHolder' | 'day';
     dayNumber: string;
     isWeekendDay: boolean;
   };

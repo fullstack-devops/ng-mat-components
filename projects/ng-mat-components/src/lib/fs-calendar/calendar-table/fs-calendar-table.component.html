@@ -22,7 +22,7 @@
         </button>
       </th>
       <th
-        *ngFor="let day of currentMonth?.days"
+        *ngFor="let day of currentMonth.days"
         [class.date-today]="isToday(day.date)"
       >
         {{ day._meta?.dayNumber }} <br />
@@ -49,12 +49,9 @@
   </thead>
 
   <tbody role="rowgroup">
-    <tr *ngFor="let entry of tableData?.entries">
+    <tr *ngFor="let entry of tableData">
       <td colspan="2">{{ entry.name }}</td>
-      <td
-        *ngFor="let day of matchMonthData(entry.data)"
-        [class.tooltip]="day.toolTip"
-      >
+      <td *ngFor="let day of entry.data" [class.tooltip]="day.toolTip">
         <span class="tooltiptext" *ngIf="day.toolTip">{{ day.toolTip }}</span>
         <div
           class="box box-base"

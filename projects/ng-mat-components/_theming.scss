@@ -163,12 +163,18 @@
   bottom: 125%;
   left: 50%;
   margin-left: -60px;
+  white-space: nowrap;
+  list-style: none;
 
   /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
 }
 
+.tooltip .tooltiptext li {
+  height: 20px;
+  line-height: 20px;
+}
 /* Tooltip arrow */
 /* .tooltip .tooltiptext::after {
   content: "";

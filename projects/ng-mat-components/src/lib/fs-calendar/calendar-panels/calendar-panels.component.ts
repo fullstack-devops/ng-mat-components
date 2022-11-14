@@ -44,7 +44,7 @@ export class FsCalendarPanelsComponent implements OnInit {
   private _monthsBefore: number = 0;
   private _monthsAfter: number = 0;
 
-  calendar: CalendarPanelSum;
+  calendar: CalendarPanelSum | undefined;
   today = new Date();
   selectedDayStart: Date | undefined;
   selectedDayBetween: Date[] = [];
@@ -149,17 +149,18 @@ export class FsCalendarPanelsComponent implements OnInit {
   }
 
   onMouseOver(dateComp: Date) {
-    if (
-      this.selectedDayStart != undefined &&
-      this.selectedDayEnd == undefined
-    ) {
-      console.log(this.selectedDayStart, dateComp);
-      this.selectedDayBetween = this.calendar.daysAbsolute.filter((date) => {
-        return (
-          dateFns.isAfter(date, this.selectedDayStart as Date) &&
-          dateFns.isBefore(date, dateComp)
-        );
-      });
+    if (this.calendar != undefined) {
+      if (
+        this.selectedDayStart != undefined &&
+        this.selectedDayEnd == undefined
+      ) {
+        this.selectedDayBetween = this.calendar.daysAbsolute.filter((date) => {
+          return (
+            dateFns.isAfter(date, this.selectedDayStart as Date) &&
+            dateFns.isBefore(date, dateComp)
+          );
+        });
+      }
     }
   }
 

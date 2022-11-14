@@ -4,10 +4,7 @@ import {
   CalendarExtendedDay,
   CalendarMonth,
   CalendarPanel,
-  CalendarPanelRender,
-  CalendarPanelsPlaceholderDay,
   CalendarPanelSum,
-  CalendarPanelsWeekNumber,
 } from '../calendar.models';
 
 @Injectable({
@@ -129,9 +126,9 @@ export class FsCalendarService {
       days: tmpMonth.days,
       render: [[]],
     };
-    let tmpPreRender: CalendarPanelRender = tmpMonth.days;
+    let tmpPreRender: CalendarExtendedDay[] = tmpMonth.days;
     let firstDayOfMonth = tmpMonth.days[0].date;
-    let dayOfWeek = dateFns.getDay(firstDayOfMonth);
+    let dayOfWeek = dateFns.getISODay(firstDayOfMonth);
     let nextMonth = dateFns.addMonths(firstDayOfMonth, 1);
     // previous month
     for (let i = 0; i < dayOfWeek - 1; i++) {
@@ -190,28 +187,30 @@ export class FsCalendarService {
     return tmpMonthRenderer;
   }
 
-  generatePlaceholder(date: Date): CalendarPanelsPlaceholderDay {
+  generatePlaceholder(date: Date): CalendarExtendedDay {
     return {
       date: date,
       _meta: {
         kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
-        isWeekendDay: dateFns.isWeekend(date),
+        type: 'plHolder',
         dayNumber: dateFns.format(date, 'd', {
           locale: this.appLocale,
         }),
+        isWeekendDay: dateFns.isWeekend(date),
       },
     };
   }
 
-  generateWeekNumber(date: Date): CalendarPanelsWeekNumber {
+  generateWeekNumber(date: Date): CalendarExtendedDay {
     return {
       date: date,
       _meta: {
         kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
-        isWeekendDay: dateFns.isWeekend(date),
+        type: 'cw',
         dayNumber: dateFns.format(date, 'd', {
           locale: this.appLocale,
         }),
+        isWeekendDay: dateFns.isWeekend(date),
       },
     };
   }
@@ -223,8 +222,8 @@ export class FsCalendarService {
   ): CalendarMonth {
     const firstDayInMonth = new Date(year, month, 1);
     const daysInMonth = dateFns.getDaysInMonth(firstDayInMonth);
-
     const days: CalendarExtendedDay[] = [];
+
     for (let index = 0; index < daysInMonth; index++) {
       const date = new Date(year, month, index + 1);
       const filtedCustomDays = customDays.filter((day) => {
@@ -249,10 +248,11 @@ export class FsCalendarService {
         date: dateToGenerate,
         _meta: {
           kw: dateFns.getWeek(dateToGenerate, { weekStartsOn: 4 }),
-          isWeekendDay: dateFns.isWeekend(dateToGenerate),
+          type: 'day',
           dayNumber: dateFns.format(dateToGenerate, 'd', {
             locale: this.appLocale,
           }),
+          isWeekendDay: dateFns.isWeekend(dateToGenerate),
         },
       };
     } else {
@@ -261,14 +261,14 @@ export class FsCalendarService {
       switch (customDays.length) {
         case 2:
           backgroundColor = `linear-gradient(110deg, ${customDays[0].colors?.backgroundColor} 49%, ${customDays[1].colors?.backgroundColor} 51%)`;
-          toolTip = `${customDays[0].toolTip} \n ${customDays[1].toolTip}`;
+          toolTip = `<li>${customDays[0].toolTip}</li><li>${customDays[1].toolTip}</li>`;
           break;
         case 3:
           backgroundColor = `linear-gradient(110deg,
                 ${customDays[0].colors?.backgroundColor}, ${customDays[0].colors?.backgroundColor} 31%,
                 ${customDays[1].colors?.backgroundColor} 32%, ${customDays[1].colors?.backgroundColor} 65%,
                 ${customDays[2].colors?.backgroundColor} 66%)`;
-          toolTip = `${customDays[0].toolTip} \n ${customDays[1].toolTip} \n ${customDays[2].toolTip}`;
+          toolTip = `${customDays[0].toolTip} <br> ${customDays[1].toolTip} <br> ${customDays[2].toolTip}`;
           break;
         case 4:
           backgroundColor = `linear-gradient(110deg,
@@ -276,7 +276,7 @@ export class FsCalendarService {
               ${customDays[1].colors?.backgroundColor} 26%, ${customDays[1].colors?.backgroundColor} 49%,
               ${customDays[2].colors?.backgroundColor} 51%, ${customDays[2].colors?.backgroundColor} 74%,
               ${customDays[3].colors?.backgroundColor} 76%)`;
-          toolTip = `${customDays[0].toolTip} \n ${customDays[1].toolTip} \n ${customDays[2].toolTip} \n ${customDays[3].toolTip}`;
+          toolTip = `${customDays[0].toolTip} <br> ${customDays[1].toolTip} <br> ${customDays[2].toolTip} <br> ${customDays[3].toolTip}`;
           break;
         default:
           if (customDays[0].colors?.backgroundColor) {
@@ -293,14 +293,16 @@ export class FsCalendarService {
         char: customDays[0].char,
         colors: {
           backgroundColor: backgroundColor,
+          color: customDays[0].colors?.color,
         },
         toolTip: toolTip,
         _meta: {
           kw: dateFns.getWeek(dateToGenerate, { weekStartsOn: 4 }),
-          isWeekendDay: dateFns.isWeekend(dateToGenerate),
+          type: 'day',
           dayNumber: dateFns.format(dateToGenerate, 'd', {
             locale: this.appLocale,
           }),
+          isWeekendDay: dateFns.isWeekend(dateToGenerate),
         },
       };
     }

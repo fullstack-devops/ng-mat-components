@@ -1,10 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as dateFns from 'date-fns';
-import {
-  CalendarExtendedDay,
-  CalendarMonth,
-  CalendarTable,
-} from '../calendar.models';
+import { CalendarMonth, CalendarTableEntry } from '../calendar.models';
 import { FsCalendarService } from '../services/fs-calendar.service';
 
 @Component({
@@ -18,15 +14,30 @@ import { FsCalendarService } from '../services/fs-calendar.service';
 export class FsCalendarTableComponent implements OnInit {
   isLoading: boolean = true;
 
-  currentMonth: CalendarMonth | undefined;
-  tableData: CalendarTable | undefined;
-
   private _monthNumber: number = dateFns.getMonth(new Date());
   private _yearNumber: number = dateFns.getYear(new Date());
+  private _dataSource: CalendarTableEntry[] = [];
+
+  currentMonth: CalendarMonth = this.calendarService.generateMonth(
+    this._yearNumber,
+    this._monthNumber,
+    []
+  );
+  tableData: CalendarTableEntry[] = [];
+
+  get dataSource(): CalendarTableEntry[] {
+    return this._dataSource;
+  }
+  get month(): number {
+    return this._monthNumber;
+  }
+  get year(): number {
+    return this._yearNumber;
+  }
 
   @Input()
-  set dataSource(data: CalendarTable) {
-    this.tableData = data;
+  set dataSource(data: CalendarTableEntry[]) {
+    this._dataSource = data;
     this.genMonthData();
   }
 
@@ -49,34 +60,16 @@ export class FsCalendarTableComponent implements OnInit {
   }
 
   genMonthData() {
-    this.currentMonth = this.calendarService.newgenerateMonth(
-      this._monthNumber,
-      this._yearNumber,
-      []
-    );
-  }
-
-  matchMonthData(customData: CalendarExtendedDay[]): CalendarExtendedDay[] {
-    let result: CalendarExtendedDay[] = [];
-    this.currentMonth?.days.forEach((dayInMonth) => {
-      let index = customData.findIndex((day) => {
-        return dateFns.isSameDay(day.date, dayInMonth.date);
+    this._dataSource.forEach((item: CalendarTableEntry, index: number) => {
+      this.tableData.splice(index, 1, {
+        name: item.name,
+        data: this.calendarService.generateMonth(
+          this.year,
+          this.month,
+          item.data
+        ).days,
       });
-
-      if (index == -1) {
-        result.push(dayInMonth);
-      } else {
-        let tmpDay = dayInMonth;
-        tmpDay.toolTip = customData[index].toolTip;
-        result.push({
-          date: dayInMonth.date,
-          toolTip: customData[index].toolTip,
-          colors: customData[index].colors,
-          char: customData[index].char,
-        });
-      }
     });
-    return result;
   }
 
   onMonthForward() {
