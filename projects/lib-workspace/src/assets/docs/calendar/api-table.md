@@ -17,6 +17,7 @@ import { FsCalendarModule } from "@fullstack-devops/ng-mat-components";
 ## Ts
 
 ```typescript
+// ...
 import { CalendarTableEntry } from "@fullstack-devops/ng-mat-components";
 
 @Component({

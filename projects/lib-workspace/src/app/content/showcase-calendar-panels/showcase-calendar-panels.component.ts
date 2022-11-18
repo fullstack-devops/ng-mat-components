@@ -10,7 +10,6 @@ import {
   styleUrls: ['./showcase-calendar-panels.component.css'],
 })
 export class ShowcaseCalendarPanelsComponent implements OnInit {
-  docsApi = './assets/docs/calendar/api.md';
   range: any;
 
   placeholder = false; // boolean
