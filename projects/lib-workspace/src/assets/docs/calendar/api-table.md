@@ -25,6 +25,7 @@ import { CalendarTableEntry } from "@fullstack-devops/ng-mat-components";
   styleUrls: ["example.css"],
 })
 export class ExampleComponent implements OnInit {
+  // this can also be empty
   calTableData: CalendarTableEntry[] = [
     {
       name: "Test User",
