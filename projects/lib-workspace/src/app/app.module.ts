@@ -14,9 +14,7 @@ import {
   FsCalendarModule,
   FsCalendarService,
   FsMaterialFullModule,
-  FsUiFrameContentModule,
   FsUiFrameModule,
-  FsUiFrameToolbarModule,
 } from 'projects/ng-mat-components/src/public-api';
 import { CalendarTableComponent } from './content/calendar-table/calendar-table.component';
 import { HomeComponent } from './content/home/home.component';
@@ -41,8 +39,6 @@ import { TestComponent } from './content/test/test.component';
     /* Lib modules */
     FsMaterialFullModule,
     FsUiFrameModule,
-    FsUiFrameContentModule,
-    FsUiFrameToolbarModule,
     FsCalendarModule,
   ],
   providers: [

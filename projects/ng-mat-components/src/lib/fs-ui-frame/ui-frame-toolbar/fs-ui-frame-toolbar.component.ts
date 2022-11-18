@@ -1,5 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FsUiFrameService } from '../fs-ui-frame/fs-ui-frame.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import { FsUiFrameService } from '../services/fs-ui-frame.service';
 
 @Component({
   selector: 'fs-ui-frame-toolbar',
@@ -8,7 +16,7 @@ import { FsUiFrameService } from '../fs-ui-frame/fs-ui-frame.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'class': 'fs-ui-frame-toolbar',
+    class: 'fs-ui-frame-toolbar',
   },
 })
 export class FsUiFrameToolbarComponent implements OnInit, OnDestroy {
@@ -19,18 +27,16 @@ export class FsUiFrameToolbarComponent implements OnInit, OnDestroy {
   constructor(private frameService: FsUiFrameService) {
     this.frameService.isMenuClosed.subscribe((bool: boolean) => {
       if (bool) {
-        this.openedClass = ""
+        this.openedClass = '';
       } else {
-        this.openedClass = "opened"
+        this.openedClass = 'opened';
       }
-    })
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
-    this.frameService.isMenuClosed.unsubscribe()
+    this.frameService.isMenuClosed.unsubscribe();
   }
-
 }

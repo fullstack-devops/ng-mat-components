@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
-import { FsUiFrameService } from '../fs-ui-frame/fs-ui-frame.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import { FsUiFrameService } from '../services/fs-ui-frame.service';
 
 @Component({
   selector: 'fs-ui-frame-content',
@@ -8,7 +14,7 @@ import { FsUiFrameService } from '../fs-ui-frame/fs-ui-frame.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'class': 'fs-ui-frame-content',
+    class: 'fs-ui-frame-content',
   },
 })
 export class FsUiFrameContentComponent implements OnInit {
@@ -17,14 +23,12 @@ export class FsUiFrameContentComponent implements OnInit {
   constructor(private frameService: FsUiFrameService) {
     this.frameService.isMenuClosed.subscribe((bool: Boolean) => {
       if (bool) {
-        this.openedClass = ""
+        this.openedClass = '';
       } else {
-        this.openedClass = "opened"
+        this.openedClass = 'opened';
       }
-    })
+    });
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
