@@ -1,0 +1,18 @@
+.docs-components {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  padding: 20px;
+  justify-content: center;
+}
+
+.docs-components .mat-card {
+  height: 300px;
+  width: 250px;
+  margin: 8px;
+  cursor: pointer;
+}
+
+.docs-components .mat-card img {
+  height: 200px;
+}
