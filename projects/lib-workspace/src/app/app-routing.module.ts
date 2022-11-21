@@ -5,7 +5,6 @@ import { HomeComponent } from './content/home/home.component';
 import { ShowcaseCalendarPanelsComponent } from './content/showcase-calendar-panels/showcase-calendar-panels.component';
 import { ShowcaseCalendarTableComponent } from './content/showcase-calendar-table/showcase-calendar-table.component';
 import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-ui-frame.component';
-import { TestComponent } from './content/test/test.component';
 
 export const routes: FrameRoutes = [
   {
@@ -15,15 +14,6 @@ export const routes: FrameRoutes = [
       displaySidemenu: true,
       sidenavIcon: 'home',
       sidenavText: 'Home',
-    },
-  },
-  {
-    path: 'test',
-    component: TestComponent,
-    data: {
-      displaySidemenu: true,
-      sidenavIcon: 'dashboard',
-      sidenavText: 'Dashboard',
     },
   },
   {

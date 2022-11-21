@@ -1,4 +1,4 @@
-# API reference for Calendar Panels
+# API reference for Calendar Table
 
 ```javascript
 import { FsCalendarModule } from "@fullstack-devops/ng-mat-components";
