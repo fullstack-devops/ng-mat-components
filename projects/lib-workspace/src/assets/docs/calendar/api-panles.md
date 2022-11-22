@@ -1,4 +1,4 @@
-# API reference for Calendar Panels
+## installation
 
 ```javascript
 import { FsCalendarModule } from "@fullstack-devops/ng-mat-components";

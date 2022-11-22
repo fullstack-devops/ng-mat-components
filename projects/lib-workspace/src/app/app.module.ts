@@ -5,7 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { de } from 'date-fns/locale';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -37,7 +37,19 @@ import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-u
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MarkdownModule.forRoot({ loader: HttpClient }),
+    MarkdownModule.forRoot({
+      loader: HttpClient,
+      markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+          gfm: true,
+          breaks: false,
+          pedantic: false,
+          smartLists: true,
+          smartypants: false,
+        },
+      },
+    }),
     /* Lib modules */
     FsMaterialFullModule,
     FsUiFrameModule,

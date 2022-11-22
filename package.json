@@ -27,6 +27,7 @@
     "@angular/platform-browser": "~13.3.11",
     "@angular/platform-browser-dynamic": "~13.3.11",
     "@angular/router": "~13.3.11",
+    "clipboard": "^2.0.11",
     "date-fns": "^2.29.3",
     "ngx-markdown": "13",
     "prismjs": "^1.29.0",
