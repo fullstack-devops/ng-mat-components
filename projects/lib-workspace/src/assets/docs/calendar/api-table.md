@@ -4,7 +4,7 @@
 import { FsCalendarModule } from "@fullstack-devops/ng-mat-components";
 ```
 
-## Html
+## HTML
 
 ```html
 <section class="mat-elevation-z4">
@@ -14,7 +14,7 @@ import { FsCalendarModule } from "@fullstack-devops/ng-mat-components";
 </section>
 ```
 
-## Ts
+## TS
 
 ```typescript
 // ...

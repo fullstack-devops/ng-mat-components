@@ -5,6 +5,7 @@
 @mixin theme($theme) {
   // Extract whichever individual palettes you need from the theme.
   $primary: map-get($theme, primary);
+  $primaryContrast: map-get($primary, contrast);
   $accent: map-get($theme, accent);
   // Gets the standard material maps of fore/background
   $background: map-get($theme, "background");
@@ -134,10 +135,10 @@
   .fs-calendar-table .box-base {
     background-color: mat-color($foreground, "divider");
   }
-  .date-today {
-    background-color: mat-color($primary, "default");
+  .fs-calendar-table .date-today {
+    background-color: mat-color($primary, "main") !important;
     border-radius: 4px;
-    color: mat-color($primary, "secondary-text");
+    color: mat-color($primaryContrast, "main") !important;
   }
 }
 

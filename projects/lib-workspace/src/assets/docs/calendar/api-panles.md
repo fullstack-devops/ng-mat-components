@@ -1,10 +1,10 @@
-## installation
+# API reference for Calendar Panels
 
 ```javascript
 import { FsCalendarModule } from "@fullstack-devops/ng-mat-components";
 ```
 
-## html
+## HTML
 
 ```html
 <div style="height: 80%">
@@ -21,7 +21,7 @@ import { FsCalendarModule } from "@fullstack-devops/ng-mat-components";
 </div>
 ```
 
-## ts
+## TS
 
 ```typescript
 // ...
