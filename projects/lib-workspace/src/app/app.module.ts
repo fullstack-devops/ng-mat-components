@@ -5,11 +5,9 @@ import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { de } from 'date-fns/locale';
-import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {
   FsCalendarModule,
@@ -33,23 +31,9 @@ import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-u
   imports: [
     FormsModule,
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MarkdownModule.forRoot({
-      loader: HttpClient,
-      markedOptions: {
-        provide: MarkedOptions,
-        useValue: {
-          gfm: true,
-          breaks: false,
-          pedantic: false,
-          smartLists: true,
-          smartypants: false,
-        },
-      },
-    }),
     /* Lib modules */
     FsMaterialFullModule,
     FsUiFrameModule,
@@ -70,4 +54,4 @@ import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-u
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

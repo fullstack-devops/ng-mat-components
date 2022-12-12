@@ -2,7 +2,7 @@
 Components for @angular/material
 
 
-## Usage
+## Installation
 
 add to your local `.npmrc` the following line to be able to use this package:
 ```javascript
@@ -23,7 +23,7 @@ And install it:
 
 Live Demo with all current modules at https://fullstack-devops.github.io/ng-mat-components (still in dev)
 
-Documentation will be done later when the api is fixed.
+Api Documentation: https://fullstack-devops.github.io/libraries/ng-mat-components.
 
 ## Development server
 

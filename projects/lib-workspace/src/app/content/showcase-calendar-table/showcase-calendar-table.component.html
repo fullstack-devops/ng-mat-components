@@ -1,13 +1,5 @@
-<mat-tab-group>
-  <mat-tab label="Api">
-    <markdown [src]="'assets/docs/calendar/api-table.md'"> </markdown>
-  </mat-tab>
-
-  <mat-tab label="Examples">
-    <section class="mat-elevation-z4">
-      <fs-calendar-table [dataSource]="calTableData">
-        <fs-calendar-table-name> Persons </fs-calendar-table-name>
-      </fs-calendar-table>
-    </section>
-  </mat-tab>
-</mat-tab-group>
+<section class="mat-elevation-z4">
+  <fs-calendar-table [dataSource]="calTableData">
+    <fs-calendar-table-name> Persons </fs-calendar-table-name>
+  </fs-calendar-table>
+</section>
