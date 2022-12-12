@@ -22,9 +22,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup awesome-ci
-        uses: fullstack-devops/awesome-ci-action@main
-      - name: Setup node
+
+      - name: Setup node for GitHub
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
@@ -36,17 +35,28 @@ jobs:
       - name: build applikation
         run: yarn run build
 
-      # - name: set publish config
-      #   shell: bash
-      #   run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.GITHUB_TOKEN }}
-
-      - name: npm publish
+      - name: npm publish to GitHub
         working-directory: dist/ng-mat-components
         run: |
           npm version ${{ needs.create_release.outputs.version }}
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup node for npmjs
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@fullstack-devops"
+
+
+      - name: npm publish to npmjs
+        working-directory: dist/ng-mat-components
+        run: |
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
       - name: Publish release
         run: awesome-ci release publish -releaseid "${{ needs.create_release.outputs.releaseid }}"

@@ -5,12 +5,11 @@ import {
 } from 'projects/ng-mat-components/src/public-api';
 
 @Component({
-  selector: 'lib-calender-showcase',
-  templateUrl: './calender-showcase.component.html',
-  styleUrls: ['./calender-showcase.component.scss'],
+  selector: 'app-showcase-calendar-panels',
+  templateUrl: './showcase-calendar-panels.component.html',
+  styleUrls: ['./showcase-calendar-panels.component.css'],
 })
-export class CalenderShowcaseComponent implements OnInit {
-  docsApi = './assets/docs/calendar/api.md';
+export class ShowcaseCalendarPanelsComponent implements OnInit {
   range: any;
 
   placeholder = false; // boolean

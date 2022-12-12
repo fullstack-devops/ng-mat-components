@@ -60,6 +60,11 @@ export class FsCalendarTableComponent implements OnInit {
   }
 
   genMonthData() {
+    this.currentMonth = this.calendarService.generateMonth(
+      this._yearNumber,
+      this._monthNumber,
+      []
+    );
     this._dataSource.forEach((item: CalendarTableEntry, index: number) => {
       this.tableData.splice(index, 1, {
         name: item.name,

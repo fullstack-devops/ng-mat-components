@@ -1,6 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,19 +15,18 @@ import {
   FsMaterialFullModule,
   FsUiFrameModule,
 } from 'projects/ng-mat-components/src/public-api';
-import { CalendarTableComponent } from './content/calendar-table/calendar-table.component';
 import { HomeComponent } from './content/home/home.component';
-import { SubComponent } from './content/home/sub/sub.component';
-import { TestComponent } from './content/test/test.component';
+import { ShowcaseCalendarPanelsComponent } from './content/showcase-calendar-panels/showcase-calendar-panels.component';
+import { ShowcaseCalendarTableComponent } from './content/showcase-calendar-table/showcase-calendar-table.component';
+import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-ui-frame.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TestComponent,
-    SubComponent,
-    CalenderShowcaseComponent,
-    CalendarTableComponent,
+    ShowcaseCalendarPanelsComponent,
+    ShowcaseCalendarTableComponent,
+    ShowcaseUiFrameComponent,
   ],
   imports: [
     FormsModule,
@@ -56,4 +54,4 @@ import { TestComponent } from './content/test/test.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

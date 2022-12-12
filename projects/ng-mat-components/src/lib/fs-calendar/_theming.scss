@@ -11,12 +11,12 @@
   $foreground: map-get($theme, "foreground");
 
   // Use mat-color to extract individual colors from a palette as necessary.
-  .svg-icon svg {
+  /*   .svg-icon svg {
     fill: mat-color($foreground, "text");
   }
 
   .date-today {
     background-color: mat-color($primary, "lighter");
     border-radius: 4px;
-  }
+  } */
 }

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { FrameRoutes } from 'projects/ng-mat-components/src/public-api';
-import { CalendarTableComponent } from './content/calendar-table/calendar-table.component';
-import { CalenderShowcaseComponent } from './content/calender-showcase/calender-showcase.component';
 import { HomeComponent } from './content/home/home.component';
-import { SubComponent } from './content/home/sub/sub.component';
-import { TestComponent } from './content/test/test.component';
+import { ShowcaseCalendarPanelsComponent } from './content/showcase-calendar-panels/showcase-calendar-panels.component';
+import { ShowcaseCalendarTableComponent } from './content/showcase-calendar-table/showcase-calendar-table.component';
+import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-ui-frame.component';
 
 export const routes: FrameRoutes = [
   {
@@ -16,25 +15,19 @@ export const routes: FrameRoutes = [
       sidenavIcon: 'home',
       sidenavText: 'Home',
     },
-    children: [
-      {
-        path: 'sub',
-        component: SubComponent,
-      },
-    ],
   },
   {
-    path: 'test',
-    component: TestComponent,
+    path: 'ui-frame',
+    component: ShowcaseUiFrameComponent,
     data: {
       displaySidemenu: true,
-      sidenavIcon: 'dashboard',
-      sidenavText: 'Dashboard',
+      sidenavIcon: 'pivot_table_chart',
+      sidenavText: 'Ui Frame',
     },
   },
   {
     path: 'calendar-panels',
-    component: CalenderShowcaseComponent,
+    component: ShowcaseCalendarPanelsComponent,
     data: {
       displaySidemenu: true,
       sidenavIcon: 'calendar_month',
@@ -43,7 +36,7 @@ export const routes: FrameRoutes = [
   },
   {
     path: 'calendar-table',
-    component: CalendarTableComponent,
+    component: ShowcaseCalendarTableComponent,
     data: {
       displaySidemenu: true,
       sidenavIcon: 'event_note',
