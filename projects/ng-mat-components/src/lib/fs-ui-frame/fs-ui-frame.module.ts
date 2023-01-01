@@ -5,11 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FsUiFrameToolbarCenterDirective } from './directives/fs-ui-frame-toolbar-center.directive';
 import { FsUiFrameToolbarSideDirective } from './directives/fs-ui-frame-toolbar-side.directive';
@@ -25,11 +21,7 @@ import { FsUiFrameToolbarComponent } from './ui-frame-toolbar/fs-ui-frame-toolba
     BrowserAnimationsModule,
     RouterModule,
     MatIconModule,
-    MatInputModule,
     MatButtonModule,
-    MatDividerModule,
-    MatMenuModule,
-    MatTooltipModule,
   ],
   exports: [
     FsUiFrameComponent,
@@ -48,4 +40,4 @@ import { FsUiFrameToolbarComponent } from './ui-frame-toolbar/fs-ui-frame-toolba
     FsUiFrameContentComponent,
   ],
 })
-export class FsUiFrameModule {}
+export class FsUiFrameModule { }

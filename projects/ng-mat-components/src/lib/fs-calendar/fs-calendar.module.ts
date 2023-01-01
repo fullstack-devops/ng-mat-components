@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatTableModule } from '@angular/material/table';
 import { FsCalendarPanelsComponent } from './calendar-panels/calendar-panels.component';
 import { FsCalendarTableComponent } from './calendar-table/fs-calendar-table.component';
 import { FsCalendarTableNameDirective } from './directives/fs-calendar-table-name.directive';
@@ -13,7 +12,7 @@ import { FsCalendarTableNameDirective } from './directives/fs-calendar-table-nam
     FsCalendarTableComponent,
     FsCalendarTableNameDirective,
   ],
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatTableModule],
+  imports: [CommonModule, MatButtonModule, MatDividerModule],
   exports: [
     FsCalendarPanelsComponent,
     FsCalendarTableComponent,
