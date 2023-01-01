@@ -12,6 +12,7 @@ $toolbar-width-opened: 264px;
   height: $toolbar-height;
   transition: all 0.3s ease-in-out;
 }
+
 ::ng-deep .fs-ui-frame-toolbar {
   position: fixed;
   z-index: 1;
@@ -49,7 +50,7 @@ $toolbar-width-opened: 264px;
   justify-content: center;
 }
 
-.fs-ui-frame-pic-button-wrapper {
+.profile-pic-button-wrapper {
   width: 64px;
   height: 64px;
   display: flex;
@@ -103,11 +104,17 @@ $toolbar-width-opened: 264px;
   overflow: auto;
 }
 
-.sidebar-name-span {
+.sidebar-name-span,
+.profile-content-wrapper {
   width: calc(100% - $toolbar-width-closed);
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.sidebar-name-span span,
+.profile-content-wrapper span {
+  font-size: 1.5rem;
 }
 
 .sidebar .profile {
@@ -142,6 +149,14 @@ $toolbar-width-opened: 264px;
   flex-direction: column;
   align-items: baseline;
   width: 100%;
+}
+
+.sidebar .profile .user-infos .name {
+  font-size: 1rem;
+}
+
+.sidebar .profile .user-infos .role {
+  font-size: .8rem;
 }
 
 .nav-links li {
