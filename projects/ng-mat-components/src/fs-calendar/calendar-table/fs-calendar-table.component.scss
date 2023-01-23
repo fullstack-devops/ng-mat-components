@@ -1,6 +1,5 @@
 table {
   width: 100%;
-  padding: 8px;
   border-spacing: 0;
   background-color: inherit;
 }
@@ -20,7 +19,7 @@ table thead tr {
   height: 56px;
 }
 
-table thead tr th {
+table thead tr th:not(.date-today) {
   position: sticky;
   top: 0px;
   z-index: 1;

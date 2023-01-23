@@ -4,8 +4,8 @@
 * Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48IzRjN2MzYyIsIj9lcjwjYzlkOGM1IiwiO2VyPCMzMzVmMjd$LCIlPmBePCM0OTg0OTciLCI~ZXI8I2M4ZGFlMCIsIjtlcjwjMzE2Nzdhfiwid2Fybj5gXjwjZWY5YjAwIiwiP2VyPCNmYWUxYjMiLCI7ZXI8I2U4N2YwMH4sIj9UZXh0PCMwMDAwMDAiLCI~PTwjZmFmYWZhIiwiO1RleHQ8I2ZmZmZmZiIsIjs9PCMyYzJjMmN$LCJmb250cz5bYEA8KC00fixgQDwoLTN$LGBAPCgtMn4sYEA8KC0xfixgQDxoZWFkbGluZX4sYEA8dGl0bGV$LGBAPHN1YiktMn4sYEA8c3ViKS0xfixgQDxib2R5LTJ$LGBAPGJvZHktMX4sYEA8YnV0dG9ufixgQDxjYXB0aW9ufixgQDxpbnB1dCIsInNpemU$bnVsbH1dLCJpY29uczxGaWxsZWQiLCI~bmVzcz5mYWxzZSwidmVyc2lvbj4xM30=
 */
 @use "sass:map";
-@use "@angular/material" as mat;
-@use "../../ng-mat-components" as fs-components;
+@use "@angular/material/" as mat;
+@use "../../ng-mat-components" as fsc;
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -262,18 +262,17 @@ $foreground: map.get($theme, "foreground");
 
 @media (prefers-color-scheme: dark) {
   @include mat.all-component-themes($theme);
-  @include fs-components.all-component-themes($theme);
+  @include fsc.all-component-themes($theme);
   $background: map.get($theme, "background");
   $foreground: map.get($theme, "foreground");
 }
 
 @media (prefers-color-scheme: light) {
   @include mat.all-component-themes($altTheme);
-  @include fs-components.all-component-themes($altTheme);
+  @include fsc.all-component-themes($altTheme);
   $background: map.get($altTheme, "background");
   $foreground: map.get($altTheme, "foreground");
 }
 
-@tailwind base;
 @tailwind components;
 @tailwind utilities;

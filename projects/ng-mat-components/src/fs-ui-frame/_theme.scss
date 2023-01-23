@@ -1,0 +1,48 @@
+@mixin fs-ui-frame-theme($theme) {
+  // Extract whichever individual palettes you need from the theme.
+  $primary: map-get($theme, primary);
+  $primaryContrast: map-get($primary, contrast);
+  $accent: map-get($theme, accent);
+  // Gets the standard material maps of fore/background
+  $background: map-get($theme, "background");
+  $foreground: map-get($theme, "foreground");
+
+  .fs-ui-frame-toolbar-logo,
+  .fs-ui-frame-toolbar-logo .logo-span {
+    background-color: map-get($background, "app-bar");
+    color: map-get($foreground, "text");
+  }
+
+  .fs-ui-frame-toolbar {
+    background-color: map-get($background, "status-bar");
+    color: map-get($foreground, "text");
+  }
+
+  .sidebar {
+    background-color: map-get($background, "app-bar");
+    color: map-get($foreground, "text");
+    border-top: 1px solid map-get($foreground, "divider");
+  }
+
+  .sidebar .profile {
+    border-top: 1px solid map-get($foreground, "divider");
+  }
+
+  .sidebar .nav-links li .active::after {
+    content: "";
+    background-color: map-get($primary, "default");
+    border-radius: 8px;
+    width: calc(100% - 8px);
+    height: 56px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: -1;
+  }
+
+  .fs-ui-frame-content {
+    color: map-get($foreground, "text");
+    background-color: lighten($color: map-get($background, "background"),
+        $amount: 3%);
+  }
+}

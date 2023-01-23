@@ -16,7 +16,7 @@
     "url": "https://github.com/fullstack-devops/ng-mat-components.git"
   },
   "homepage": "https://github.com/fullstack-devops/ng-mat-components",
-  "description": "Zentral component repo for angular applications",
+  "description": "Central component repo for angular applications",
   "engines": {
     "node": ">= 12.0.0",
     "npm": ">= 7.0.0",
