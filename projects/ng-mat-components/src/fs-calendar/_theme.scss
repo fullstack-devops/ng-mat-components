@@ -1,7 +1,6 @@
 @mixin fs-calendar-theme($theme) {
   // Extract whichever individual palettes you need from the theme.
   $primary: map-get($theme, primary);
-  $primaryContrast: map-get($primary, contrast);
   $accent: map-get($theme, accent);
   // Gets the standard material maps of fore/background
   $background: map-get($theme, "background");
@@ -77,9 +76,9 @@
     border-bottom: solid 1px map-get($foreground, "divider");
   }
 
-  .fs-calendar-table {
-    background-color: lighten($color: map-get($background, "background"),
-        $amount: 3%);
+  .fs-calendar-table-helper,
+  .fs-calendar-month {
+    background-color: map-get($background, "card");
   }
 
   .fs-calendar-table .box-base {

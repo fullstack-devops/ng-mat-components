@@ -5,7 +5,6 @@
 }
 
 .fs-calendar-month {
-  background-color: inherit;
   margin: 8px;
   padding: 8px;
   border-radius: 4px;
@@ -53,9 +52,11 @@
 .fs-calendar-table thead tr td button {
   visibility: hidden;
 }
+
 .fs-calendar-table:first-child thead tr td:first-child button {
   visibility: visible;
 }
+
 .fs-calendar-table:last-child thead tr td:last-child button {
   visibility: visible;
 }
@@ -86,6 +87,7 @@
   content: "";
   z-index: -1;
 }
+
 .fs-calendar-body-cell-content::after {
   content: "";
   z-index: -2;

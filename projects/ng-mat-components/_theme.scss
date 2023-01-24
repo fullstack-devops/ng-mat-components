@@ -4,7 +4,6 @@
 @mixin all-component-themes($theme) {
   // Extract whichever individual palettes you need from the theme.
   $primary: map-get($theme, primary);
-  $primaryContrast: map-get($primary, contrast);
   $accent: map-get($theme, accent);
   // Gets the standard material maps of fore/background
   $background: map-get($theme, "background");
