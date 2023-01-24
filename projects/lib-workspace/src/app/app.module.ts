@@ -13,12 +13,12 @@ import {
   FsCalendarModule,
   FsCalendarService,
   FsMaterialFullModule,
-  FsUiFrameModule,
+  FsNavFrameModule,
 } from 'projects/ng-mat-components/src/public-api';
 import { HomeComponent } from './content/home/home.component';
 import { ShowcaseCalendarPanelsComponent } from './content/showcase-calendar-panels/showcase-calendar-panels.component';
 import { ShowcaseCalendarTableComponent } from './content/showcase-calendar-table/showcase-calendar-table.component';
-import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-ui-frame.component';
+import { ShowcaseNavFrameComponent } from './content/showcase-nav-frame/showcase-nav-frame.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-u
     HomeComponent,
     ShowcaseCalendarPanelsComponent,
     ShowcaseCalendarTableComponent,
-    ShowcaseUiFrameComponent,
+    ShowcaseNavFrameComponent,
   ],
   imports: [
     FormsModule,
@@ -36,7 +36,7 @@ import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-u
     ReactiveFormsModule,
     /* Lib modules */
     FsMaterialFullModule,
-    FsUiFrameModule,
+    FsNavFrameModule,
     FsCalendarModule,
   ],
   providers: [

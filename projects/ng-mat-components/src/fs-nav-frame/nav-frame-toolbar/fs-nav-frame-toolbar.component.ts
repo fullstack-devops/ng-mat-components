@@ -7,24 +7,24 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { FsUiFrameService } from '../services/fs-ui-frame.service';
+import { FsNavFrameService } from '../services/fs-nav-frame.service';
 
 @Component({
-  selector: 'fs-ui-frame-toolbar',
-  templateUrl: './fs-ui-frame-toolbar.component.html',
-  styleUrls: ['./fs-ui-frame-toolbar.component.scss'],
+  selector: 'fs-nav-frame-toolbar',
+  templateUrl: './fs-nav-frame-toolbar.component.html',
+  styleUrls: ['./fs-nav-frame-toolbar.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'fs-ui-frame-toolbar',
+    class: 'fs-nav-frame-toolbar',
   },
 })
-export class FsUiFrameToolbarComponent implements OnInit, OnDestroy {
+export class FsNavFrameToolbarComponent implements OnInit, OnDestroy {
   @Input() menuOpened: boolean = false;
 
   @HostBinding('class') openedClass = '';
 
-  constructor(private frameService: FsUiFrameService) {
+  constructor(private frameService: FsNavFrameService) {
     this.frameService.isMenuClosed.subscribe((bool: boolean) => {
       if (bool) {
         this.openedClass = '';
@@ -34,7 +34,7 @@ export class FsUiFrameToolbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnDestroy() {
     this.frameService.isMenuClosed.unsubscribe();

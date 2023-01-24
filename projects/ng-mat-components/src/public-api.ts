@@ -4,4 +4,4 @@
 
 export * from './fs-calendar/public-api';
 export * from './fs-material-full/public-api';
-export * from './fs-ui-frame/public-api';
+export * from './fs-nav-frame/public-api';

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FsUiFrameService } from './fs-ui-frame.service';
+import { FsNavFrameService } from './fs-nav-frame.service';
 
 describe('UiFrameService', () => {
-  let service: FsUiFrameService;
+  let service: FsNavFrameService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FsUiFrameService);
+    service = TestBed.inject(FsNavFrameService);
   });
 
   it('should be created', () => {

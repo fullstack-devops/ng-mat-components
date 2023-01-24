@@ -4,7 +4,7 @@ import { FrameRoutes } from 'projects/ng-mat-components/src/public-api';
 import { HomeComponent } from './content/home/home.component';
 import { ShowcaseCalendarPanelsComponent } from './content/showcase-calendar-panels/showcase-calendar-panels.component';
 import { ShowcaseCalendarTableComponent } from './content/showcase-calendar-table/showcase-calendar-table.component';
-import { ShowcaseUiFrameComponent } from './content/showcase-ui-frame/showcase-ui-frame.component';
+import { ShowcaseNavFrameComponent } from './content/showcase-nav-frame/showcase-nav-frame.component';
 
 export const routes: FrameRoutes = [
   {
@@ -17,8 +17,8 @@ export const routes: FrameRoutes = [
     },
   },
   {
-    path: 'ui-frame',
-    component: ShowcaseUiFrameComponent,
+    path: 'nav-frame',
+    component: ShowcaseNavFrameComponent,
     data: {
       displaySidemenu: true,
       sidenavIcon: 'pivot_table_chart',
@@ -56,4 +56,4 @@ export const routes: FrameRoutes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

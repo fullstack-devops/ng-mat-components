@@ -1,24 +1,24 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { FsUiFrameService } from './services/fs-ui-frame.service';
+import { FsNavFrameService } from './services/fs-nav-frame.service';
 import {
   FrameConfig,
   FrameEvent,
   FrameEvents,
   FrameRoutes,
   NavUser,
-} from './ui-frame.modules';
+} from './nav-frame.modules';
 
 @Component({
-  selector: 'fs-ui-frame',
-  templateUrl: './fs-ui-frame.component.html',
-  styleUrls: ['./fs-ui-frame.component.scss'],
+  selector: 'fs-nav-frame',
+  templateUrl: './fs-nav-frame.component.html',
+  styleUrls: ['./fs-nav-frame.component.scss'],
   host: {
-    class: 'fs-ui-frame',
+    class: 'fs-nav-frame',
   },
 })
-export class FsUiFrameComponent implements OnInit {
+export class FsNavFrameComponent implements OnInit {
   @Output() event = new EventEmitter<FrameEvent>();
 
   @Input() navUser: NavUser | undefined;
@@ -34,10 +34,10 @@ export class FsUiFrameComponent implements OnInit {
   navList: FrameRoutes = [];
 
   constructor(
-    private frameService: FsUiFrameService,
+    private frameService: FsNavFrameService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.navList = this.appRoutes.filter((elm) => {

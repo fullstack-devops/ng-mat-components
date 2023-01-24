@@ -1,5 +1,5 @@
 @use "src/fs-calendar";
-@use "src/fs-ui-frame";
+@use "src/fs-nav-frame";
 
 @mixin all-component-themes($theme) {
   // Extract whichever individual palettes you need from the theme.
@@ -11,7 +11,7 @@
   $foreground: map-get($theme, "foreground");
 
   @include fs-calendar.fs-calendar-theme($theme);
-  @include fs-ui-frame.fs-ui-frame-theme($theme);
+  @include fs-nav-frame.fs-nav-frame-theme($theme);
 
   .svg-icon svg {
     fill: map-get($foreground, "text");

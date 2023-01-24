@@ -3,7 +3,7 @@ $toolbar-width-closed: 4rem;
 $toolbar-width-opened: 264px;
 
 // Toolbar-logo
-.fs-ui-frame-toolbar-logo {
+.fs-nav-frame-toolbar-logo {
   position: fixed;
   z-index: 1;
   top: 0;
@@ -13,7 +13,7 @@ $toolbar-width-opened: 264px;
   transition: all 0.3s ease-in-out;
 }
 
-::ng-deep .fs-ui-frame-toolbar {
+::ng-deep .fs-nav-frame-toolbar {
   position: fixed;
   z-index: 1;
   top: 0;
@@ -25,17 +25,17 @@ $toolbar-width-opened: 264px;
   //   0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-::ng-deep .fs-ui-frame-content.opened,
-::ng-deep .fs-ui-frame-toolbar.opened {
+::ng-deep .fs-nav-frame-content.opened,
+::ng-deep .fs-nav-frame-toolbar.opened {
   left: $toolbar-width-opened !important;
 }
 
 .sidebar.opened,
-.fs-ui-frame-toolbar-logo.opened {
+.fs-nav-frame-toolbar-logo.opened {
   width: $toolbar-width-opened !important;
 }
 
-.fs-ui-frame-toolbar-logo .logo-span {
+.fs-nav-frame-toolbar-logo .logo-span {
   width: 100%;
   height: $toolbar-height;
   white-space: nowrap;
@@ -43,7 +43,7 @@ $toolbar-width-opened: 264px;
   justify-content: space-between;
 }
 
-.fs-ui-frame-toolbar-logo .logo-span .logo {
+.fs-nav-frame-toolbar-logo .logo-span .logo {
   width: $toolbar-width-closed;
   height: $toolbar-height;
   display: flex;
@@ -73,7 +73,7 @@ $toolbar-width-opened: 264px;
   }
 }
 
-.fs-ui-frame-toolbar-logo .logo-span .logo .logo-picture {
+.fs-nav-frame-toolbar-logo .logo-span .logo .logo-picture {
   background-size: cover;
   height: 48px;
   width: 48px;
@@ -81,7 +81,7 @@ $toolbar-width-opened: 264px;
   object-fit: cover;
 }
 
-.fs-ui-frame-toolbar-logo .logo-span .logo button {
+.fs-nav-frame-toolbar-logo .logo-span .logo button {
   width: $toolbar-height;
   height: $toolbar-height;
 }
@@ -185,7 +185,7 @@ $toolbar-width-opened: 264px;
   margin-left: 16px;
 }
 
-::ng-deep .fs-ui-frame-content {
+::ng-deep .fs-nav-frame-content {
   position: fixed;
   top: $toolbar-height;
   left: $toolbar-width-closed;

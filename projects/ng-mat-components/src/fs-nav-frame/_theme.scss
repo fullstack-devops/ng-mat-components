@@ -1,4 +1,4 @@
-@mixin fs-ui-frame-theme($theme) {
+@mixin fs-nav-frame-theme($theme) {
   // Extract whichever individual palettes you need from the theme.
   $primary: map-get($theme, primary);
   $primaryContrast: map-get($primary, contrast);
@@ -7,13 +7,13 @@
   $background: map-get($theme, "background");
   $foreground: map-get($theme, "foreground");
 
-  .fs-ui-frame-toolbar-logo,
-  .fs-ui-frame-toolbar-logo .logo-span {
+  .fs-nav-frame-toolbar-logo,
+  .fs-nav-frame-toolbar-logo .logo-span {
     background-color: map-get($background, "app-bar");
     color: map-get($foreground, "text");
   }
 
-  .fs-ui-frame-toolbar {
+  .fs-nav-frame-toolbar {
     background-color: map-get($background, "status-bar");
     color: map-get($foreground, "text");
   }
@@ -40,7 +40,7 @@
     z-index: -1;
   }
 
-  .fs-ui-frame-content {
+  .fs-nav-frame-content {
     color: map-get($foreground, "text");
     background-color: lighten($color: map-get($background, "background"),
         $amount: 3%);

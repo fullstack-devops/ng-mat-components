@@ -1,4 +1,4 @@
-<div class="fs-ui-frame-toolbar-logo" [class.opened]="!isClosed">
+<div class="fs-nav-frame-toolbar-logo" [class.opened]="!isClosed">
   <div class="logo-span">
     <div class="logo">
       <button mat-icon-button (click)="toggleSidemenu()">
@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<ng-content select="fs-ui-frame-toolbar"></ng-content>
+<ng-content select="fs-nav-frame-toolbar"></ng-content>
 
 
 <div class="sidebar" [class.opened]="!isClosed">
@@ -73,4 +73,4 @@
 </div>
 
 
-<ng-content select="fs-ui-frame-content"></ng-content>
+<ng-content select="fs-nav-frame-content"></ng-content>

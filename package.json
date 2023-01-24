@@ -8,7 +8,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
     "watch:scss": "sass --watch projects/ng-mat-components/test.scss:dist/css/css",
     "prebuild": "cp README.md projects/ng-mat-components/",
     "build": "ng build --project ng-mat-components",

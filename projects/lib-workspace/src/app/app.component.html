@@ -1,8 +1,8 @@
-<fs-ui-frame [frameConfig]="frameConfig" [navUser]="navUser" [appRoutes]="appRoutes" (event)="onEvent($event)">
-  <fs-ui-frame-toolbar>
-    <fs-ui-frame-toolbar-title>Current App Title</fs-ui-frame-toolbar-title>
+<fs-nav-frame [frameConfig]="frameConfig" [navUser]="navUser" [appRoutes]="appRoutes" (event)="onEvent($event)">
+  <fs-nav-frame-toolbar>
+    <fs-nav-frame-toolbar-title>Current App Title</fs-nav-frame-toolbar-title>
 
-    <fs-ui-frame-toolbar-center>
+    <fs-nav-frame-toolbar-center>
       <button mat-icon-button>
         <mat-icon>help</mat-icon>
       </button>
@@ -12,9 +12,9 @@
       <button mat-icon-button>
         <mat-icon>call</mat-icon>
       </button>
-    </fs-ui-frame-toolbar-center>
+    </fs-nav-frame-toolbar-center>
 
-    <fs-ui-frame-toolbar-side>
+    <fs-nav-frame-toolbar-side>
       <!-- <a>Test the side</a> -->
       <!-- <mat-form-field appearance="outline">
         <input matInput placeholder="Search" type="search" />
@@ -24,10 +24,10 @@
           class="block w-full p-2 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg"
           placeholder="Dummy Search">
       </div>
-    </fs-ui-frame-toolbar-side>
-  </fs-ui-frame-toolbar>
+    </fs-nav-frame-toolbar-side>
+  </fs-nav-frame-toolbar>
 
-  <fs-ui-frame-content>
+  <fs-nav-frame-content>
     <router-outlet></router-outlet>
-  </fs-ui-frame-content>
-</fs-ui-frame>
+  </fs-nav-frame-content>
+</fs-nav-frame>

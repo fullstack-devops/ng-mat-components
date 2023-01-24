@@ -1,7 +1,6 @@
 .docs-components {
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
   padding: 20px;
   justify-content: center;
 }
