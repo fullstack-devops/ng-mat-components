@@ -10,8 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FsNavFrameToolbarCenterDirective } from './directives/fs-nav-frame-toolbar-center.directive';
 import { FsNavFrameToolbarSideDirective } from './directives/fs-nav-frame-toolbar-side.directive';
 import { FsNavFrameToolbarTitleDirective } from './directives/fs-nav-frame-toolbar-title.directive';
+import { FsNavFrameContentDirective } from './directives/fs-nav-frame-content.directive';
 import { FsNavFrameComponent } from './fs-nav-frame.component';
-import { FsNavFrameContentComponent } from './nav-frame-content/fs-nav-frame-content.component';
 import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-toolbar.component';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-too
     FsNavFrameToolbarCenterDirective,
     FsNavFrameToolbarSideDirective,
     FsNavFrameToolbarTitleDirective,
-    FsNavFrameContentComponent,
+    FsNavFrameContentDirective,
   ],
   declarations: [
     FsNavFrameComponent,
@@ -37,7 +37,7 @@ import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-too
     FsNavFrameToolbarCenterDirective,
     FsNavFrameToolbarSideDirective,
     FsNavFrameToolbarTitleDirective,
-    FsNavFrameContentComponent,
+    FsNavFrameContentDirective,
   ],
 })
 export class FsNavFrameModule { }
