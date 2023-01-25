@@ -1,10 +1,4 @@
 @use "sass:color";
 @use "sass:map";
 
-@use "./theming";
-
-@forward "./_theming.scss" show all-component-themes;
-
-@mixin all-component-themes($theme-or-color-config) {
-  @include theming.theme($theme-or-color-config);
-}
+@forward "theme" show all-component-themes;

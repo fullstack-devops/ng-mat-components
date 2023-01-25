@@ -1,0 +1,199 @@
+$toolbar-height: 3rem;
+$toolbar-width-closed: 4rem;
+$toolbar-width-opened: 264px;
+
+// Toolbar-logo
+.fs-nav-frame-toolbar-logo {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: $toolbar-width-closed;
+  height: $toolbar-height;
+  transition: all 0.3s ease-in-out;
+}
+
+::ng-deep .fs-nav-frame-toolbar {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: $toolbar-width-closed;
+  transition: all 0.3s ease-in-out;
+  right: 0;
+  height: $toolbar-height;
+  // box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+  //   0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .fs-nav-frame-content.opened,
+::ng-deep .fs-nav-frame-toolbar.opened {
+  left: $toolbar-width-opened !important;
+}
+
+.sidebar.opened,
+.fs-nav-frame-toolbar-logo.opened {
+  width: $toolbar-width-opened !important;
+}
+
+.fs-nav-frame-toolbar-logo .logo-span {
+  width: 100%;
+  height: $toolbar-height;
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fs-nav-frame-toolbar-logo .logo-span .logo {
+  width: $toolbar-width-closed;
+  height: $toolbar-height;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-pic-button-wrapper {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+  }
+
+  .pic {
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.fs-nav-frame-toolbar-logo .logo-span .logo .logo-picture {
+  background-size: cover;
+  height: 48px;
+  width: 48px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.fs-nav-frame-toolbar-logo .logo-span .logo button {
+  width: $toolbar-height;
+  height: $toolbar-height;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 1;
+  top: $toolbar-height;
+  left: 0;
+  bottom: 0;
+  width: $toolbar-width-closed;
+  transition: all 0.3s ease-in-out;
+  // box-shadow: 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
+  //  4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+}
+
+.sidebar .nav-links {
+  height: 100%;
+  padding: 0 0 150px 0;
+  overflow: auto;
+}
+
+.sidebar-name-span,
+.profile-content-wrapper {
+  width: calc(100% - $toolbar-width-closed);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sidebar-name-span span,
+.profile-content-wrapper span {
+  font-size: 1.5rem;
+}
+
+.sidebar .profile {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: $toolbar-width-closed;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.sidebar .profile .profile-picture-wrapper {
+  width: $toolbar-width-closed;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar .profile .profile-picture {
+  background-size: cover;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.sidebar .profile .user-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  width: 100%;
+}
+
+.sidebar .profile .user-infos .name {
+  font-size: 1rem;
+}
+
+.sidebar .profile .user-infos .role {
+  font-size: .8rem;
+}
+
+.nav-links li {
+  position: relative;
+  list-style: none;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.nav-links li button {
+  width: 100%;
+  height: 64px;
+}
+
+.nav-links li button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-links li button .material-icons {
+  padding-left: 4px;
+}
+
+.nav-links li button .link-name {
+  margin-left: 16px;
+}
+
+::ng-deep .fs-nav-frame-content {
+  position: fixed;
+  top: $toolbar-height;
+  left: $toolbar-width-closed;
+  right: 0;
+  bottom: 0;
+  padding: 16px;
+  transition: all 0.3s ease-in-out;
+  overflow: auto;
+  box-shadow: inset 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+}

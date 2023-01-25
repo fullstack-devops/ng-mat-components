@@ -8,9 +8,11 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
+    "watch:scss": "sass --watch projects/ng-mat-components/test.scss:dist/css/css",
     "prebuild": "cp README.md projects/ng-mat-components/",
     "build": "ng build --project ng-mat-components",
+    "build:sass": "sass projects/ng-mat-components/_index.scss:dist/css/css",
     "build:workspace": "ng build --project lib-workspace",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -48,6 +50,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "ng-packagr": "^13.0.0",
+    "sass": "^1.57.1",
     "typescript": "~4.5.2"
   }
 }

@@ -1,0 +1,69 @@
+@mixin fs-nav-frame-theme($theme) {
+  // Extract whichever individual palettes you need from the theme.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  // Gets the standard material maps of fore/background
+  $background: map-get($theme, "background");
+  $foreground: map-get($theme, "foreground");
+
+  .fs-nav-frame-toolbar-logo,
+  .fs-nav-frame-toolbar-logo .logo-span {
+    background-color: map-get($background, "app-bar");
+    color: map-get($foreground, "text");
+  }
+
+  .fs-nav-frame-toolbar {
+    background-color: map-get($background, "app-bar");
+    color: map-get($foreground, "text");
+  }
+
+  .sidebar {
+    background-color: map-get($background, "app-bar");
+    color: map-get($foreground, "text");
+    border-top: 1px solid map-get($foreground, "divider");
+  }
+
+  .sidebar .profile {
+    border-top: 1px solid map-get($foreground, "divider");
+  }
+
+  .sidebar .nav-links li .active::after {
+    content: "";
+    background-color: map-get($primary, "default");
+    border-radius: 8px;
+    width: calc(100% - 8px);
+    height: 56px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: -1;
+  }
+
+  .fs-nav-frame-content {
+    color: map-get($foreground, "text");
+    background-color: map-get($background, "background");
+  }
+
+  .badge[data-badge]:after {
+    content: attr(data-badge);
+
+    position: absolute;
+    top: 12px;
+    right: 7px;
+
+    font-size: 11px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 600;
+
+    text-align: center;
+    line-height: 23px;
+
+    background: map-get($accent, "default");
+    color: map-get($accent, default-contrast);
+
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+  }
+}

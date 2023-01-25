@@ -1,0 +1,76 @@
+<div class="fs-nav-frame-toolbar-logo" [class.opened]="!isClosed">
+  <div class="logo-span">
+    <div class="logo">
+      <button mat-icon-button (click)="toggleSidemenu()">
+        <div class="logo-picture" *ngIf="frameConfig.logo != ''"
+          style="background-image: url('{{ frameConfig.logo }}');">
+
+        </div>
+        <span class="material-icons" *ngIf="frameConfig.logo === ''">
+          menu
+        </span>
+      </button>
+    </div>
+    <div class="sidebar-name-span">
+      <span *ngIf="!isClosed">{{frameConfig.appName}}</span>
+    </div>
+  </div>
+</div>
+
+<ng-content select="fs-nav-frame-toolbar"></ng-content>
+
+
+<div class="sidebar" [class.opened]="!isClosed">
+  <!-- Logo / Branding -->
+  <div class="app-name">
+    <span *ngIf="isClosed">{{frameConfig.appNameShort}}</span>
+  </div>
+
+  <!-- Navigation -->
+  <ul class="nav-links">
+    <li>
+      <button mat-button *ngFor="let item of navList" [class.active]="item.path === isActivePath"
+        [routerLink]="item.path" (click)="closeSidebar()"> <!--  class="badge" data-badge="2" -->
+        <span class="material-icons">
+          {{item.data?.sidenavIcon}}
+        </span>
+        <span class="link-name" *ngIf="!isClosed">{{item.data?.sidenavText}}</span>
+      </button>
+    </li>
+  </ul>
+
+  <!-- User Profile -->
+  <div class="profile" *ngIf="navUser != undefined">
+    <div class="profile-pic-button-wrapper">
+      <button mat-icon-button (click)="toggleSidemenu()">
+        <div class="pic" *ngIf="navUser.profilePicture != ''"
+          style="background-image: url('{{ navUser.profilePicture }}');">
+        </div>
+        <span class="material-icons" *ngIf="navUser.profilePicture === ''">
+          account_circle
+        </span>
+      </button>
+    </div>
+
+
+    <div class="profile-content-wrapper" *ngIf="!isClosed">
+      <div class="user-infos">
+        <span class="name">{{navUser.name}}</span>
+        <span class="role">{{navUser.role}}</span>
+      </div>
+      <button mat-icon-button (click)="onManageAccount()">
+        <span class="material-icons">
+          manage_accounts
+        </span>
+      </button>
+      <button mat-icon-button (click)="onLogout()">
+        <span class="material-icons">
+          logout
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<ng-content select="fs-nav-frame-content" [class.opened]="!isClosed"></ng-content>
