@@ -63,6 +63,12 @@ export class FsNavFrameComponent implements OnInit {
     this.isClosed = !this.isClosed;
   }
 
+  closeSidebar() {
+    if (!this.isClosed) {
+      this.toggleSidemenu()
+    }
+  }
+
   isNavActive(name: string): boolean {
     return name === this.isActivePath;
   }
