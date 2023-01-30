@@ -15,14 +15,7 @@ import { FsNavFrameComponent } from './fs-nav-frame.component';
 import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-toolbar.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule,
-    MatIconModule,
-    MatButtonModule,
-  ],
+  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, RouterModule, MatIconModule, MatButtonModule],
   exports: [
     FsNavFrameComponent,
     FsNavFrameToolbarComponent,
@@ -40,4 +33,4 @@ import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-too
     FsNavFrameContentDirective,
   ],
 })
-export class FsNavFrameModule { }
+export class FsNavFrameModule {}

@@ -1,11 +1,9 @@
 {
+  "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.renderWhitespace": "all",
-  "prettier.arrowParens": "avoid",
-  "prettier.printWidth": 130,
-  "editor.tabSize": 2,
-  "files.trimTrailingWhitespace": true,
-  "files.trimFinalNewlines": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "workbench.iconTheme": "material-icon-theme",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
@@ -20,10 +18,24 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
   "[scss]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  }
 }

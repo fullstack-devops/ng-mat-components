@@ -1,11 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FsNavFrameService {
-
   isMenuClosed = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor() {}
 }

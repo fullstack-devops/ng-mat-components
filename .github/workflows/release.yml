@@ -3,12 +3,12 @@ name: Release Package
 on:
   push:
     branches:
-      - "main"
+      - 'main'
     paths-ignore:
-      - "README.md"
-      - "docs/**"
-      - ".github/ISSUE_TEMPLATE/**"
-      - ".github/PULL_REQUEST_TEMPLATE.md"
+      - 'README.md'
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
 
 jobs:
   create_release:
@@ -26,9 +26,9 @@ jobs:
       - name: Setup node for GitHub
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@fullstack-devops"
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@fullstack-devops'
 
       - name: install packages
         run: yarn
@@ -46,10 +46,9 @@ jobs:
       - name: Setup node for npmjs
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-          registry-url: "https://registry.npmjs.org"
-          scope: "@fullstack-devops"
-
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@fullstack-devops'
 
       - name: npm publish to npmjs
         working-directory: dist/ng-mat-components

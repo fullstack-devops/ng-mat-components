@@ -2,13 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { FsNavFrameService } from './services/fs-nav-frame.service';
-import {
-  FrameConfig,
-  FrameEvent,
-  FrameEvents,
-  FrameRoutes,
-  NavUser,
-} from './nav-frame.modules';
+import { FrameConfig, FrameEvent, FrameEvents, FrameRoutes, NavUser } from './nav-frame.modules';
 
 @Component({
   selector: 'fs-nav-frame',
@@ -33,26 +27,22 @@ export class FsNavFrameComponent implements OnInit {
   isActivePath: string = '';
   navList: FrameRoutes = [];
 
-  constructor(
-    private frameService: FsNavFrameService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+  constructor(private frameService: FsNavFrameService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.navList = this.appRoutes.filter((elm) => {
+    this.navList = this.appRoutes.filter(elm => {
       return elm.data?.displaySidemenu === true;
     });
     this.router.events
       .pipe(
-        filter((event) => event instanceof NavigationEnd),
+        filter(event => event instanceof NavigationEnd),
         map(() => {
           const child = this.activatedRoute.firstChild;
           return child;
         })
       )
       .subscribe((ttl: ActivatedRoute | null) => {
-        ttl?.url.subscribe((obj) => {
+        ttl?.url.subscribe(obj => {
           this.isActivePath = obj[0].path;
         });
       });
@@ -65,7 +55,7 @@ export class FsNavFrameComponent implements OnInit {
 
   closeSidebar() {
     if (!this.isClosed) {
-      this.toggleSidemenu()
+      this.toggleSidemenu();
     }
   }
 

@@ -1,9 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Custom
-/gh-pages-demo
-projects/ng-nav-frame/README.md
-
 # Compiled output
 /dist
 /tmp
@@ -11,12 +7,11 @@ projects/ng-nav-frame/README.md
 /bazel-out
 
 # Node
-/node_modules
+node_modules
 npm-debug.log
 yarn-error.log
-yarn.lock
 package-lock.json
-.yarn/
+yarn.lock
 
 # IDEs and editors
 .idea/
@@ -47,5 +42,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-.yarnrc
-package-lock.json

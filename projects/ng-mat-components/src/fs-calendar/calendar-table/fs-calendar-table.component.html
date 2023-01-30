@@ -1,5 +1,4 @@
 <div class="fs-calendar-table-helper">
-
   <table *ngIf="!isLoading">
     <thead role="rowgroup">
       <tr>
@@ -15,8 +14,9 @@
           </button>
         </th>
         <th *ngFor="let day of currentMonth.days" [class.date-today]="isToday(day.date)">
-          {{ day._meta?.dayNumber }} <br />
-          {{ day.date | date: "EEEEEE" }}
+          {{ day._meta?.dayNumber }}
+          <br />
+          {{ day.date | date : 'EEEEEE' }}
         </th>
         <th>
           <button mat-icon-button class="fs-calendar-switches" (click)="onMonthForward()">
@@ -34,8 +34,7 @@
         <td colspan="2">{{ entry.name }}</td>
         <td *ngFor="let day of entry.data" [class.tooltip]="day.toolTip">
           <span class="tooltiptext" *ngIf="day.toolTip">{{ day.toolTip }}</span>
-          <div class="box box-base" [style.backgroundColor]="day.colors?.backgroundColor"
-            [style.color]="day.colors?.color">
+          <div class="box box-base" [style.backgroundColor]="day.colors?.backgroundColor" [style.color]="day.colors?.color">
             {{ day.char }}
           </div>
         </td>
@@ -43,5 +42,4 @@
       </tr>
     </tbody>
   </table>
-
 </div>

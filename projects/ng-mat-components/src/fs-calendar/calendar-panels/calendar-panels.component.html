@@ -1,30 +1,15 @@
 <div class="fs-calendar-helper" *ngIf="calendar != undefined">
-  <ng-container
-    *ngFor="let month of calendar.calendarPanels; let iMonth = index"
-  >
+  <ng-container *ngFor="let month of calendar.calendarPanels; let iMonth = index">
     <div class="fs-calendar-month mat-elevation-z4">
       <div class="month-header">
         <button
           mat-icon-button
           (click)="onMonthBackward()"
           class="fs-calendar-switches"
-          *ngIf="
-            dataSource.config.switches &&
-              dataSource.config.renderMode != 'annual' &&
-              iMonth == 0;
-            else elseAfterBackward
-          "
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="24px"
-            height="24px"
-          >
+          *ngIf="dataSource.config.switches && dataSource.config.renderMode != 'annual' && iMonth == 0; else elseAfterBackward">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
             <path d="M0 0h24v24H0V0z" fill="none" />
-            <path
-              d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-            />
+            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
           </svg>
         </button>
         <ng-template #elseAfterBackward>
@@ -32,25 +17,14 @@
         </ng-template>
         <div>
           {{ month.monthName }}
-          {{ dataSource.config.displayYear ? month.year : "" }}
+          {{ dataSource.config.displayYear ? month.year : '' }}
         </div>
         <button
           mat-icon-button
           (click)="onMonthForward()"
           class="fs-calendar-switches"
-          *ngIf="
-            dataSource.config.switches &&
-              dataSource.config.renderMode != 'annual' &&
-              calendar.calendarPanels.length == iMonth + 1;
-            else elseAfterForward
-          "
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="24px"
-            height="24px"
-          >
+          *ngIf="dataSource.config.switches && dataSource.config.renderMode != 'annual' && calendar.calendarPanels.length == iMonth + 1; else elseAfterForward">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
           </svg>
@@ -59,10 +33,7 @@
           <div style="width: 40px"></div>
         </ng-template>
       </div>
-      <table
-        class="fs-calendar-table"
-        [style.width]="dataSource.config.panelWidth"
-      >
+      <table class="fs-calendar-table" [style.width]="dataSource.config.panelWidth">
         <thead class="fs-calendar-table-header">
           <tr>
             <th scope="col" *ngIf="dataSource.config.calendarWeek"></th>
@@ -71,11 +42,7 @@
             </th>
           </tr>
           <tr>
-            <th
-              scope="col"
-              *ngIf="dataSource.config.calendarWeek"
-              class="kw"
-            ></th>
+            <th scope="col" *ngIf="dataSource.config.calendarWeek" class="kw"></th>
             <th scope="col" style="height: 10px"></th>
           </tr>
         </thead>
@@ -90,13 +57,8 @@
                   *ngIf="day._meta?.type == 'day'"
                   [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
                   (click)="onClick(day, 'date')"
-                  (mouseenter)="onMouseOver(day.date)"
-                >
-                  <ul
-                    class="tooltiptext"
-                    *ngIf="day.toolTip"
-                    [innerHTML]="day.toolTip"
-                  >
+                  (mouseenter)="onMouseOver(day.date)">
+                  <ul class="tooltiptext" *ngIf="day.toolTip" [innerHTML]="day.toolTip">
                     <!-- {{  }} -->
                   </ul>
                   <div
@@ -105,23 +67,15 @@
                     [class.selected-set]="getCanIBeHighlighted(day.date)"
                     [class.selected-start]="isSelectedDayStart(day.date)"
                     [class.selected-end]="isSelectedDayEnd(day.date)"
-                    [class.date-between]="getAmIBetween(day.date)"
-                  >
+                    [class.date-between]="getAmIBetween(day.date)">
                     {{ day._meta?.dayNumber }}
                   </div>
                   <div
                     class="fs-calendar-body-cell-content"
                     style="z-index: -3; border-radius: 4px"
-                    [class.weekend]="
-                      day._meta?.isWeekendDay &&
-                      day.colors?.backgroundColor != '' &&
-                      markWeekend
-                    "
-                    [class.blured-days]="
-                      bluredDays && day.colors?.backgroundColor
-                    "
-                    [ngStyle]="{ background: day.colors?.backgroundColor }"
-                  >
+                    [class.weekend]="day._meta?.isWeekendDay && day.colors?.backgroundColor != '' && markWeekend"
+                    [class.blured-days]="bluredDays && day.colors?.backgroundColor"
+                    [ngStyle]="{ background: day.colors?.backgroundColor }">
                     <!-- <ng-container
                         *ngIf="day.hasOwnProperty('badgeMode') && day.date != selectedDayStart && day.date != selectedDayEnd">
                         <span class="fs-calendar-badge fs-calendar-badge-int" *ngIf="day.badgeMode == 'Int'">
@@ -141,15 +95,9 @@
                   class="fs-calendar-body-cell kw"
                   tabindex="-1"
                   *ngIf="day._meta?.type == 'cw'"
-                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
-                >
-                  <div
-                    *ngIf="
-                      row[iDay + 1]._meta?.type == 'plHolder' && iRender != 0;
-                      else normalKW
-                    "
-                  >
-                    {{ placeholderDay ? day._meta?.kw : "" }}
+                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'">
+                  <div *ngIf="row[iDay + 1]._meta?.type == 'plHolder' && iRender != 0; else normalKW">
+                    {{ placeholderDay ? day._meta?.kw : '' }}
                   </div>
                   <ng-template #normalKW>
                     <div>{{ day._meta?.kw }}</div>
@@ -162,8 +110,7 @@
                   tabindex="-1"
                   (click)="onClick(day, 'placeholderDay')"
                   *ngIf="day._meta?.type == 'plHolder' && placeholderDay"
-                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
-                >
+                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'">
                   <div class="fs-calendar-body-cell-content">
                     {{ day._meta?.dayNumber }}
                   </div>
@@ -173,18 +120,13 @@
                   class="fs-calendar-body-cell"
                   tabindex="-1"
                   *ngIf="day._meta?.type == 'plHolder' && !placeholderDay"
-                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'"
-                >
+                  [ngClass]="dataSource.config.calendarWeek ? 'eight' : 'seven'">
                   <div></div>
                 </td>
               </ng-container>
             </tr>
             <tr>
-              <th
-                scope="col"
-                *ngIf="dataSource.config.calendarWeek"
-                class="kw"
-              ></th>
+              <th scope="col" *ngIf="dataSource.config.calendarWeek" class="kw"></th>
               <th scope="col" style="height: 5px"></th>
             </tr>
           </ng-container>

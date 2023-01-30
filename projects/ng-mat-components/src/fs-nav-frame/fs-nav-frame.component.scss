@@ -156,7 +156,7 @@ $toolbar-width-opened: 264px;
 }
 
 .sidebar .profile .user-infos .role {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .nav-links li {
@@ -194,6 +194,5 @@ $toolbar-width-opened: 264px;
   padding: 16px;
   transition: all 0.3s ease-in-out;
   overflow: auto;
-  box-shadow: inset 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+  box-shadow: inset 5px 2px 4px -1px rgba(0, 0, 0, 0.2), 4px 4px 5px 0px rgba(0, 0, 0, 0.14);
 }

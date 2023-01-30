@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  CalendarEvent,
-  CalendarPanels,
-} from 'projects/ng-mat-components/src/public-api';
+import { CalendarEvent, CalendarPanels } from 'projects/ng-mat-components/src/public-api';
 
 @Component({
   selector: 'app-showcase-calendar-panels',

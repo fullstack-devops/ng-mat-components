@@ -75,18 +75,11 @@ type StringOfLength<Min, Max> = string & {
 
 // This is a type guard function which can be used to assert that a string
 // is of type StringOfLength<Min,Max>
-const isStringOfLength = <Min extends number, Max extends number>(
-  str: string,
-  min: Min,
-  max: Max
-): str is StringOfLength<Min, Max> => str.length >= min && str.length <= max;
+const isStringOfLength = <Min extends number, Max extends number>(str: string, min: Min, max: Max): str is StringOfLength<Min, Max> =>
+  str.length >= min && str.length <= max;
 
 // type constructor function
-export const stringOfLength = <Min extends number, Max extends number>(
-  input: unknown,
-  min: Min,
-  max: Max
-): StringOfLength<Min, Max> => {
+export const stringOfLength = <Min extends number, Max extends number>(input: unknown, min: Min, max: Max): StringOfLength<Min, Max> => {
   if (typeof input !== 'string') {
     throw new Error('invalid input');
   }

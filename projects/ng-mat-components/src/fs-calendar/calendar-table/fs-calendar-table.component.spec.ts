@@ -11,9 +11,8 @@ describe('FsCalendarTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FsCalendarTableComponent ]
-    })
-    .compileComponents();
+      declarations: [FsCalendarTableComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

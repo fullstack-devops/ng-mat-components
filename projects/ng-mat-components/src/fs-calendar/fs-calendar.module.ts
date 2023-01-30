@@ -7,16 +7,8 @@ import { FsCalendarTableComponent } from './calendar-table/fs-calendar-table.com
 import { FsCalendarTableNameDirective } from './directives/fs-calendar-table-name.directive';
 
 @NgModule({
-  declarations: [
-    FsCalendarPanelsComponent,
-    FsCalendarTableComponent,
-    FsCalendarTableNameDirective,
-  ],
+  declarations: [FsCalendarPanelsComponent, FsCalendarTableComponent, FsCalendarTableNameDirective],
   imports: [CommonModule, MatButtonModule, MatDividerModule],
-  exports: [
-    FsCalendarPanelsComponent,
-    FsCalendarTableComponent,
-    FsCalendarTableNameDirective,
-  ],
+  exports: [FsCalendarPanelsComponent, FsCalendarTableComponent, FsCalendarTableNameDirective],
 })
 export class FsCalendarModule {}

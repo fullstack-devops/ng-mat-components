@@ -2,12 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { Component, OnInit } from '@angular/core';
-import {
-  FrameConfig,
-  FrameEvent,
-  FrameEvents,
-  NavUser,
-} from 'projects/ng-mat-components/src/public-api';
+import { FrameConfig, FrameEvent, FrameEvents, NavUser } from 'projects/ng-mat-components/src/public-api';
 import { routes } from './app-routing.module';
 
 @Component({
@@ -25,8 +20,7 @@ export class AppComponent implements OnInit {
     logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
   };
   navUser: NavUser = {
-    profilePicture:
-      'https://material.angular.io/assets/img/examples/shiba1.jpg',
+    profilePicture: 'https://material.angular.io/assets/img/examples/shiba1.jpg',
     name: 'Some User',
     role: 'Engineer',
   };

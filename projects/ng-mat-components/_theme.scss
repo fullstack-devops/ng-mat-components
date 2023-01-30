@@ -1,21 +1,20 @@
-@use "src/fs-calendar";
-@use "src/fs-nav-frame";
+@use 'src/fs-calendar';
+@use 'src/fs-nav-frame';
 
 @mixin all-component-themes($theme) {
   // Extract whichever individual palettes you need from the theme.
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   // Gets the standard material maps of fore/background
-  $background: map-get($theme, "background");
-  $foreground: map-get($theme, "foreground");
+  $background: map-get($theme, 'background');
+  $foreground: map-get($theme, 'foreground');
 
   @include fs-calendar.fs-calendar-theme($theme);
   @include fs-nav-frame.fs-nav-frame-theme($theme);
 
   .svg-icon svg {
-    fill: map-get($foreground, "text");
+    fill: map-get($foreground, 'text');
   }
-
 
   /* Tooltip container */
   .tooltip {
@@ -57,5 +56,4 @@
     visibility: visible;
     opacity: 1;
   }
-
 }

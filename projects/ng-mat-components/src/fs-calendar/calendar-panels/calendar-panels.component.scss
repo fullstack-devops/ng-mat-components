@@ -84,12 +84,12 @@
 }
 
 .fs-calendar-body-cell-content::before {
-  content: "";
+  content: '';
   z-index: -1;
 }
 
 .fs-calendar-body-cell-content::after {
-  content: "";
+  content: '';
   z-index: -2;
 }
 

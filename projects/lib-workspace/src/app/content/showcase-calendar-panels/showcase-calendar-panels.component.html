@@ -1,24 +1,18 @@
 <div style="display: flex; justify-content: space-around">
-  <mat-slide-toggle [(ngModel)]="placeholder">
-    Days placeholder
-  </mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="placeholder">Days placeholder</mat-slide-toggle>
 </div>
 
 <div class="selection">
   <mat-form-field>
     <mat-label>Months before</mat-label>
     <mat-select [(ngModel)]="monthsBefore">
-      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{
-        num
-        }}</mat-option>
+      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{ num }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Months after</mat-label>
     <mat-select [(ngModel)]="monthsAfter">
-      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{
-        num
-        }}</mat-option>
+      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{ num }}</mat-option>
     </mat-select>
   </mat-form-field>
   <div>
@@ -27,7 +21,12 @@
 </div>
 
 <div style="height: 80%">
-  <fs-calendar-panels [placeholderDay]="placeholder" [dataSource]="dataSource" [year]="todayYear" [month]="todayMonth"
-    [monthsBefore]="monthsBefore" [monthsAfter]="monthsAfter" (selection)="testMethod($event)">
-  </fs-calendar-panels>
+  <fs-calendar-panels
+    [placeholderDay]="placeholder"
+    [dataSource]="dataSource"
+    [year]="todayYear"
+    [month]="todayMonth"
+    [monthsBefore]="monthsBefore"
+    [monthsAfter]="monthsAfter"
+    (selection)="testMethod($event)"></fs-calendar-panels>
 </div>
