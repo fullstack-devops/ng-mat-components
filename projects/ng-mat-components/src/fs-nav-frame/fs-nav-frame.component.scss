@@ -94,8 +94,6 @@ $toolbar-width-opened: 264px;
   bottom: 0;
   width: $toolbar-width-closed;
   transition: all 0.3s ease-in-out;
-  // box-shadow: 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
-  //  4px 4px 5px 0px rgba(0, 0, 0, 0.14);
 }
 
 .sidebar .nav-links {
@@ -104,12 +102,26 @@ $toolbar-width-opened: 264px;
   overflow: auto;
 }
 
-.sidebar-name-span,
 .profile-content-wrapper {
   width: calc(100% - $toolbar-width-closed);
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.sidebar-span {
+  width: calc(100% - 4rem);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .app-name {
+    font-size: 1.5rem;
+  }
+
+  .app-version {
+    font-size: 1rem;
+  }
 }
 
 .sidebar-name-span span,

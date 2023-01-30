@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { Component, OnInit } from '@angular/core';
-import { FrameConfig, FrameEvent, FrameEvents, NavUser } from 'projects/ng-mat-components/src/public-api';
+import { FrameEvent, FrameEvents, NavFrameConfig, NavUser } from 'projects/ng-mat-components/src/public-api';
 import { routes } from './app-routing.module';
 
 @Component({
@@ -14,10 +14,10 @@ export class AppComponent implements OnInit {
   title = 'FS DevOps`s ng mat components';
   appRoutes = routes;
 
-  frameConfig: FrameConfig = {
+  navFrameConfig: NavFrameConfig = {
     appName: 'Dummy App',
-    // appNameShort: stringOfLength('DUMMY', 0, 6),
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
+    appVersion: '0.0.0',
+    // logoSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
   };
   navUser: NavUser = {
     profilePicture: 'https://material.angular.io/assets/img/examples/shiba1.jpg',

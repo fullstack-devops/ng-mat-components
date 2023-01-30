@@ -2,12 +2,13 @@
   <div class="logo-span">
     <div class="logo">
       <button mat-icon-button (click)="toggleSidemenu()">
-        <div class="logo-picture" *ngIf="frameConfig.logo != ''" style="background-image: url('{{ frameConfig.logo }}');"></div>
-        <span class="material-icons" *ngIf="frameConfig.logo === ''">menu</span>
+        <div class="logo-picture" *ngIf="navFrameConfig.logoSrc != ('' || undefined)" style="background-image: url('{{ navFrameConfig.logoSrc }}');"></div>
+        <span class="material-icons" *ngIf="navFrameConfig.logoSrc == ('' || undefined)">menu</span>
       </button>
     </div>
-    <div class="sidebar-name-span">
-      <span *ngIf="!isClosed">{{ frameConfig.appName }}</span>
+    <div class="sidebar-span">
+      <span class="app-name" *ngIf="!isClosed">{{ navFrameConfig.appName }}</span>
+      <span class="app-version" *ngIf="!isClosed">{{ navFrameConfig.appVersion }}</span>
     </div>
   </div>
 </div>
@@ -15,11 +16,6 @@
 <ng-content select="fs-nav-frame-toolbar"></ng-content>
 
 <div class="sidebar" [class.opened]="!isClosed">
-  <!-- Logo / Branding -->
-  <div class="app-name">
-    <span *ngIf="isClosed">{{ frameConfig.appNameShort }}</span>
-  </div>
-
   <!-- Navigation -->
   <ul class="nav-links">
     <li>

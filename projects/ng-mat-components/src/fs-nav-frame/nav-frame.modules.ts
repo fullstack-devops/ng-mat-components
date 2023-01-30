@@ -1,16 +1,16 @@
 import { Data, Route } from '@angular/router';
 
 /**
- *  @interface NavItem
+ *  @interface NavFrameConfig
  *
  *  @appName             {string}     displayed app name, shows only in opened mode
- *  @appNameShort        {string}     displayed short app name, only 6 chars allowed!
- *  @logo                {string}     link to logo, can be relative or full URL
+ *  @appVersion          {string}     (optional) display app version
+ *  @logoSrc             {string}     (optional) link to logo, can be relative or full URL
  */
-export interface FrameConfig {
+export interface NavFrameConfig {
   appName: string;
-  appNameShort?: StringOfLength<0, 6>;
-  logo: string;
+  appVersion?: string;
+  logoSrc?: string;
 }
 
 export enum FrameEvents {
