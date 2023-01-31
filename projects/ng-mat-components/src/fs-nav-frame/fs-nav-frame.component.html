@@ -33,15 +33,15 @@
   <div class="profile" *ngIf="navUser != undefined">
     <div class="profile-pic-button-wrapper">
       <button mat-icon-button (click)="toggleSidemenu()">
-        <div class="pic" *ngIf="navUser.profilePicture != ''" style="background-image: url('{{ navUser.profilePicture }}');"></div>
-        <span class="material-icons" *ngIf="navUser.profilePicture === ''">account_circle</span>
+        <div class="pic" *ngIf="navUser.profilePicture != ('' || undefined)" style="background-image: url('{{ navUser.profilePicture }}');"></div>
+        <span class="material-icons" style="font-size: 3rem" *ngIf="navUser.profilePicture == ('' || undefined)">account_circle</span>
       </button>
     </div>
 
     <div class="profile-content-wrapper" *ngIf="!isClosed">
       <div class="user-infos">
         <span class="name">{{ navUser.name }}</span>
-        <span class="role">{{ navUser.role }}</span>
+        <span class="role">{{ navUser.subname }}</span>
       </div>
       <button mat-icon-button (click)="onManageAccount()">
         <span class="material-icons">manage_accounts</span>
@@ -53,4 +53,5 @@
   </div>
 </div>
 
+<div class="glassplane" [class.opened]="!isClosed"></div>
 <ng-content select="fs-nav-frame-content" [class.opened]="!isClosed"></ng-content>

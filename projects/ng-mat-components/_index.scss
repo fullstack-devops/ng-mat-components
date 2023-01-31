@@ -1,4 +1,6 @@
 @use 'sass:color';
 @use 'sass:map';
 
-@forward 'theme' show all-component-themes;
+@forward 'theme' show all-component-themes,
+core,
+normalize;

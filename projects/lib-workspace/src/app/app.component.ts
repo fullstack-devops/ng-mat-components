@@ -16,13 +16,13 @@ export class AppComponent implements OnInit {
 
   navFrameConfig: NavFrameConfig = {
     appName: 'Dummy App',
-    appVersion: '0.0.0',
+    // appVersion: '0.0.0',
     // logoSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
   };
   navUser: NavUser = {
-    profilePicture: 'https://material.angular.io/assets/img/examples/shiba1.jpg',
+    // profilePicture: 'https://material.angular.io/assets/img/examples/shiba1.jpg',
     name: 'Some User',
-    role: 'Engineer',
+    subname: 'Engineer',
   };
 
   ngOnInit() {

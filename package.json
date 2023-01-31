@@ -16,6 +16,7 @@
     "build:workspace": "ng build --project lib-workspace",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "format": "prettier --write .",
     "lint": "ng lint"
   },
   "private": true,

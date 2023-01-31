@@ -33,13 +33,13 @@ export interface FrameEvent {
  *  @interface NavUser
  *
  *  @name                 {string}     displayed name of user
- *  @role                 {string}     displayed role of user (can be empty)
+ *  @subname              {string}     displayed role of user (can be empty)
  *  @profilePicture       {string}     profile Picture (can be empty)
  */
 export interface NavUser {
   name: string;
-  role: string;
-  profilePicture: string;
+  subname: string;
+  profilePicture?: string;
 }
 
 interface FrameRouteData extends Data {
