@@ -1,0 +1,20 @@
+<div class="profile-pic-button-wrapper">
+  <button mat-icon-button (click)="toggleSidemenu()">
+    <div class="pic" *ngIf="profilePicture != ''" style="background-image: url('{{ profilePicture }}');"></div>
+    <span class="material-icons default-profile-pic" *ngIf="profilePicture == ''">account_circle</span>
+  </button>
+</div>
+
+<div class="profile-content-wrapper" [class.opened]="opened">
+  <div class="user-infos">
+    <ng-content select="fs-nav-user-profile-name"></ng-content>
+    <ng-content select="fs-nav-user-profile-subname"></ng-content>
+  </div>
+  <ng-content select="fs-nav-user-profile-actions"></ng-content>
+  <!-- <button mat-icon-button (click)="onManageAccount()">
+      <span class="material-icons">manage_accounts</span>
+    </button>
+    <button mat-icon-button (click)="onLogout()">
+      <span class="material-icons">logout</span>
+    </button> -->
+</div>

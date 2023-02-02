@@ -1,18 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import * as dateFns from 'date-fns';
-import {
-  CalendarEvent,
-  CalendarExtendedDay,
-  CalendarPanels,
-  CalendarPanelSum,
-} from '../calendar.models';
+import { CalendarEvent, CalendarExtendedDay, CalendarPanels, CalendarPanelSum } from '../calendar.models';
 import { FsCalendarService } from '../services/fs-calendar.service';
 
 @Component({
@@ -119,18 +107,12 @@ export class FsCalendarPanelsComponent implements OnInit {
 
   onClick(day: CalendarExtendedDay, type: string) {
     if (type === 'date' && this._dataSource.config.selectMode === 'range') {
-      if (
-        this.selectedDayStart != undefined &&
-        this.selectedDayEnd != undefined
-      ) {
+      if (this.selectedDayStart != undefined && this.selectedDayEnd != undefined) {
         this.selectedDayBetween = [];
         this.selectedDayStart = undefined;
         this.selectedDayEnd = undefined;
       }
-      if (
-        dateFns.isBefore(day.date, this.selectedDayStart as Date) ||
-        this.selectedDayStart === undefined
-      ) {
+      if (dateFns.isBefore(day.date, this.selectedDayStart as Date) || this.selectedDayStart === undefined) {
         this.selectedDayStart = day.date;
       } else {
         this.selectedDayEnd = day.date;
@@ -150,22 +132,16 @@ export class FsCalendarPanelsComponent implements OnInit {
 
   onMouseOver(dateComp: Date) {
     if (this.calendar != undefined) {
-      if (
-        this.selectedDayStart != undefined &&
-        this.selectedDayEnd == undefined
-      ) {
-        this.selectedDayBetween = this.calendar.daysAbsolute.filter((date) => {
-          return (
-            dateFns.isAfter(date, this.selectedDayStart as Date) &&
-            dateFns.isBefore(date, dateComp)
-          );
+      if (this.selectedDayStart != undefined && this.selectedDayEnd == undefined) {
+        this.selectedDayBetween = this.calendar.daysAbsolute.filter(date => {
+          return dateFns.isAfter(date, this.selectedDayStart as Date) && dateFns.isBefore(date, dateComp);
         });
       }
     }
   }
 
   getAmIBetween(date: Date): boolean {
-    const fIndex = this.selectedDayBetween.findIndex((selDate) => {
+    const fIndex = this.selectedDayBetween.findIndex(selDate => {
       return dateFns.isSameDay(selDate, date);
     });
     if (fIndex != -1) {
@@ -187,15 +163,7 @@ export class FsCalendarPanelsComponent implements OnInit {
       return dateFns.isSameDay(this.selectedDayEnd, date);
     } else {
       if (this.selectedDayBetween.length > 0) {
-        if (
-          dateFns.isSameDay(
-            dateFns.addDays(
-              this.selectedDayBetween[this.selectedDayBetween.length - 1],
-              1
-            ),
-            date
-          )
-        ) {
+        if (dateFns.isSameDay(dateFns.addDays(this.selectedDayBetween[this.selectedDayBetween.length - 1], 1), date)) {
           return true;
         }
       }
@@ -210,13 +178,9 @@ export class FsCalendarPanelsComponent implements OnInit {
   getCanIBeHighlighted(date: Date) {
     if (this.selectedDayEnd) {
       if (
-        (!dateFns.isSameDay(this.selectedDayStart as Date, date) &&
-          !dateFns.isSameDay(this.selectedDayEnd, date) &&
-          this.getAmIBetween(date)) ||
-        (dateFns.isSameDay(this.selectedDayEnd, date) &&
-          this.selectedDayEnd != undefined) ||
-        (dateFns.isSameDay(this.selectedDayStart as Date, date) &&
-          this.selectedDayStart != undefined)
+        (!dateFns.isSameDay(this.selectedDayStart as Date, date) && !dateFns.isSameDay(this.selectedDayEnd, date) && this.getAmIBetween(date)) ||
+        (dateFns.isSameDay(this.selectedDayEnd, date) && this.selectedDayEnd != undefined) ||
+        (dateFns.isSameDay(this.selectedDayStart as Date, date) && this.selectedDayStart != undefined)
       ) {
         return true;
       } else {

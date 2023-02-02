@@ -15,6 +15,7 @@ projects/ng-nav-frame/README.md
 npm-debug.log
 yarn-error.log
 yarn.lock
+package-lock.json
 .yarn/
 
 # IDEs and editors

@@ -1,8 +1,13 @@
 @use '@angular/material' as mat;
-@use "../../ng-mat-components" as fsc;
-@use "./palettes";
+@use '../../ng-mat-components' as fsc;
+@use './palettes';
 
 @include mat.core();
+
+@include fsc.normalize();
+@include fsc.core();
+
+mat.$theme-ignore-duplication-warnings: true;
 
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette(palettes.$md-primary),

@@ -1,199 +1,173 @@
-$toolbar-height: 3rem;
-$toolbar-width-closed: 4rem;
-$toolbar-width-opened: 264px;
+@use './_variables' as *;
 
-// Toolbar-logo
-.fs-nav-frame-toolbar-logo {
+// logo
+.fs-nav-frame-logo {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   left: 0;
-  width: $toolbar-width-closed;
+  width: $sidebar-width-closed;
   height: $toolbar-height;
   transition: all 0.3s ease-in-out;
+  display: grid;
+  grid-template-columns: $sidebar-width-closed 1fr;
+
+  .logo-wrapper {
+    width: $sidebar-width-closed;
+    height: $toolbar-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo-picture {
+      background-size: cover;
+      height: 40px;
+      width: 40px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    .material-icons {
+      font-size: 32px;
+    }
+  }
+
+  .app-info-wrapper {
+    position: relative;
+    height: $toolbar-height;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+
+    .app-name {
+      font-size: 1.2rem;
+    }
+
+    .app-version {
+      padding: 0 1rem;
+      font-size: .9rem;
+    }
+  }
+
+
+  .app-info-wrapper.opened {
+    display: flex;
+  }
 }
 
 ::ng-deep .fs-nav-frame-toolbar {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
-  left: $toolbar-width-closed;
+  left: $sidebar-width-closed;
   transition: all 0.3s ease-in-out;
   right: 0;
   height: $toolbar-height;
-  // box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-  //   0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 ::ng-deep .fs-nav-frame-content.opened,
 ::ng-deep .fs-nav-frame-toolbar.opened {
-  left: $toolbar-width-opened !important;
+  left: $sidebar-width-opened;
 }
 
 .sidebar.opened,
-.fs-nav-frame-toolbar-logo.opened {
-  width: $toolbar-width-opened !important;
-}
-
-.fs-nav-frame-toolbar-logo .logo-span {
-  width: 100%;
-  height: $toolbar-height;
-  white-space: nowrap;
-  display: flex;
-  justify-content: space-between;
-}
-
-.fs-nav-frame-toolbar-logo .logo-span .logo {
-  width: $toolbar-width-closed;
-  height: $toolbar-height;
-  display: flex;
-  justify-content: center;
-}
-
-.profile-pic-button-wrapper {
-  width: 64px;
-  height: 64px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  button {
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-  }
-
-  .pic {
-    background-size: cover;
-    height: 48px;
-    width: 48px;
-    flex-shrink: 0;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-}
-
-.fs-nav-frame-toolbar-logo .logo-span .logo .logo-picture {
-  background-size: cover;
-  height: 48px;
-  width: 48px;
-  flex-shrink: 0;
-  object-fit: cover;
-}
-
-.fs-nav-frame-toolbar-logo .logo-span .logo button {
-  width: $toolbar-height;
-  height: $toolbar-height;
+.fs-nav-frame-logo.opened {
+  width: $sidebar-width-opened;
 }
 
 .sidebar {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: $toolbar-height;
   left: 0;
   bottom: 0;
-  width: $toolbar-width-closed;
+  width: $sidebar-width-closed;
   transition: all 0.3s ease-in-out;
-  // box-shadow: 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
-  //  4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+
+  display: grid;
+  // grid-template-rows: 3rem 1fr 4rem;
+  grid-template-rows: 1fr 4rem;
 }
 
-.sidebar .nav-links {
-  height: 100%;
-  padding: 0 0 150px 0;
-  overflow: auto;
-}
-
-.sidebar-name-span,
-.profile-content-wrapper {
-  width: calc(100% - $toolbar-width-closed);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.sidebar-name-span span,
-.profile-content-wrapper span {
-  font-size: 1.5rem;
-}
-
-.sidebar .profile {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  height: $toolbar-width-closed;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.sidebar .profile .profile-picture-wrapper {
-  width: $toolbar-width-closed;
-  display: flex;
-  justify-content: center;
-}
-
-.sidebar .profile .profile-picture {
-  background-size: cover;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  object-fit: cover;
-}
-
-.sidebar .profile .user-infos {
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  width: 100%;
-}
-
-.sidebar .profile .user-infos .name {
-  font-size: 1rem;
-}
-
-.sidebar .profile .user-infos .role {
-  font-size: .8rem;
-}
-
-.nav-links li {
-  position: relative;
+ul {
   list-style: none;
   transition: all 0.3s ease-in-out;
   text-decoration: none;
 }
 
-.nav-links li button {
-  width: 100%;
-  height: 64px;
-}
+.sidebar .nav-links {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
 
-.nav-links li button {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
+  >li {
+    position: relative;
+    display: inline-grid;
+    grid-template-columns: 1fr 3rem;
+    align-items: center;
+    width: 100%;
 
-.nav-links li button .material-icons {
-  padding-left: 4px;
-}
+    >button:nth-child(1) {
+      width: 100%;
+      height: $sidebar-width-closed;
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
 
-.nav-links li button .link-name {
-  margin-left: 16px;
+      ::ng-deep span:nth-child(1) {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .material-icons {
+        padding-left: 4px;
+      }
+
+      .link-name {
+        margin-left: 1rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    button:nth-child(2) {
+      height: 3rem;
+      width: 3rem;
+    }
+
+    .nav-links-l2 {
+      li {
+        button {
+          width: 100%;
+          display: inline-flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+    }
+  }
 }
 
 ::ng-deep .fs-nav-frame-content {
   position: fixed;
   top: $toolbar-height;
-  left: $toolbar-width-closed;
+  left: $sidebar-width-closed;
   right: 0;
   bottom: 0;
-  padding: 16px;
+  padding: 1rem;
   transition: all 0.3s ease-in-out;
   overflow: auto;
-  box-shadow: inset 5px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+  box-shadow: inset 5px 2px 4px -1px rgba(0, 0, 0, 0.2), 4px 4px 5px 0px rgba(0, 0, 0, 0.14);
+}
+
+.glassplane.opened {
+  position: absolute;
+  top: $toolbar-height;
+  left: $sidebar-width-closed;
+  transition: all 0.3s ease-in-out;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }

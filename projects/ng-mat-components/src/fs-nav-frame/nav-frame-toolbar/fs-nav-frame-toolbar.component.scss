@@ -1,9 +1,25 @@
+@use '../_variables' as *;
+
+.fs-nav-frame-toolbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: $sidebar-width-closed;
+  transition: all 0.3s ease-in-out;
+  right: 0;
+  height: $toolbar-height;
+  padding: 0 1rem;
+}
+
+.fs-nav-frame-toolbar.opened {
+  left: $sidebar-width-opened;
+}
+
 .fs-nav-frame-toolbar-wrapper {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
 }
 
 .mat-badge-medium.mat-badge-above .mat-badge-content {

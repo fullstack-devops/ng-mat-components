@@ -11,9 +11,8 @@ describe('CalendarPanelsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarPanelsComponent ]
-    })
-    .compileComponents();
+      declarations: [CalendarPanelsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

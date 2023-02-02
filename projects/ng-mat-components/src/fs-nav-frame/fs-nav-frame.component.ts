@@ -1,14 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { FsNavFrameService } from './services/fs-nav-frame.service';
-import {
-  FrameConfig,
-  FrameEvent,
-  FrameEvents,
-  FrameRoutes,
-  NavUser,
-} from './nav-frame.modules';
+import { NavFrameConfig, NavRoutes } from './fs-nav-frame.modules';
+import { FsNavFrameService, MenuState } from './services/fs-nav-frame.service';
 
 @Component({
   selector: 'fs-nav-frame',
@@ -18,74 +13,77 @@ import {
     class: 'fs-nav-frame',
   },
 })
-export class FsNavFrameComponent implements OnInit {
-  @Output() event = new EventEmitter<FrameEvent>();
-
-  @Input() navUser: NavUser | undefined;
-  @Input() appRoutes: FrameRoutes = [];
-  @Input() frameConfig: FrameConfig = {
-    appName: 'Dummy App',
-    // appNameShort: stringOfLength('DUMMY', 0, 6),
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
+export class FsNavFrameComponent implements OnInit, OnDestroy {
+  @Input() navRoutes: NavRoutes = [];
+  @Input() navFrameConfig: NavFrameConfig = {
+    appName: 'Demo App',
   };
 
+  @ContentChild('navLinks') navLinks: TemplateRef<any> | undefined;
+
+  profileContentElement!: HTMLElement | null;
   isClosed: boolean = true;
   isActivePath: string = '';
-  navList: FrameRoutes = [];
 
   constructor(
+    private elementRef: ElementRef,
     private frameService: FsNavFrameService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
-    this.navList = this.appRoutes.filter((elm) => {
-      return elm.data?.displaySidemenu === true;
+    this.frameService.menuStateEvent.subscribe((state: MenuState) => {
+      if (state == MenuState.OPENED) {
+        this.frameService.menuState = MenuState.OPENED;
+        this.isClosed = false;
+        if (this.profileContentElement != null) {
+          this.profileContentElement.classList.add('opened');
+        }
+      } else {
+        this.frameService.menuState = MenuState.CLOSED;
+        this.isClosed = true;
+        if (this.profileContentElement != null) {
+          this.profileContentElement.classList.remove('opened');
+        }
+      }
     });
+
     this.router.events
       .pipe(
-        filter((event) => event instanceof NavigationEnd),
+        filter(event => event instanceof NavigationEnd),
         map(() => {
           const child = this.activatedRoute.firstChild;
           return child;
         })
       )
       .subscribe((ttl: ActivatedRoute | null) => {
-        ttl?.url.subscribe((obj) => {
+        ttl?.url.subscribe(obj => {
           this.isActivePath = obj[0].path;
         });
       });
   }
 
+  ngAfterViewInit() {
+    this.profileContentElement = (<HTMLElement>this.elementRef.nativeElement).querySelector('.fs-nav-user-profile .profile-content-wrapper');
+  }
+
+  ngOnDestroy(): void {
+    this.frameService.menuStateEvent.unsubscribe();
+  }
+
   toggleSidemenu() {
-    this.frameService.isMenuClosed.emit(!this.isClosed);
-    this.isClosed = !this.isClosed;
+    this.frameService.switchMenuState();
   }
 
   closeSidebar() {
-    if (!this.isClosed) {
-      this.toggleSidemenu()
+    if (this.frameService.menuState == MenuState.OPENED) {
+      this.frameService.switchMenuState();
     }
   }
 
   isNavActive(name: string): boolean {
     return name === this.isActivePath;
-  }
-
-  onManageAccount(): void {
-    const frameEvent: FrameEvent = {
-      type: FrameEvents.MANAGE_ACCOUNT,
-      data: {},
-    };
-    this.event.emit(frameEvent);
-  }
-
-  onLogout(): void {
-    const frameEvent: FrameEvent = {
-      type: FrameEvents.LOGOUT,
-      data: {},
-    };
-    this.event.emit(frameEvent);
   }
 }

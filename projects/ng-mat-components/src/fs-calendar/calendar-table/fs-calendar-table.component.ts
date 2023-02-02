@@ -18,11 +18,7 @@ export class FsCalendarTableComponent implements OnInit {
   private _yearNumber: number = dateFns.getYear(new Date());
   private _dataSource: CalendarTableEntry[] = [];
 
-  currentMonth: CalendarMonth = this.calendarService.generateMonth(
-    this._yearNumber,
-    this._monthNumber,
-    []
-  );
+  currentMonth: CalendarMonth = this.calendarService.generateMonth(this._yearNumber, this._monthNumber, []);
   tableData: CalendarTableEntry[] = [];
 
   get dataSource(): CalendarTableEntry[] {
@@ -60,19 +56,11 @@ export class FsCalendarTableComponent implements OnInit {
   }
 
   genMonthData() {
-    this.currentMonth = this.calendarService.generateMonth(
-      this._yearNumber,
-      this._monthNumber,
-      []
-    );
+    this.currentMonth = this.calendarService.generateMonth(this._yearNumber, this._monthNumber, []);
     this._dataSource.forEach((item: CalendarTableEntry, index: number) => {
       this.tableData.splice(index, 1, {
         name: item.name,
-        data: this.calendarService.generateMonth(
-          this.year,
-          this.month,
-          item.data
-        ).days,
+        data: this.calendarService.generateMonth(this.year, this.month, item.data).days,
       });
     });
   }

@@ -9,25 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import {
-  FsCalendarModule,
-  FsCalendarService,
-  FsMaterialFullModule,
-  FsNavFrameModule,
-} from 'projects/ng-mat-components/src/public-api';
+import { FsCalendarModule, FsCalendarService, FsMaterialFullModule, FsNavFrameModule } from 'projects/ng-mat-components/src/public-api';
 import { HomeComponent } from './content/home/home.component';
 import { ShowcaseCalendarPanelsComponent } from './content/showcase-calendar-panels/showcase-calendar-panels.component';
 import { ShowcaseCalendarTableComponent } from './content/showcase-calendar-table/showcase-calendar-table.component';
 import { ShowcaseNavFrameComponent } from './content/showcase-nav-frame/showcase-nav-frame.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    ShowcaseCalendarPanelsComponent,
-    ShowcaseCalendarTableComponent,
-    ShowcaseNavFrameComponent,
-  ],
+  declarations: [AppComponent, HomeComponent, ShowcaseCalendarPanelsComponent, ShowcaseCalendarTableComponent, ShowcaseNavFrameComponent],
   imports: [
     FormsModule,
     BrowserModule,
@@ -54,4 +43,4 @@ import { ShowcaseNavFrameComponent } from './content/showcase-nav-frame/showcase
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

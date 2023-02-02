@@ -3,59 +3,59 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   // Gets the standard material maps of fore/background
-  $background: map-get($theme, "background");
-  $foreground: map-get($theme, "foreground");
+  $background: map-get($theme, 'background');
+  $foreground: map-get($theme, 'foreground');
 
   .fs-calendar-body-today {
-    border: 1px solid map-get($foreground, "secondary-text");
+    border: 1px solid map-get($foreground, 'secondary-text');
   }
 
   .fs-calendar-switches svg {
-    fill: map-get($foreground, "base");
+    fill: map-get($foreground, 'base');
   }
 
   .placeholderDay {
-    color: map-get($foreground, "hint-text");
+    color: map-get($foreground, 'hint-text');
   }
 
   .fs-calendar-table-header tr:first-child {
-    border-bottom: solid 1px map-get($foreground, "divider");
-    color: map-get($foreground, "secondary-text");
+    border-bottom: solid 1px map-get($foreground, 'divider');
+    color: map-get($foreground, 'secondary-text');
   }
 
   .kw {
-    border-right: solid 1px map-get($foreground, "divider");
-    color: map-get($foreground, "secondary-text");
+    border-right: solid 1px map-get($foreground, 'divider');
+    color: map-get($foreground, 'secondary-text');
   }
 
   .clickable:hover {
-    background-color: map-get($primary, "lighter");
+    background-color: map-get($primary, 'lighter');
   }
 
   .weekend {
-    background-color: map-get($foreground, "divider");
+    background-color: map-get($foreground, 'divider');
   }
 
   .date-between::after,
   .selected-start::after,
   .selected-end::after {
-    border-top: dashed 1px map-get($foreground, "secondary-text");
-    border-bottom: dashed 1px map-get($foreground, "secondary-text");
+    border-top: dashed 1px map-get($foreground, 'secondary-text');
+    border-bottom: dashed 1px map-get($foreground, 'secondary-text');
   }
 
   .selected-set.date-between {
-    color: map-get($primary, "lighter-contrast");
+    color: map-get($primary, 'lighter-contrast');
   }
 
   .selected-set.date-between::after,
   .selected-set.selected-start::after,
   .selected-set.selected-end::after {
-    background-color: map-get($primary, "lighter");
+    background-color: map-get($primary, 'lighter');
   }
 
   .selected-set.selected-start,
   .selected-set.selected-end {
-    color: map-get($primary, "secondary-text");
+    color: map-get($primary, 'secondary-text');
   }
 
   .selected-start::before,
@@ -64,25 +64,27 @@
   }
 
   .blured-days::after {
-    content: "";
-    background: radial-gradient(circle at center,
-        map-get($background, "background") 0,
-        map-get($background, "background") 12px,
-        transparent 14px,
-        transparent 100%);
+    content: '';
+    background: radial-gradient(
+      circle at center,
+      map-get($background, 'background') 0,
+      map-get($background, 'background') 12px,
+      transparent 14px,
+      transparent 100%
+    );
   }
 
   .fs-calendar-table table thead tr th {
-    border-bottom: solid 1px map-get($foreground, "divider");
+    border-bottom: solid 1px map-get($foreground, 'divider');
   }
 
   .fs-calendar-table-helper,
   .fs-calendar-month {
-    background-color: map-get($background, "card");
+    background-color: map-get($background, 'card');
   }
 
   .fs-calendar-table .box-base {
-    background-color: map-get($foreground, "divider");
+    background-color: map-get($foreground, 'divider');
   }
 
   .fs-calendar-table .date-today {

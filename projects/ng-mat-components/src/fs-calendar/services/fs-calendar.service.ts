@@ -1,11 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import * as dateFns from 'date-fns';
-import {
-  CalendarExtendedDay,
-  CalendarMonth,
-  CalendarPanel,
-  CalendarPanelSum,
-} from '../calendar.models';
+import { CalendarExtendedDay, CalendarMonth, CalendarPanel, CalendarPanelSum } from '../calendar.models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,12 +22,8 @@ export class FsCalendarService {
   ): CalendarPanelSum {
     let cal: CalendarPanelSum;
 
-    monthsAfter = monthsAfter
-      ? parseInt(monthsAfter.toString(), 10)
-      : monthsAfter;
-    monthsBefore = monthsBefore
-      ? parseInt(monthsBefore.toString(), 10)
-      : monthsBefore;
+    monthsAfter = monthsAfter ? parseInt(monthsAfter.toString(), 10) : monthsAfter;
+    monthsBefore = monthsBefore ? parseInt(monthsBefore.toString(), 10) : monthsBefore;
     currMonth = currMonth ? parseInt(currMonth.toString(), 10) : currMonth;
 
     // Standard calendar
@@ -41,28 +32,20 @@ export class FsCalendarService {
       for (let index = 0; index < monthsBefore; index++) {
         const calculatedMonth = currMonth - monthsBefore + index;
         const actualYear = calculatedMonth + 1 < 1 ? year - 1 : year;
-        const actualMonth =
-          calculatedMonth + 1 < 1 ? 12 + calculatedMonth : calculatedMonth;
-        calendarPanels.push(
-          this.generatePanel(actualYear, actualMonth, calendarWeek, customDays)
-        );
+        const actualMonth = calculatedMonth + 1 < 1 ? 12 + calculatedMonth : calculatedMonth;
+        calendarPanels.push(this.generatePanel(actualYear, actualMonth, calendarWeek, customDays));
       }
-      calendarPanels.push(
-        this.generatePanel(year, currMonth, calendarWeek, customDays)
-      );
+      calendarPanels.push(this.generatePanel(year, currMonth, calendarWeek, customDays));
       for (let index = 0; index < monthsAfter; index++) {
         const calculatedMonth = currMonth + index + 1;
         const actualYear = calculatedMonth > 11 ? year + 1 : year;
-        const actualMonth =
-          calculatedMonth > 11 ? calculatedMonth - 12 : calculatedMonth;
-        calendarPanels.push(
-          this.generatePanel(actualYear, actualMonth, calendarWeek, customDays)
-        );
+        const actualMonth = calculatedMonth > 11 ? calculatedMonth - 12 : calculatedMonth;
+        calendarPanels.push(this.generatePanel(actualYear, actualMonth, calendarWeek, customDays));
       }
 
       let daysAbsolute: Date[] = [];
-      calendarPanels.forEach((panel) => {
-        panel.days.forEach((day) => {
+      calendarPanels.forEach(panel => {
+        panel.days.forEach(day => {
           daysAbsolute.push(day.date);
         });
       });
@@ -74,15 +57,10 @@ export class FsCalendarService {
       };
     } else {
       // Calendar is a full year
-      let calendarPanels = this.generatePanels(
-        year,
-        this.oneYearOfMonths,
-        calendarWeek,
-        customDays
-      );
+      let calendarPanels = this.generatePanels(year, this.oneYearOfMonths, calendarWeek, customDays);
       let daysAbsolute: Date[] = [];
-      calendarPanels.forEach((panel) => {
-        panel.days.forEach((day) => {
+      calendarPanels.forEach(panel => {
+        panel.days.forEach(day => {
           daysAbsolute.push(day.date);
         });
       });
@@ -96,26 +74,16 @@ export class FsCalendarService {
     return cal;
   }
 
-  generatePanels(
-    year: number,
-    months: number[],
-    calendarWeek: boolean,
-    customDays: CalendarExtendedDay[]
-  ): CalendarPanel[] {
+  generatePanels(year: number, months: number[], calendarWeek: boolean, customDays: CalendarExtendedDay[]): CalendarPanel[] {
     let tmpPanels: CalendarPanel[] = [];
-    months.forEach((month) => {
+    months.forEach(month => {
       tmpPanels.push(this.generatePanel(year, month, calendarWeek, customDays));
     });
     return tmpPanels;
   }
 
-  generatePanel(
-    year: number,
-    month: number,
-    calendarWeek: boolean,
-    customDays: CalendarExtendedDay[]
-  ): CalendarPanel {
-    const filtedCustomDays = customDays.filter((day) => {
+  generatePanel(year: number, month: number, calendarWeek: boolean, customDays: CalendarExtendedDay[]): CalendarPanel {
+    const filtedCustomDays = customDays.filter(day => {
       return dateFns.isSameMonth(new Date(year, month, 1), day.date);
     });
     let tmpMonth = this.generateMonth(year, month, filtedCustomDays);
@@ -132,44 +100,20 @@ export class FsCalendarService {
     let nextMonth = dateFns.addMonths(firstDayOfMonth, 1);
     // previous month
     for (let i = 0; i < dayOfWeek - 1; i++) {
-      tmpPreRender.splice(
-        0,
-        0,
-        this.generatePlaceholder(dateFns.subDays(firstDayOfMonth, i + 1))
-      );
+      tmpPreRender.splice(0, 0, this.generatePlaceholder(dateFns.subDays(firstDayOfMonth, i + 1)));
     }
     // post month
     for (let i = 0; tmpPreRender.length < 42; i++) {
-      tmpPreRender.splice(
-        tmpPreRender.length,
-        0,
-        this.generatePlaceholder(dateFns.addDays(nextMonth, i))
-      );
+      tmpPreRender.splice(tmpPreRender.length, 0, this.generatePlaceholder(dateFns.addDays(nextMonth, i)));
     }
     // CalendarWeekDays && tr rows
     if (calendarWeek) {
       tmpPreRender.splice(0, 0, this.generateWeekNumber(tmpPreRender[0].date));
       tmpPreRender.splice(8, 0, this.generateWeekNumber(tmpPreRender[8].date));
-      tmpPreRender.splice(
-        16,
-        0,
-        this.generateWeekNumber(tmpPreRender[16].date)
-      );
-      tmpPreRender.splice(
-        24,
-        0,
-        this.generateWeekNumber(tmpPreRender[24].date)
-      );
-      tmpPreRender.splice(
-        32,
-        0,
-        this.generateWeekNumber(tmpPreRender[32].date)
-      );
-      tmpPreRender.splice(
-        40,
-        0,
-        this.generateWeekNumber(tmpPreRender[40].date)
-      );
+      tmpPreRender.splice(16, 0, this.generateWeekNumber(tmpPreRender[16].date));
+      tmpPreRender.splice(24, 0, this.generateWeekNumber(tmpPreRender[24].date));
+      tmpPreRender.splice(32, 0, this.generateWeekNumber(tmpPreRender[32].date));
+      tmpPreRender.splice(40, 0, this.generateWeekNumber(tmpPreRender[40].date));
       tmpMonthRenderer.render.push(tmpPreRender.slice(0, 8));
       tmpMonthRenderer.render.push(tmpPreRender.slice(8, 16));
       tmpMonthRenderer.render.push(tmpPreRender.slice(16, 24));
@@ -215,18 +159,14 @@ export class FsCalendarService {
     };
   }
 
-  generateMonth(
-    year: number,
-    month: number,
-    customDays: CalendarExtendedDay[]
-  ): CalendarMonth {
+  generateMonth(year: number, month: number, customDays: CalendarExtendedDay[]): CalendarMonth {
     const firstDayInMonth = new Date(year, month, 1);
     const daysInMonth = dateFns.getDaysInMonth(firstDayInMonth);
     const days: CalendarExtendedDay[] = [];
 
     for (let index = 0; index < daysInMonth; index++) {
       const date = new Date(year, month, index + 1);
-      const filtedCustomDays = customDays.filter((day) => {
+      const filtedCustomDays = customDays.filter(day => {
         return dateFns.isSameDay(date, day.date);
       });
       days.push(this.generateDay(date, filtedCustomDays));
@@ -239,10 +179,7 @@ export class FsCalendarService {
     };
   }
 
-  generateDay(
-    dateToGenerate: Date,
-    customDays: CalendarExtendedDay[]
-  ): CalendarExtendedDay {
+  generateDay(dateToGenerate: Date, customDays: CalendarExtendedDay[]): CalendarExtendedDay {
     if (customDays.length == 0) {
       return {
         date: dateToGenerate,
@@ -315,9 +252,7 @@ export class FsCalendarService {
       end: dateFns.endOfWeek(now, { weekStartsOn: 1 }),
     });
     let arrOfDays: string[] = [];
-    arr.map((a) =>
-      arrOfDays.push(dateFns.format(a, 'EEEEEE', { locale: this.appLocale }))
-    );
+    arr.map(a => arrOfDays.push(dateFns.format(a, 'EEEEEE', { locale: this.appLocale })));
     return arrOfDays;
   }
 }

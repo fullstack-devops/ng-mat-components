@@ -7,37 +7,50 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { FsNavFrameToolbarCenterDirective } from './directives/fs-nav-frame-toolbar-center.directive';
-import { FsNavFrameToolbarSideDirective } from './directives/fs-nav-frame-toolbar-side.directive';
-import { FsNavFrameToolbarTitleDirective } from './directives/fs-nav-frame-toolbar-title.directive';
+import { MatListModule } from '@angular/material/list';
 import { FsNavFrameContentDirective } from './directives/fs-nav-frame-content.directive';
+import { FsNavFrameSidebarDirective } from './directives/fs-nav-frame-sidebar.directive';
 import { FsNavFrameComponent } from './fs-nav-frame.component';
+import { FsNavUserProfileActionsDirective } from './fs-nav-user-profile/directives/fs-nav-user-profile-actions.directive';
+import { FsNavUserProfileNameDirective } from './fs-nav-user-profile/directives/fs-nav-user-profile-name.directive';
+import { FsNavUserProfileSubNameDirective } from './fs-nav-user-profile/directives/fs-nav-user-profile-subname.directive';
+import { FsNavUserProfileComponent } from './fs-nav-user-profile/fs-nav-user-profile.component';
+import { FsNavFrameToolbarCenterDirective } from './nav-frame-toolbar/directives/fs-nav-frame-toolbar-center.directive';
+import { FsNavFrameToolbarEndDirective } from './nav-frame-toolbar/directives/fs-nav-frame-toolbar-end.directive';
+import { FsNavFrameToolbarStartDirective } from './nav-frame-toolbar/directives/fs-nav-frame-toolbar-start.directive';
 import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-toolbar.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule,
-    MatIconModule,
-    MatButtonModule,
-  ],
+  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, RouterModule, MatIconModule, MatButtonModule, MatListModule],
   exports: [
     FsNavFrameComponent,
     FsNavFrameToolbarComponent,
+    FsNavFrameToolbarStartDirective,
     FsNavFrameToolbarCenterDirective,
-    FsNavFrameToolbarSideDirective,
-    FsNavFrameToolbarTitleDirective,
+    FsNavFrameToolbarEndDirective,
+
+    FsNavFrameSidebarDirective,
     FsNavFrameContentDirective,
+
+    FsNavUserProfileComponent,
+    FsNavUserProfileNameDirective,
+    FsNavUserProfileSubNameDirective,
+    FsNavUserProfileActionsDirective,
   ],
   declarations: [
     FsNavFrameComponent,
     FsNavFrameToolbarComponent,
+    FsNavFrameToolbarStartDirective,
     FsNavFrameToolbarCenterDirective,
-    FsNavFrameToolbarSideDirective,
-    FsNavFrameToolbarTitleDirective,
+    FsNavFrameToolbarEndDirective,
+
+    FsNavFrameSidebarDirective,
     FsNavFrameContentDirective,
+
+    FsNavUserProfileComponent,
+    FsNavUserProfileNameDirective,
+    FsNavUserProfileSubNameDirective,
+    FsNavUserProfileActionsDirective,
   ],
 })
-export class FsNavFrameModule { }
+export class FsNavFrameModule {}
