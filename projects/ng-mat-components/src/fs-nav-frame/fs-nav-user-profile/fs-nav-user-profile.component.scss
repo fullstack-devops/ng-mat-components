@@ -1,0 +1,67 @@
+fs-nav-user-profile {
+    position: relative;
+    height: 4rem;
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+}
+
+.profile-pic-button-wrapper {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: 4rem;
+        height: 4rem;
+        line-height: 4rem;
+
+        .pic {
+            height: 3rem;
+            width: 3rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-size: cover;
+            flex-shrink: 0;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .default-profile-pic {
+            font-size: 3rem;
+        }
+    }
+}
+
+.profile-content-wrapper {
+    position: relative;
+    height: 4rem;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+
+    .user-infos {
+        height: 2rem;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        .fs-nav-user-profile-name {
+            font-size: 1rem;
+        }
+
+        .fs-nav-user-profile-subname {
+            font-size: .7rem;
+        }
+    }
+
+    .fs-nav-user-profile-actions {
+        display: inline-flex;
+        justify-content: space-around;
+    }
+}
+
+.profile-content-wrapper.opened {
+    display: flex;
+}

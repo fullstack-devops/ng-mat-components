@@ -1,6 +1,7 @@
-<fs-nav-frame [navFrameConfig]="navFrameConfig" [navUser]="navUser" [appRoutes]="appRoutes" (event)="onEvent($event)">
+<fs-nav-frame [navFrameConfig]="navFrameConfig" [navRoutes]="navRoutes">
   <fs-nav-frame-toolbar>
-    <fs-nav-frame-toolbar-title>Current App Title</fs-nav-frame-toolbar-title>
+    <!-- <ng-template #tbcontent>hallo</ng-template> -->
+    <fs-nav-frame-toolbar-start>Current App Title</fs-nav-frame-toolbar-start>
 
     <fs-nav-frame-toolbar-center>
       <button mat-icon-button>
@@ -14,11 +15,7 @@
       </button>
     </fs-nav-frame-toolbar-center>
 
-    <fs-nav-frame-toolbar-side>
-      <!-- <a>Test the side</a> -->
-      <!-- <mat-form-field appearance="outline">
-        <input matInput placeholder="Search" type="search" />
-      </mat-form-field> -->
+    <fs-nav-frame-toolbar-end>
       <div>
         <input
           type="search"
@@ -26,8 +23,25 @@
           class="block w-full p-2 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg"
           placeholder="Dummy Search" />
       </div>
-    </fs-nav-frame-toolbar-side>
+    </fs-nav-frame-toolbar-end>
   </fs-nav-frame-toolbar>
+
+  <!-- <fs-nav-frame-sidebar> -->
+  <fs-nav-user-profile profilePicture="https://material.angular.io/assets/img/examples/shiba1.jpg">
+    <!--  profilePicture="https://material.angular.io/assets/img/examples/shiba1.jpg" -->
+    <fs-nav-user-profile-name>Some User</fs-nav-user-profile-name>
+    <fs-nav-user-profile-subname>Enginer</fs-nav-user-profile-subname>
+
+    <fs-nav-user-profile-actions>
+      <button mat-icon-button>
+        <mat-icon>manage_accounts</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>logout</mat-icon>
+      </button>
+    </fs-nav-user-profile-actions>
+  </fs-nav-user-profile>
+  <!-- </fs-nav-frame-sidebar> -->
 
   <fs-nav-frame-content>
     <router-outlet></router-outlet>

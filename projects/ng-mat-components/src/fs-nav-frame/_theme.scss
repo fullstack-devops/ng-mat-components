@@ -6,8 +6,7 @@
   $background: map-get($theme, 'background');
   $foreground: map-get($theme, 'foreground');
 
-  .fs-nav-frame-toolbar-logo,
-  .fs-nav-frame-toolbar-logo .logo-span {
+  .fs-nav-frame-logo {
     background-color: map-get($background, 'app-bar');
     color: map-get($foreground, 'text');
   }
@@ -27,16 +26,18 @@
     border-top: 1px solid map-get($foreground, 'divider');
   }
 
-  .sidebar .nav-links li .active::after {
+  $nav-link-border: 5px;
+
+  .sidebar .nav-links li.active::after {
     content: '';
-    background-color: map-get($primary, 'default');
-    border-radius: 8px;
-    width: calc(100% - 8px);
-    height: 56px;
     position: absolute;
-    top: 4px;
-    left: 4px;
+    top: calc($nav-link-border / 2);
+    left: calc($nav-link-border / 2);
     z-index: -1;
+    width: calc(100% - $nav-link-border);
+    height: calc(4rem - $nav-link-border);
+    border-radius: $nav-link-border;
+    background-color: map-get($primary, 'default');
   }
 
   .fs-nav-frame-content {
@@ -44,12 +45,12 @@
     background-color: map-get($background, 'background');
   }
 
-  .badge[data-badge]:after {
+  .badge[data-badge]::before {
     content: attr(data-badge);
 
     position: absolute;
-    top: 12px;
-    right: 7px;
+    top: 8px;
+    left: 8px;
 
     font-size: 11px;
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;

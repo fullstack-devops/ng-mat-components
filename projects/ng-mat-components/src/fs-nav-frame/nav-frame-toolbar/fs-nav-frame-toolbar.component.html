@@ -1,11 +1,15 @@
 <div class="fs-nav-frame-toolbar-wrapper">
+  <ng-container *ngTemplateOutlet="tbcontent || defaultToolbarTemplate"></ng-container>
+</div>
+
+<ng-template #defaultToolbarTemplate>
   <div>
-    <ng-content select="fs-nav-frame-toolbar-title"></ng-content>
+    <ng-content select="fs-nav-frame-toolbar-start"></ng-content>
   </div>
   <div>
     <ng-content select="fs-nav-frame-toolbar-center"></ng-content>
   </div>
   <div>
-    <ng-content select="fs-nav-frame-toolbar-side"></ng-content>
+    <ng-content select="fs-nav-frame-toolbar-end"></ng-content>
   </div>
-</div>
+</ng-template>

@@ -7,6 +7,8 @@
 @include fsc.normalize();
 @include fsc.core();
 
+mat.$theme-ignore-duplication-warnings: true;
+
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette(palettes.$md-primary),
         accent: mat.define-palette(palettes.$md-accent),
