@@ -27,7 +27,7 @@ jobs:
         run: yarn
       - name: build applikation
         run: |
-          yarn version --new-version ${{ needs.generate_infos.outputs.version }}
+          yarn version --new-version ${{ needs.generate_infos.outputs.version }} --cwd projects/ng-mat-components/ --no-git-tag-version
           yarn run build
 
       - name: yarn publish

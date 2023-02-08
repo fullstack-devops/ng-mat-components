@@ -1,6 +1,6 @@
 {
   "name": "@fullstack-devops/ng-mat-components",
-  "version": "0.0.0",
+  "version": "13.1.0-pr-21",
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^13.0.0",
