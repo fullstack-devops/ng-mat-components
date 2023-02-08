@@ -26,12 +26,12 @@ jobs:
       - name: install packages
         run: yarn
       - name: build applikation
-        run: yarn run build
+        run: |
+          yarn version --new-version ${{ needs.generate_infos.outputs.version }}
+          yarn run build
 
       - name: yarn publish
         working-directory: dist/ng-mat-components
-        run: |
-          yarn version --new-version ${{ needs.create_release.outputs.version }} -f
-          yarn publish --access public -dry-run
+        run: yarn publish --access public -dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

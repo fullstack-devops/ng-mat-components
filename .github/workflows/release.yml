@@ -33,13 +33,13 @@ jobs:
       - name: install packages
         run: yarn
       - name: build applikation
-        run: yarn run build
+        run: |
+          yarn version --new-version ${{ needs.create_release.outputs.version }}
+          yarn run build
 
       - name: yarn publish
         working-directory: dist/ng-mat-components
-        run: |
-          yarn version --new-version ${{ needs.create_release.outputs.version }} -f
-          yarn publish --access public
+        run: yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
