@@ -3,16 +3,16 @@ name: Release Package
 on:
   push:
     branches:
-      - 'main'
+      - "main"
     paths-ignore:
-      - 'README.md'
-      - 'docs/**'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/PULL_REQUEST_TEMPLATE.md'
+      - "README.md"
+      - "docs/**"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/PULL_REQUEST_TEMPLATE.md"
 
 jobs:
   create_release:
-    uses: fullstack-devops/actions/.github/workflows/create-release.yml@main
+    uses: fullstack-devops/git-workflows/.github/workflows/create-release.yml@main
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -26,38 +26,24 @@ jobs:
       - name: Setup node for GitHub
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@fullstack-devops'
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@fullstack-devops"
 
       - name: install packages
         run: yarn
       - name: build applikation
         run: yarn run build
 
-      - name: npm publish to GitHub
+      - name: yarn publish
         working-directory: dist/ng-mat-components
         run: |
-          npm version ${{ needs.create_release.outputs.version }}
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup node for npmjs
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@fullstack-devops'
-
-      - name: npm publish to npmjs
-        working-directory: dist/ng-mat-components
-        run: |
-          npm publish
+          yarn version --new-version ${{ needs.create_release.outputs.version }} -f
+          yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
       - name: Publish release
-        run: awesome-ci release publish -releaseid "${{ needs.create_release.outputs.releaseid }}"
+        run: awesome-ci release publish --release-id "${{ needs.create_release.outputs.release-id }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

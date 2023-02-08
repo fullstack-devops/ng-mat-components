@@ -5,7 +5,7 @@ on:
 
 jobs:
   generate_infos:
-    uses: fullstack-devops/actions/.github/workflows/generate-build-infos.yml@main
+    uses: fullstack-devops/git-workflows/.github/workflows/generate-build-infos.yml@main
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -19,19 +19,19 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@fullstack-devops'
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@fullstack-devops"
 
       - name: install packages
         run: yarn
       - name: build applikation
         run: yarn run build
 
-      - name: npm publish
+      - name: yarn publish
         working-directory: dist/ng-mat-components
         run: |
-          npm version ${{ needs.create_release.outputs.version }}
-          npm publish -dry-run
+          yarn version --new-version ${{ needs.create_release.outputs.version }} -f
+          yarn publish --access public -dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
