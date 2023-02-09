@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org/'
           scope: '@fullstack-devops'
 
       - name: install packages
@@ -28,8 +28,8 @@ jobs:
       - name: build applikation
         run: yarn run build
 
-      # - name: yarn publish
-      #   working-directory: dist/ng-mat-components
-      #   run: yarn publish --access public --new-version ${{ needs.generate_infos.outputs.version }} --no-git-tag-version
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: yarn publish
+        working-directory: dist/ng-mat-components
+        run: yarn publish --access public --new-version ${{ needs.generate_infos.outputs.version }} --no-git-tag-version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
