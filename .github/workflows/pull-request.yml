@@ -27,9 +27,3 @@ jobs:
         run: yarn
       - name: build applikation
         run: yarn run build
-
-      - name: yarn publish
-        working-directory: dist/ng-mat-components
-        run: yarn publish --access public --new-version ${{ needs.generate_infos.outputs.version }} --no-git-tag-version
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
