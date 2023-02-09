@@ -1,6 +1,6 @@
 {
   "name": "@fullstack-devops/ng-mat-components",
-  "version": "0.0.0",
+  "version": "0.0.0-PLACEHOLDER",
   "engines": {
     "node": ">=14.0.0 <17.0.0",
     "yarn": "^1.22.17",
@@ -20,7 +20,7 @@
     "format": "prettier --write .",
     "lint": "ng lint"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~13.3.11",
     "@angular/cdk": "13.3.9",
