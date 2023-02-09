@@ -39,6 +39,7 @@ jobs:
         working-directory: dist/ng-mat-components
         run: |
           npm version ${{ needs.create_release.outputs.version }}
+          npm set registry https://registry.npmjs.org/
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
