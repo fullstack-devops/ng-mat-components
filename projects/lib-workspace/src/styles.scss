@@ -3,16 +3,14 @@
 @use './styling/palettes';
 
 @import 'material-icons/iconfont/material-icons.scss';
-@import './styling/roboto.scss';
 
 @include mat.core();
+
 @include fsc.normalize();
 @include fsc.core();
-
+@include fsc.roboto();
 
 $my-typography: mat.define-typography-config($font-family: 'Roboto-local');
-
-mat.$theme-ignore-duplication-warnings: true;
 
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette(palettes.$md-primary),
@@ -37,7 +35,7 @@ $light-theme: mat.define-light-theme((color: (primary: mat.define-palette(palett
 @media (prefers-color-scheme: light) {
   // Use the `-color` mixins to only apply color styles without reapplying the same
   // typography and density styles.
-  @include mat.all-component-themes($light-theme);
+  @include mat.all-component-colors($light-theme);
   @include fsc.all-component-themes($light-theme);
 }
 
