@@ -33,6 +33,7 @@
     "@angular/platform-browser-dynamic": "~13.3.11",
     "@angular/router": "~13.3.11",
     "date-fns": "^2.29.3",
+    "material-icons": "^1.13.1",
     "postcss": "^8.4.20",
     "rxjs": "~7.5.6",
     "tailwindcss": "^3.2.4",
