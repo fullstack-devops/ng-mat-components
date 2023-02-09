@@ -4,9 +4,10 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
+  "inlineStyleLanguage": "scss",
   "assets": [
     "_index.scss",
-    "_theme.scss",
-    "./assets/fonts/roboto.scss"
+    "_theming.scss",
+    "./styles/fonts/_roboto.scss"
   ]
 }

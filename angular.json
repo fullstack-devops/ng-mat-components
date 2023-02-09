@@ -58,9 +58,13 @@
             "polyfills": "projects/lib-workspace/src/polyfills.ts",
             "tsConfig": "projects/lib-workspace/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": ["moment"],
-            "assets": ["projects/lib-workspace/src/favicon.ico", "projects/lib-workspace/src/assets"],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "projects/lib-workspace/src/styles.scss"],
+            "assets": [
+              "projects/lib-workspace/src/favicon.ico",
+              "projects/lib-workspace/src/assets"
+            ],
+            "styles": [
+              "projects/lib-workspace/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -122,12 +126,21 @@
             "tsConfig": "projects/lib-workspace/tsconfig.spec.json",
             "karmaConfig": "projects/lib-workspace/karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["projects/lib-workspace/src/favicon.ico", "projects/lib-workspace/src/assets"],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "projects/lib-workspace/src/styles.scss"],
+            "assets": [
+              "projects/lib-workspace/src/favicon.ico",
+              "projects/lib-workspace/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/lib-workspace/src/styles.scss"
+            ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
