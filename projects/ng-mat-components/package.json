@@ -1,7 +1,7 @@
 {
   "name": "@fullstack-devops/ng-mat-components",
   "version": "13.1.0-pr-21",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "peerDependencies": {
     "@angular/common": "^13.0.0",
     "@angular/core": "^13.0.0",
@@ -24,6 +24,10 @@
   },
   "bugs": {
     "url": "https://github.com/fullstack-devops/ng-mat-components/issues"
+  },
+  "funding": {
+    "type": "github sponsors",
+    "url": "https://github.com/sponsors/eksrha"
   },
   "exports": {
     ".": {

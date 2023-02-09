@@ -3,12 +3,12 @@ name: Release Package
 on:
   push:
     branches:
-      - "main"
+      - 'main'
     paths-ignore:
-      - "README.md"
-      - "docs/**"
-      - ".github/ISSUE_TEMPLATE/**"
-      - ".github/PULL_REQUEST_TEMPLATE.md"
+      - 'README.md'
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
 
 jobs:
   create_release:
@@ -19,6 +19,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: create_release
+    strategy:
+      matrix:
+        include:
+          - registry: https://npm.pkg.github.com
+            token: ${{ secrets.GITHUB_TOKEN }}
+          - registry: https://registry.npmjs.org
+            token: ${{ secrets.NPM_ACCESS_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,23 +33,25 @@ jobs:
       - name: Setup node for GitHub
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-          registry-url: "https://registry.npmjs.org"
-          scope: "@fullstack-devops"
+          node-version: '16.x'
+          registry-url: ${{ matrix.registry }}
+          scope: '@fullstack-devops'
 
       - name: install packages
         run: yarn
       - name: build applikation
-        run: |
-          yarn version --new-version ${{ needs.create_release.outputs.version }} --cwd projects/ng-mat-components/ --no-git-tag-version
-          yarn run build
+        run: yarn run build
 
       - name: yarn publish
         working-directory: dist/ng-mat-components
-        run: yarn publish --access public
+        run: yarn publish --access public --new-version ${{ needs.create_release.outputs.version }} --no-git-tag-version
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ matrix.token }}
 
+  publish_gh_release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Publish release
         run: awesome-ci release publish --release-id "${{ needs.create_release.outputs.release-id }}"
         env:
