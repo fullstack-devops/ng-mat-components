@@ -1,7 +1,10 @@
 {
   "name": "@fullstack-devops/ng-mat-components",
-  "version": "13.1.0-pr-21",
+  "version": "0.0.0",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/@fullstack-devops"
+  },
   "peerDependencies": {
     "@angular/common": "^13.0.0",
     "@angular/core": "^13.0.0",
@@ -18,8 +21,8 @@
   "homepage": "https://github.com/fullstack-devops/ng-mat-components",
   "description": "Central component repo for angular applications",
   "engines": {
-    "node": ">= 12.0.0",
-    "npm": ">= 7.0.0",
+    "node": ">= 16.0.0",
+    "npm": ">= 8.0.0",
     "yarn": ">= 1.13.0"
   },
   "bugs": {
@@ -33,11 +36,8 @@
     ".": {
       "sass": "./_index.scss"
     },
-    "./theming": {
-      "sass": "./_theming.scss"
-    },
-    "./_theming": {
-      "sass": "./_theming.scss"
+    "./fonts/roboto": {
+      "sass": "./assets/fonts/roboto.scss"
     }
   }
 }

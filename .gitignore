@@ -49,3 +49,4 @@ testem.log
 Thumbs.db
 .yarnrc
 package-lock.json
+projects/ng-mat-components/README.md
