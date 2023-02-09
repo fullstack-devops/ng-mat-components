@@ -2,9 +2,6 @@
   "name": "@fullstack-devops/ng-mat-components",
   "version": "0.0.0-PLACEHOLDER",
   "license": "Apache-2.0",
-  "publishConfig": {
-    "@fullstack-devops:registry": "https://registry.npmjs.org/"
-  },
   "peerDependencies": {
     "@angular/common": "^13.0.0",
     "@angular/core": "^13.0.0",
