@@ -4,26 +4,26 @@ Components for @angular/material
 
 ## Installation
 
-add to your local `.npmrc` the following line to be able to use this package:
-
-```javascript
-@fullstack-devops:registry=https://npm.pkg.github.com
-```
-
-And install it:
-
 - yarn
-  ```javascript
+  ```shell
   yarn add @fullstack-devops/ng-mat-components
   ```
 - npm
-  ```javascript
+  ```shell
   npm install @fullstack-devops/ng-mat-components
   ```
 
+### Installation via GitHub packages
+
+add to your local `.npmrc` the following line to be able to use this package:
+
+```shell
+@fullstack-devops:registry=https://npm.pkg.github.com
+```
+
 ## Documentation
 
-Live Demo with all current modules at https://fullstack-devops.github.io/ng-mat-components (still in dev)
+Live Demo with all current modules at https://fullstack-devops.github.io/ng-mat-components
 
 Api Documentation: https://fullstack-devops.github.io/libraries/ng-mat-components.
 
