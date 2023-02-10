@@ -51,6 +51,13 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  publish_release:
+    runs-on: ubuntu-latest
+    needs: [build, create_release]
+    steps:
+      - name: Setup awesome-ci
+        uses: fullstack-devops/awesome-ci-action@main
+
       - name: Publish release
         run: awesome-ci release publish --release-id "${{ needs.create_release.outputs.release-id }}"
         env:

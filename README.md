@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/%40fullstack-devops%2Fng-mat-components.svg)](https://www.npmjs.com/package/@fullstack-devops/ng-mat-components)
+[![Build and Release Package](https://github.com/fullstack-devops/ng-mat-components/actions/workflows/release.yml/badge.svg)](https://github.com/fullstack-devops/ng-mat-components/actions/workflows/release.yml)
+
 # ng-mat-components
 
 Components for @angular/material
