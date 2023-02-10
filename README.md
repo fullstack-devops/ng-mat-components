@@ -1,7 +1,16 @@
-[![npm version](https://badge.fury.io/js/%40fullstack-devops%2Fng-mat-components.svg)](https://www.npmjs.com/package/@fullstack-devops/ng-mat-components)
-[![Build and Release Package](https://github.com/fullstack-devops/ng-mat-components/actions/workflows/release.yml/badge.svg)](https://github.com/fullstack-devops/ng-mat-components/actions/workflows/release.yml)
+# @fullstack-devops/ng-mat-components
 
-# ng-mat-components
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/fullstack-devops/ng-mat-components/release.yml?logo=GitHub%20Actions)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/fullstack-devops/ng-mat-components)
+
+**Downloads:**
+
+![GitHub release (latest by date)](https://img.shields.io/github/downloads/fullstack-devops/ng-mat-components/latest/total?style=flat&label=GitHub%20downloads%40latest&logo=GitHub)
+![npm](https://img.shields.io/npm/dw/@fullstack-devops/ng-mat-components?style=flat&label=npm%20downloads&logo=npm)
+
+**License:**
+
+![GitHub](https://img.shields.io/github/license/fullstack-devops/ng-mat-components?style=flat)
 
 Components for @angular/material
 
