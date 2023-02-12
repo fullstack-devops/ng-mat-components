@@ -1,5 +1,5 @@
-@use 'src/fs-calendar';
-@use 'src/fs-nav-frame';
+@use 'styles/fs-calendar';
+@use 'styles/fs-nav-frame';
 
 @mixin all-component-themes($theme) {
   // Extract whichever individual palettes you need from the theme.

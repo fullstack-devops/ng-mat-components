@@ -36,10 +36,7 @@
     "./theming": {
       "sass": "./_theming.scss"
     },
-    "./_theming": {
-      "sass": "./_theming.scss"
-    },
-    "./fonts/roboto": {
+    "./styles/fonts/roboto": {
       "sass": "./styles/fonts/_roboto.scss"
     }
   }
