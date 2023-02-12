@@ -8,6 +8,10 @@
   "assets": [
     "_index.scss",
     "_theming.scss",
-    "./styles/fonts/_roboto.scss"
+    "./styles/fonts/_roboto.scss",
+    "./styles/fs-calendar/_index.scss",
+    "./styles/fs-calendar/_theming.scss",
+    "./styles/fs-nav-frame/_index.scss",
+    "./styles/fs-nav-frame/_theming.scss"
   ]
 }

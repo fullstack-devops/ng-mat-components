@@ -39,9 +39,6 @@ $light-theme: mat.define-light-theme((color: (primary: mat.define-palette(palett
   @include fsc.all-component-themes($light-theme);
 }
 
-@tailwind components;
-@tailwind utilities;
-
 html * {
   font-family: 'Roboto-local';
 }
