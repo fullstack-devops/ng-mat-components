@@ -49,10 +49,14 @@ fs-nav-user-profile {
 
         .fs-nav-user-profile-name {
             font-size: 1rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .fs-nav-user-profile-subname {
             font-size: .7rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     }
 

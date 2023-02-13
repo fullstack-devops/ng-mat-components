@@ -41,6 +41,8 @@
 
     .app-name {
       font-size: 1.2rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     .app-version {
