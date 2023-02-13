@@ -3,15 +3,15 @@
 </div>
 
 <div class="selection">
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Months before</mat-label>
-    <mat-select [(ngModel)]="monthsBefore">
+    <mat-select name="monthsBefore" [(ngModel)]="monthsBefore">
       <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{ num }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Months after</mat-label>
-    <mat-select [(ngModel)]="monthsAfter">
+    <mat-select name="monthsAfter" [(ngModel)]="monthsAfter">
       <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{ num }}</mat-option>
     </mat-select>
   </mat-form-field>

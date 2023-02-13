@@ -23,6 +23,9 @@ export class ShowcaseCalendarPanelsComponent implements OnInit {
   monthsBefore = 1;
   monthsAfter = 1;
 
+  // monthsBefore = new FormControl(1);
+  // monthsAfter = new FormControl(1);
+
   dataSource: CalendarPanels = {
     config: {
       renderMode: 'monthly', // 'annual' | 'monthly'
