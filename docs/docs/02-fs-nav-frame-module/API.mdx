@@ -1,0 +1,168 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+```typescript
+import { FsUiFrameModule } from "@fullstack-devops/ng-mat-components";
+```
+
+## References
+
+- demo: https://fullstack-devops.github.io/ng-mat-components/ui-frame
+- code example:
+  [app.component.html](https://github.com/fullstack-devops/ng-mat-components/blob/main/projects/lib-workspace/src/app/app.component.html)
+  [app.component.ts](https://github.com/fullstack-devops/ng-mat-components/blob/main/projects/lib-workspace/src/app/app.component.ts)
+
+---
+
+## Directives
+
+```bash
+.
+├── fs-ui-frame
+│   └── settings.json
+└── fs-calendar-table
+    └── Dockerfile
+```
+
+## Directives
+
+### fs-ui-frame
+
+Selector: `fs-ui-frame`
+
+#### fs-ui-frame-toolbar
+
+Parent Selector: `fs-ui-frame`
+
+Selector: `fs-ui-frame-toolbar`
+
+##### fs-ui-frame-toolbar-title
+
+Parent Selector: `fs-ui-frame-toolbar`
+
+Selector: `fs-ui-frame-toolbar-title`
+
+##### fs-ui-frame-toolbar-center
+
+Parent Selector: `fs-ui-frame-toolbar`
+
+Selector: `fs-ui-frame-toolbar-center`
+
+##### fs-ui-frame-toolbar-side
+
+Parent Selector: `fs-ui-frame-toolbar`
+
+Selector: `fs-ui-frame-toolbar-side`
+
+#### fs-ui-frame-content
+
+Parent Selector: `fs-ui-frame`
+
+Selector: `fs-ui-frame-content`
+
+---
+
+## Examples
+
+### ui-frame in form
+
+<Tabs groupId="ui-frame-01">
+<TabItem value="html" label="HTML">
+
+```html
+<fs-ui-frame
+  [frameConfig]="frameConfig"
+  [navUser]="navUser"
+  [appRoutes]="appRoutes"
+  (event)="onEvent($event)">
+  <fs-ui-frame-toolbar>
+    <fs-ui-frame-toolbar-title>Current App Title</fs-ui-frame-toolbar-title>
+
+    <fs-ui-frame-toolbar-center>
+      <button mat-icon-button>
+        <mat-icon>help</mat-icon>
+      </button>
+      <button mat-icon-button matBadge="3">
+        <mat-icon>article</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>call</mat-icon>
+      </button>
+    </fs-ui-frame-toolbar-center>
+
+    <fs-ui-frame-toolbar-side>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Search" type="search" />
+      </mat-form-field>
+    </fs-ui-frame-toolbar-side>
+  </fs-ui-frame-toolbar>
+
+  <fs-ui-frame-content>
+    <router-outlet></router-outlet>
+  </fs-ui-frame-content>
+</fs-ui-frame>
+```
+
+  </TabItem>
+
+<TabItem value="ts" label="TS">
+
+```typescript
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import {
+  FrameConfig,
+  FrameEvent,
+  FrameEvents,
+  NavUser,
+} from "@ite/ng-daimlertruck";
+import { routes } from "./app-routing.module";
+
+@Component({
+  selector: "example",
+  templateUrl: "example.html",
+  styleUrls: ["example.css"],
+})
+export class ExampleComponent implements OnInit {
+  title = "FS DevOps`s ng mat components";
+  appRoutes = routes;
+
+  frameConfig: FrameConfig = {
+    appName: "Dummy App",
+    // appNameShort: stringOfLength('DUMMY', 0, 6),
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png",
+  };
+  navUser: NavUser = {
+    profilePicture:
+      "https://material.angular.io/assets/img/examples/shiba1.jpg",
+    name: "Some User",
+    role: "Engineer",
+  };
+
+  ngOnInit() {}
+
+  onEvent(frameEvent: FrameEvent) {
+    switch (frameEvent.type) {
+      case FrameEvents.MANAGE_ACCOUNT:
+        console.log("Manage Account called, do something...");
+        break;
+      case FrameEvents.LOGOUT:
+        console.log("Logout called, do something...");
+        break;
+      default:
+        console.error(`unknown event fetched: ${JSON.stringify(event)}`);
+        break;
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem value="scss" label="SCSS">
+
+```css
+
+```
+
+</TabItem>
+</Tabs>

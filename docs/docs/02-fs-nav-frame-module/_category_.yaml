@@ -1,0 +1,5 @@
+label: 'fs nav frame Module'
+collapsible: true
+collapsed: true
+link:
+  type: generated-index
