@@ -1,6 +1,6 @@
 label: "Library NG Mat Components"
 collapsible: true
-collapsed: false
+collapsed: true
 # className: red
 link:
   type: generated-index
