@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as dateFns from 'date-fns';
 import { CalendarMonth, CalendarTableEntry } from '../calendar.models';
 import { FsCalendarService } from '../services/fs-calendar.service';
@@ -21,13 +21,17 @@ export class FsCalendarTableComponent implements OnInit {
   currentMonth: CalendarMonth = this.calendarService.generateMonth(this._yearNumber, this._monthNumber, []);
   tableData: CalendarTableEntry[] = [];
 
+  markWeekend = true;
+
   get dataSource(): CalendarTableEntry[] {
     return this._dataSource;
   }
   get month(): number {
+    this.monthChange.emit(this._monthNumber);
     return this._monthNumber;
   }
   get year(): number {
+    this.yearChange.emit(this._yearNumber);
     return this._yearNumber;
   }
 
@@ -42,11 +46,14 @@ export class FsCalendarTableComponent implements OnInit {
     this._monthNumber = data;
     this.genMonthData();
   }
+  @Output() monthChange = new EventEmitter<number>();
+
   @Input()
   set year(data: number) {
     this._yearNumber = data;
     this.genMonthData();
   }
+  @Output() yearChange = new EventEmitter<number>();
 
   constructor(private calendarService: FsCalendarService) {}
 

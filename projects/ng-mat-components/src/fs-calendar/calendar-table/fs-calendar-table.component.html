@@ -13,10 +13,13 @@
             </svg>
           </button>
         </th>
-        <th *ngFor="let day of currentMonth.days" [class.date-today]="isToday(day.date)">
+        <th
+          *ngFor="let day of currentMonth.days"
+          [class.date-today]="isToday(day.date)"
+          [class.weekend]="day._meta?.isWeekendDay && !isToday(day.date) && markWeekend">
           {{ day._meta?.dayNumber }}
           <br />
-          {{ day.date | date : 'EEEEEE' }}
+          {{ currentMonth.dayNames[day._meta!.dayOfWeek - 1] }}
         </th>
         <th>
           <button mat-icon-button class="fs-calendar-switches" (click)="onMonthForward()">
@@ -32,7 +35,7 @@
     <tbody role="rowgroup">
       <tr *ngFor="let entry of tableData">
         <td colspan="2">{{ entry.name }}</td>
-        <td *ngFor="let day of entry.data" [class.tooltip]="day.toolTip">
+        <td *ngFor="let day of entry.data" [class.tooltip]="day.toolTip" [class.weekend]="day._meta?.isWeekendDay && markWeekend">
           <span class="tooltiptext" *ngIf="day.toolTip">{{ day.toolTip }}</span>
           <div class="box box-base" [style.backgroundColor]="day.colors?.backgroundColor" [style.color]="day.colors?.color">
             {{ day.char }}

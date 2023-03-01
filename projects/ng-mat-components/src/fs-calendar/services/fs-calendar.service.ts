@@ -140,6 +140,7 @@ export class FsCalendarService {
         dayNumber: dateFns.format(date, 'd', {
           locale: this.appLocale,
         }),
+        dayOfWeek: dateFns.getISODay(date),
         isWeekendDay: dateFns.isWeekend(date),
       },
     };
@@ -154,6 +155,7 @@ export class FsCalendarService {
         dayNumber: dateFns.format(date, 'd', {
           locale: this.appLocale,
         }),
+        dayOfWeek: dateFns.getISODay(date),
         isWeekendDay: dateFns.isWeekend(date),
       },
     };
@@ -176,6 +178,7 @@ export class FsCalendarService {
       name: dateFns.format(days[0].date, 'MMMM', { locale: this.appLocale }),
       year: year,
       days: days,
+      dayNames: this.dayNames,
     };
   }
 
@@ -189,6 +192,7 @@ export class FsCalendarService {
           dayNumber: dateFns.format(dateToGenerate, 'd', {
             locale: this.appLocale,
           }),
+          dayOfWeek: dateFns.getISODay(dateToGenerate),
           isWeekendDay: dateFns.isWeekend(dateToGenerate),
         },
       };
@@ -239,6 +243,7 @@ export class FsCalendarService {
           dayNumber: dateFns.format(dateToGenerate, 'd', {
             locale: this.appLocale,
           }),
+          dayOfWeek: dateFns.getISODay(dateToGenerate),
           isWeekendDay: dateFns.isWeekend(dateToGenerate),
         },
       };

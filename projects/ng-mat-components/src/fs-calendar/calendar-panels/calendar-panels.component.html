@@ -33,8 +33,8 @@
           <div style="width: 40px"></div>
         </ng-template>
       </div>
-      <table class="fs-calendar-table" [style.width]="dataSource.config.panelWidth">
-        <thead class="fs-calendar-table-header">
+      <table class="fs-calendar-panels-table" [style.width]="dataSource.config.panelWidth">
+        <thead class="fs-calendar-panels-table-header">
           <tr>
             <th scope="col" *ngIf="dataSource.config.calendarWeek"></th>
             <th *ngFor="let dayname of calendar.dayNames" scope="col">
