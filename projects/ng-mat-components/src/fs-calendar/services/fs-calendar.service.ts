@@ -258,7 +258,6 @@ export class FsCalendarService {
     });
     let arrOfDays: string[] = [];
     arr.map(a => arrOfDays.push(dateFns.format(a, 'EEEEEE', { locale: this.appLocale })));
-    console.log(arrOfDays);
     return arrOfDays;
   }
 }
