@@ -17,6 +17,7 @@ export interface CalendarMonth {
   name: string;
   year: number;
   days: CalendarExtendedDay[];
+  dayNames: String[];
 }
 
 /**
@@ -29,6 +30,7 @@ export interface CalendarSelectedRange {
   type: 'range';
   start: Date;
   end: Date;
+  affectedDays: Date[];
 }
 
 /**
@@ -140,6 +142,7 @@ export interface CalendarExtendedDay {
     kw: number;
     type: 'cw' | 'plHolder' | 'day';
     dayNumber: string;
+    dayOfWeek: number;
     isWeekendDay: boolean;
   };
 }

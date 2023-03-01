@@ -1,3 +1,9 @@
-<fs-calendar-table class="mat-elevation-z4" [dataSource]="calTableData">
+<mat-card class="flex-row-wrap" style="margin-bottom: 0.25rem">
+  <div>
+    <p>Selected month: {{ month + 1 }}, Selected year: {{ year }}</p>
+  </div>
+</mat-card>
+
+<fs-calendar-table class="mat-elevation-z2" [(month)]="month" [(year)]="year" [dataSource]="calTableData">
   <fs-calendar-table-name>Persons</fs-calendar-table-name>
 </fs-calendar-table>

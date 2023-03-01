@@ -18,7 +18,7 @@
     color: map-get($foreground, 'hint-text');
   }
 
-  .fs-calendar-table-header tr:first-child {
+  .fs-calendar-panels-table-header tr:first-child {
     border-bottom: solid 1px map-get($foreground, 'divider');
     color: map-get($foreground, 'secondary-text');
   }
@@ -33,7 +33,7 @@
   }
 
   .weekend {
-    background-color: map-get($foreground, 'divider');
+    background-color: map-get($foreground, 'divider') !important;
   }
 
   .date-between::after,
@@ -65,20 +65,18 @@
 
   .blured-days::after {
     content: '';
-    background: radial-gradient(
-      circle at center,
-      map-get($background, 'background') 0,
-      map-get($background, 'background') 12px,
-      transparent 14px,
-      transparent 100%
-    );
+    background: radial-gradient(circle at center,
+        map-get($background, 'background') 0,
+        map-get($background, 'background') 12px,
+        transparent 14px,
+        transparent 100%);
   }
 
-  .fs-calendar-table table thead tr th {
+  .fs-calendar-panels-table table thead tr th {
     border-bottom: solid 1px map-get($foreground, 'divider');
   }
 
-  .fs-calendar-table-helper,
+  .fs-calendar-table,
   .fs-calendar-month {
     background-color: map-get($background, 'card');
   }

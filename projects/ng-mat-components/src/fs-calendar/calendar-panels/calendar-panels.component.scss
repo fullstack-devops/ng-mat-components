@@ -17,7 +17,7 @@
   justify-content: space-between;
 }
 
-.fs-calendar-table {
+.fs-calendar-panels-table {
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
@@ -37,7 +37,7 @@
   min-height: 10px;
 }
 
-.fs-calendar-table-header th {
+.fs-calendar-panels-table-header th {
   text-align: center;
   padding: 0 0 8px 0;
   font-size: 13px;
@@ -49,15 +49,15 @@
   font-size: 13px;
 }
 
-.fs-calendar-table thead tr td button {
+.fs-calendar-panels-table thead tr td button {
   visibility: hidden;
 }
 
-.fs-calendar-table:first-child thead tr td:first-child button {
+.fs-calendar-panels-table:first-child thead tr td:first-child button {
   visibility: visible;
 }
 
-.fs-calendar-table:last-child thead tr td:last-child button {
+.fs-calendar-panels-table:last-child thead tr td:last-child button {
   visibility: visible;
 }
 

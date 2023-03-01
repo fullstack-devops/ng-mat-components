@@ -8,6 +8,8 @@ import { CalendarTableEntry } from 'projects/ng-mat-components/src/public-api';
 })
 export class ShowcaseCalendarTableComponent implements OnInit {
   today = new Date();
+  month: number = this.today.getMonth();
+  year: number = this.today.getFullYear();
 
   calTableData: CalendarTableEntry[] = [
     {
@@ -37,7 +39,7 @@ export class ShowcaseCalendarTableComponent implements OnInit {
           },
         },
         {
-          date: new Date(this.today.getFullYear(), this.today.getMonth(), 10),
+          date: new Date(this.today.getFullYear(), this.today.getMonth(), 11),
           toolTip: 'Some text',
           char: 'U',
           colors: {

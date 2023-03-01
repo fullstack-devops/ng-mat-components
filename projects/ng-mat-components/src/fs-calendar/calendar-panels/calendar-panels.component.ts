@@ -116,10 +116,22 @@ export class FsCalendarPanelsComponent implements OnInit {
         this.selectedDayStart = day.date;
       } else {
         this.selectedDayEnd = day.date;
+
+        let daysBetween: number = dateFns.differenceInDays(this.selectedDayStart, this.selectedDayEnd);
+        let daysAffected: Date[] = [];
+
+        daysAffected.push(this.selectedDayStart);
+        if (daysBetween < 0) {
+          for (let index = 1; index < daysBetween * -1 + 1; index++) {
+            daysAffected.push(dateFns.addDays(this.selectedDayStart, index));
+          }
+        }
+
         this.selection.emit({
           type: 'range',
           start: this.selectedDayStart,
           end: this.selectedDayEnd,
+          affectedDays: daysAffected,
         });
       }
     } else {
