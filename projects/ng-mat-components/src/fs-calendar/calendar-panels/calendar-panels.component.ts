@@ -12,7 +12,7 @@ import { FsCalendarService } from '../services/fs-calendar.service';
   },
 })
 export class FsCalendarPanelsComponent implements OnInit {
-  private _dataSource: CalendarPanels = {
+  private _dataSource: CalendarPanels<any> = {
     config: {
       renderMode: 'monthly',
       selectMode: 'click',
@@ -34,9 +34,9 @@ export class FsCalendarPanelsComponent implements OnInit {
 
   calendar: CalendarPanelSum | undefined;
   today = new Date();
-  selectedDayStart: Date | undefined;
-  selectedDayBetween: Date[] = [];
-  selectedDayEnd: Date | undefined;
+  selectedDayStart: CalendarExtendedDay<any> | undefined;
+  selectedDayBetween: CalendarExtendedDay<any>[] = [];
+  selectedDayEnd: CalendarExtendedDay<any> | undefined;
   markWeekend = this._dataSource.config.markWeekend;
   bluredDays = this._dataSource.config.bluredDays;
   isLoading = true;
@@ -44,7 +44,7 @@ export class FsCalendarPanelsComponent implements OnInit {
 
   weekendColor = 'rgba(0, 0, 0, .25)';
 
-  get dataSource(): CalendarPanels {
+  get dataSource(): CalendarPanels<any> {
     return this._dataSource;
   }
   get month(): number {
@@ -61,7 +61,7 @@ export class FsCalendarPanelsComponent implements OnInit {
   }
 
   @Input()
-  set dataSource(data: CalendarPanels) {
+  set dataSource(data: CalendarPanels<any>) {
     this._dataSource = data;
     this.generateCal();
   }
@@ -105,25 +105,34 @@ export class FsCalendarPanelsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  onClick(day: CalendarExtendedDay, type: string) {
+  onClick(day: CalendarExtendedDay<any>, type: string) {
     if (type === 'date' && this._dataSource.config.selectMode === 'range') {
       if (this.selectedDayStart != undefined && this.selectedDayEnd != undefined) {
         this.selectedDayBetween = [];
         this.selectedDayStart = undefined;
         this.selectedDayEnd = undefined;
       }
-      if (dateFns.isBefore(day.date, this.selectedDayStart as Date) || this.selectedDayStart === undefined) {
-        this.selectedDayStart = day.date;
+      if (dateFns.isBefore(day.date, this.selectedDayStart?.date as Date) || this.selectedDayStart === undefined) {
+        this.selectedDayStart = day;
       } else {
-        this.selectedDayEnd = day.date;
+        this.selectedDayEnd = day;
 
-        let daysBetween: number = dateFns.differenceInDays(this.selectedDayStart, this.selectedDayEnd);
-        let daysAffected: Date[] = [];
+        let daysBetween: number = dateFns.differenceInDays(this.selectedDayStart.date, this.selectedDayEnd.date);
+        let daysAffected: CalendarExtendedDay<any>[] = [];
 
         daysAffected.push(this.selectedDayStart);
         if (daysBetween < 0) {
+          console.log(this.dataSource.data);
           for (let index = 1; index < daysBetween * -1 + 1; index++) {
-            daysAffected.push(dateFns.addDays(this.selectedDayStart, index));
+            let newGeneratedDay = this.calendarService.generateDay(dateFns.addDays(this.selectedDayStart.date, index), []);
+            let i = this.dataSource.data.findIndex(sd => dateFns.isSameDay(sd.date, newGeneratedDay.date));
+            console.log('index:', i, newGeneratedDay.date);
+            if (i != -1) {
+              console.log('found one match');
+              daysAffected.push(this.dataSource.data[i]);
+            } else {
+              daysAffected.push(newGeneratedDay);
+            }
           }
         }
 
@@ -137,7 +146,7 @@ export class FsCalendarPanelsComponent implements OnInit {
     } else {
       this.selection.emit({
         type: 'click',
-        date: day.date,
+        date: day,
       });
     }
   }
@@ -146,7 +155,7 @@ export class FsCalendarPanelsComponent implements OnInit {
     if (this.calendar != undefined) {
       if (this.selectedDayStart != undefined && this.selectedDayEnd == undefined) {
         this.selectedDayBetween = this.calendar.daysAbsolute.filter(date => {
-          return dateFns.isAfter(date, this.selectedDayStart as Date) && dateFns.isBefore(date, dateComp);
+          return dateFns.isAfter(date.date, this.selectedDayStart?.date as Date) && dateFns.isBefore(date.date, dateComp);
         });
       }
     }
@@ -154,7 +163,7 @@ export class FsCalendarPanelsComponent implements OnInit {
 
   getAmIBetween(date: Date): boolean {
     const fIndex = this.selectedDayBetween.findIndex(selDate => {
-      return dateFns.isSameDay(selDate, date);
+      return dateFns.isSameDay(selDate.date, date);
     });
     if (fIndex != -1) {
       return true;
@@ -165,17 +174,17 @@ export class FsCalendarPanelsComponent implements OnInit {
 
   isSelectedDayStart(date: Date): boolean {
     if (this.selectedDayStart) {
-      return dateFns.isSameDay(this.selectedDayStart, date);
+      return dateFns.isSameDay(this.selectedDayStart.date, date);
     } else {
       return false;
     }
   }
   isSelectedDayEnd(date: Date): boolean {
     if (this.selectedDayEnd) {
-      return dateFns.isSameDay(this.selectedDayEnd, date);
+      return dateFns.isSameDay(this.selectedDayEnd.date, date);
     } else {
       if (this.selectedDayBetween.length > 0) {
-        if (dateFns.isSameDay(dateFns.addDays(this.selectedDayBetween[this.selectedDayBetween.length - 1], 1), date)) {
+        if (dateFns.isSameDay(this.calendarService.addDays(this.selectedDayBetween[this.selectedDayBetween.length - 1], 1).date, date)) {
           return true;
         }
       }
@@ -190,9 +199,9 @@ export class FsCalendarPanelsComponent implements OnInit {
   getCanIBeHighlighted(date: Date) {
     if (this.selectedDayEnd) {
       if (
-        (!dateFns.isSameDay(this.selectedDayStart as Date, date) && !dateFns.isSameDay(this.selectedDayEnd, date) && this.getAmIBetween(date)) ||
-        (dateFns.isSameDay(this.selectedDayEnd, date) && this.selectedDayEnd != undefined) ||
-        (dateFns.isSameDay(this.selectedDayStart as Date, date) && this.selectedDayStart != undefined)
+        (!dateFns.isSameDay(this.selectedDayStart?.date as Date, date) && !dateFns.isSameDay(this.selectedDayEnd?.date, date) && this.getAmIBetween(date)) ||
+        (dateFns.isSameDay(this.selectedDayEnd?.date, date) && this.selectedDayEnd != undefined) ||
+        (dateFns.isSameDay(this.selectedDayStart?.date as Date, date) && this.selectedDayStart != undefined)
       ) {
         return true;
       } else {

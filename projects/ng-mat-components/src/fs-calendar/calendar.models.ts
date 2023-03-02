@@ -1,7 +1,7 @@
 export interface CalendarPanelSum {
   year: number;
   dayNames: String[];
-  daysAbsolute: Date[];
+  daysAbsolute: CalendarExtendedDay[];
   calendarPanels: CalendarPanel[];
 }
 
@@ -26,11 +26,11 @@ export interface CalendarMonth {
  * @param {string}    start                   first day of selected range
  * @param {string}    end                     last day of selected range
  */
-export interface CalendarSelectedRange {
+export interface CalendarSelectedRange<T = void> {
   type: 'range';
-  start: Date;
-  end: Date;
-  affectedDays: Date[];
+  start: CalendarExtendedDay<T>;
+  end: CalendarExtendedDay<T>;
+  affectedDays: CalendarExtendedDay<T>[];
 }
 
 /**
@@ -38,11 +38,11 @@ export interface CalendarSelectedRange {
  * @param {string}    type                    type of event, in this case 'click'
  * @param {string}    date                    selected date
  */
-export interface CalendarSelectedDate {
+export interface CalendarSelectedDate<T = void> {
   type: 'click';
-  date: Date;
+  date: CalendarExtendedDay<T>;
 }
-export type CalendarEvent = CalendarSelectedRange | CalendarSelectedDate;
+export type CalendarEvent<T = void> = CalendarSelectedRange<T> | CalendarSelectedDate<T>;
 
 export interface DayX {
   dayNumber: string;
@@ -64,9 +64,9 @@ export interface DayX {
  * @param {string}    config                  configurate your calendar panels
  * @param {string}    data                    set custom days CalendarExtendedDay[]
  */
-export interface CalendarPanels {
+export interface CalendarPanels<T = void> {
   config: CalendarPanelsConfig;
-  data: CalendarExtendedDay[];
+  data: CalendarExtendedDay<T>[];
 }
 
 /**
@@ -125,7 +125,7 @@ export interface CalendarTableEntry {
  * @param {string}   badge.badgeIcon          if badgeMode == 'icon', set Icon (Material-Icons)
  * @param {Object}   _meta                    can be ignored
  */
-export interface CalendarExtendedDay {
+export interface CalendarExtendedDay<T = void> {
   date: Date;
   char?: string;
   colors?: {
@@ -138,11 +138,15 @@ export interface CalendarExtendedDay {
     badgeInt?: number;
     badgeIcon?: string;
   };
-  _meta?: {
-    kw: number;
-    type: 'cw' | 'plHolder' | 'day';
-    dayNumber: string;
-    dayOfWeek: number;
-    isWeekendDay: boolean;
-  };
+  _meta?: CalendarExtendedDayMeta;
+  customData?: T;
+}
+
+export type CalendarExtendedDayMetaType = 'cw' | 'plHolder' | 'day';
+export interface CalendarExtendedDayMeta {
+  kw: number;
+  type: CalendarExtendedDayMetaType;
+  dayNumber: string;
+  dayOfWeek: number;
+  isWeekendDay: boolean;
 }
