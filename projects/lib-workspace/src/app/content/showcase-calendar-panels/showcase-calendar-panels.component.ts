@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarEvent, CalendarPanels } from 'projects/ng-mat-components/src/public-api';
+import { CalendarEvent, CalendarExtendedDay, CalendarPanels, CalendarPanelsConfig } from 'projects/ng-mat-components/src/public-api';
+
+interface CustomTestObj {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-showcase-calendar-panels',
@@ -26,47 +31,54 @@ export class ShowcaseCalendarPanelsComponent implements OnInit {
   // monthsBefore = new FormControl(1);
   // monthsAfter = new FormControl(1);
 
-  dataSource: CalendarPanels = {
-    config: {
-      renderMode: 'monthly', // 'annual' | 'monthly'
-      selectMode: 'range', // 'click' | 'range'
-      displayYear: true,
-      firstDayOfWeekMonday: true,
-      calendarWeek: true,
-      switches: true,
-      panelWidth: '300px',
-      bluredDays: false, // default: false
-      markWeekend: true, // default: true
+  calendarConfig: CalendarPanelsConfig = {
+    renderMode: 'monthly', // 'annual' | 'monthly'
+    selectMode: 'range', // 'click' | 'range'
+    displayYear: true,
+    firstDayOfWeekMonday: true,
+    calendarWeek: true,
+    switches: true,
+    panelWidth: '300px',
+    bluredDays: false, // default: false
+    markWeekend: true, // default: true
+  };
+
+  calendarData: CalendarExtendedDay<CustomTestObj>[] = [
+    {
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
+      colors: {
+        backgroundColor: '#0167c7',
+      },
+      toolTip: 'Test ToolTip First',
     },
-    data: [
-      {
-        date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
-        colors: {
-          backgroundColor: '#0167c7',
-        },
-        toolTip: 'Test ToolTip First',
+    {
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
+      colors: {
+        backgroundColor: 'rgb(6, 182, 0)',
       },
-      {
-        date: new Date(this.today.getFullYear(), this.today.getMonth(), 3),
-        colors: {
-          backgroundColor: 'rgb(6, 182, 0)',
-        },
-        toolTip: 'Test ToolTip Second',
+      toolTip: 'Test ToolTip Second',
+    },
+    {
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 13),
+      colors: {
+        backgroundColor: 'rgb(6, 182, 0)',
       },
-      {
-        date: new Date(this.today.getFullYear(), this.today.getMonth(), 12),
-        colors: {
-          backgroundColor: 'rgb(6, 182, 0)',
-        },
-        toolTip: 'Test ToolTip 2',
+      toolTip: 'Test ToolTip 2',
+      customData: {
+        id: 1,
+        name: 'test',
       },
-      {
-        date: new Date(this.today.getFullYear(), this.today.getMonth(), 25),
-        colors: {
-          backgroundColor: 'lightblue',
-        },
+    },
+    {
+      date: new Date(this.today.getFullYear(), this.today.getMonth(), 25),
+      colors: {
+        backgroundColor: 'lightblue',
       },
-    ],
+    },
+  ];
+  dataSource: CalendarPanels<CustomTestObj> = {
+    config: this.calendarConfig,
+    data: this.calendarData,
   };
 
   constructor() {}

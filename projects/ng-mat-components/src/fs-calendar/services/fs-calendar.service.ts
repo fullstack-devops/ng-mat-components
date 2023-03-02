@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { CalendarExtendedDay, CalendarMonth, CalendarPanel, CalendarPanelSum } from '../calendar.models';
+import { CalendarExtendedDay, CalendarExtendedDayMeta, CalendarExtendedDayMetaType, CalendarMonth, CalendarPanel, CalendarPanelSum } from '../calendar.models';
+
+type StartsOn = 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined;
 
 @Injectable({
   providedIn: 'root',
@@ -8,19 +10,22 @@ import { CalendarExtendedDay, CalendarMonth, CalendarPanel, CalendarPanelSum } f
 export class FsCalendarService {
   dayNames: string[] = this.getWeekDayNames();
   oneYearOfMonths: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  weekStartsOn: StartsOn = 1;
+  kwStartsOn: StartsOn = 4;
 
   constructor(@Inject('FS_DATE_LOCALE') private appLocale: dateFns.Locale) {}
 
   generateMatrix(
     mode: 'monthly' | 'annual',
     calendarWeek: boolean,
-    customDays: CalendarExtendedDay[],
+    customDays: CalendarExtendedDay<any>[],
     year: number,
     currMonth: number,
     monthsBefore: number,
     monthsAfter: number
   ): CalendarPanelSum {
     let cal: CalendarPanelSum;
+    let daysAbsolute: CalendarExtendedDay<any>[] = [];
 
     monthsAfter = monthsAfter ? parseInt(monthsAfter.toString(), 10) : monthsAfter;
     monthsBefore = monthsBefore ? parseInt(monthsBefore.toString(), 10) : monthsBefore;
@@ -43,10 +48,9 @@ export class FsCalendarService {
         calendarPanels.push(this.generatePanel(actualYear, actualMonth, calendarWeek, customDays));
       }
 
-      let daysAbsolute: Date[] = [];
       calendarPanels.forEach(panel => {
         panel.days.forEach(day => {
-          daysAbsolute.push(day.date);
+          daysAbsolute.push(day);
         });
       });
       cal = {
@@ -58,10 +62,9 @@ export class FsCalendarService {
     } else {
       // Calendar is a full year
       let calendarPanels = this.generatePanels(year, this.oneYearOfMonths, calendarWeek, customDays);
-      let daysAbsolute: Date[] = [];
       calendarPanels.forEach(panel => {
         panel.days.forEach(day => {
-          daysAbsolute.push(day.date);
+          daysAbsolute.push(day);
         });
       });
       cal = {
@@ -74,7 +77,7 @@ export class FsCalendarService {
     return cal;
   }
 
-  generatePanels(year: number, months: number[], calendarWeek: boolean, customDays: CalendarExtendedDay[]): CalendarPanel[] {
+  generatePanels(year: number, months: number[], calendarWeek: boolean, customDays: CalendarExtendedDay<any>[]): CalendarPanel[] {
     let tmpPanels: CalendarPanel[] = [];
     months.forEach(month => {
       tmpPanels.push(this.generatePanel(year, month, calendarWeek, customDays));
@@ -82,7 +85,7 @@ export class FsCalendarService {
     return tmpPanels;
   }
 
-  generatePanel(year: number, month: number, calendarWeek: boolean, customDays: CalendarExtendedDay[]): CalendarPanel {
+  generatePanel(year: number, month: number, calendarWeek: boolean, customDays: CalendarExtendedDay<any>[]): CalendarPanel {
     const filtedCustomDays = customDays.filter(day => {
       return dateFns.isSameMonth(new Date(year, month, 1), day.date);
     });
@@ -94,7 +97,7 @@ export class FsCalendarService {
       days: tmpMonth.days,
       render: [[]],
     };
-    let tmpPreRender: CalendarExtendedDay[] = tmpMonth.days;
+    let tmpPreRender: CalendarExtendedDay<any>[] = tmpMonth.days;
     let firstDayOfMonth = tmpMonth.days[0].date;
     let dayOfWeek = dateFns.getISODay(firstDayOfMonth);
     let nextMonth = dateFns.addMonths(firstDayOfMonth, 1);
@@ -131,40 +134,24 @@ export class FsCalendarService {
     return tmpMonthRenderer;
   }
 
-  generatePlaceholder(date: Date): CalendarExtendedDay {
+  generatePlaceholder(date: Date): CalendarExtendedDay<any> {
     return {
       date: date,
-      _meta: {
-        kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
-        type: 'plHolder',
-        dayNumber: dateFns.format(date, 'd', {
-          locale: this.appLocale,
-        }),
-        dayOfWeek: dateFns.getISODay(date),
-        isWeekendDay: dateFns.isWeekend(date),
-      },
+      _meta: this.generateMetaForCalExtDay(date, 'plHolder'),
     };
   }
 
-  generateWeekNumber(date: Date): CalendarExtendedDay {
+  generateWeekNumber(date: Date): CalendarExtendedDay<any> {
     return {
       date: date,
-      _meta: {
-        kw: dateFns.getWeek(date, { weekStartsOn: 4 }),
-        type: 'cw',
-        dayNumber: dateFns.format(date, 'd', {
-          locale: this.appLocale,
-        }),
-        dayOfWeek: dateFns.getISODay(date),
-        isWeekendDay: dateFns.isWeekend(date),
-      },
+      _meta: this.generateMetaForCalExtDay(date, 'cw'),
     };
   }
 
-  generateMonth(year: number, month: number, customDays: CalendarExtendedDay[]): CalendarMonth {
+  generateMonth(year: number, month: number, customDays: CalendarExtendedDay<any>[]): CalendarMonth {
     const firstDayInMonth = new Date(year, month, 1);
     const daysInMonth = dateFns.getDaysInMonth(firstDayInMonth);
-    const days: CalendarExtendedDay[] = [];
+    const days: CalendarExtendedDay<any>[] = [];
 
     for (let index = 0; index < daysInMonth; index++) {
       const date = new Date(year, month, index + 1);
@@ -182,19 +169,11 @@ export class FsCalendarService {
     };
   }
 
-  generateDay(dateToGenerate: Date, customDays: CalendarExtendedDay[]): CalendarExtendedDay {
+  generateDay(dateToGenerate: Date, customDays: CalendarExtendedDay<any>[]): CalendarExtendedDay<any> {
     if (customDays.length == 0) {
       return {
         date: dateToGenerate,
-        _meta: {
-          kw: dateFns.getWeek(dateToGenerate, { weekStartsOn: 4 }),
-          type: 'day',
-          dayNumber: dateFns.format(dateToGenerate, 'd', {
-            locale: this.appLocale,
-          }),
-          dayOfWeek: dateFns.getISODay(dateToGenerate),
-          isWeekendDay: dateFns.isWeekend(dateToGenerate),
-        },
+        _meta: this.generateMetaForCalExtDay(dateToGenerate, 'day'),
       };
     } else {
       let backgroundColor = '';
@@ -237,24 +216,42 @@ export class FsCalendarService {
           color: customDays[0].colors?.color,
         },
         toolTip: toolTip,
-        _meta: {
-          kw: dateFns.getWeek(dateToGenerate, { weekStartsOn: 4 }),
-          type: 'day',
-          dayNumber: dateFns.format(dateToGenerate, 'd', {
-            locale: this.appLocale,
-          }),
-          dayOfWeek: dateFns.getISODay(dateToGenerate),
-          isWeekendDay: dateFns.isWeekend(dateToGenerate),
-        },
+        customData: customDays[0].customData,
+        _meta: this.generateMetaForCalExtDay(dateToGenerate, 'day'),
       };
     }
+  }
+
+  addDays(orig: CalendarExtendedDay<any>, ammount: number): CalendarExtendedDay<any> {
+    let newDate = dateFns.addDays(orig.date, ammount);
+    return {
+      date: newDate,
+      badge: orig.badge,
+      char: orig.char,
+      colors: orig.colors,
+      customData: orig.customData,
+      toolTip: orig.toolTip,
+      _meta: this.generateMetaForCalExtDay(newDate, 'day'),
+    };
+  }
+
+  generateMetaForCalExtDay(date: Date, type: CalendarExtendedDayMetaType): CalendarExtendedDayMeta {
+    return {
+      kw: dateFns.getWeek(date, { weekStartsOn: this.kwStartsOn }),
+      type: type,
+      dayNumber: dateFns.format(date, 'd', {
+        locale: this.appLocale,
+      }),
+      dayOfWeek: dateFns.getISODay(date),
+      isWeekendDay: dateFns.isWeekend(date),
+    };
   }
 
   getWeekDayNames(): string[] {
     let now = new Date();
     let arr = dateFns.eachDayOfInterval({
-      start: dateFns.startOfWeek(now, { weekStartsOn: 1 }),
-      end: dateFns.endOfWeek(now, { weekStartsOn: 1 }),
+      start: dateFns.startOfWeek(now, { weekStartsOn: this.weekStartsOn }),
+      end: dateFns.endOfWeek(now, { weekStartsOn: this.weekStartsOn }),
     });
     let arrOfDays: string[] = [];
     arr.map(a => arrOfDays.push(dateFns.format(a, 'EEEEEE', { locale: this.appLocale })));
