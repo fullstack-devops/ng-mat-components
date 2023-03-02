@@ -88,7 +88,7 @@ export class FsCalendarPanelsComponent implements OnInit {
   }
   @Input() placeholderDay: boolean = false;
 
-  @Output() readonly selection = new EventEmitter<CalendarEvent>();
+  @Output() readonly selection = new EventEmitter<CalendarEvent<any>>();
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
