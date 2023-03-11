@@ -1,0 +1,153 @@
+---
+title: Examples
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## ui-frame in form
+
+<Tabs>
+<TabItem value="html" label="HTML">
+
+```html
+<fs-nav-frame [navFrameConfig]="navFrameConfig" [navRoutes]="navRoutes">
+  <fs-nav-frame-toolbar>
+    <!-- <ng-template #tbcontent>hallo</ng-template> -->
+    <fs-nav-frame-toolbar-start>Current App Title</fs-nav-frame-toolbar-start>
+
+    <fs-nav-frame-toolbar-center>
+      <button mat-icon-button>
+        <mat-icon>help</mat-icon>
+      </button>
+      <button mat-icon-button matBadge="3">
+        <mat-icon>article</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>call</mat-icon>
+      </button>
+    </fs-nav-frame-toolbar-center>
+
+    <fs-nav-frame-toolbar-end>
+      <div style="font-size: 12px">
+        <mat-form-field appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Searching..." />
+        </mat-form-field>
+      </div>
+    </fs-nav-frame-toolbar-end>
+  </fs-nav-frame-toolbar>
+
+  <!-- <fs-nav-frame-sidebar> -->
+  <fs-nav-user-profile profilePicture="https://material.angular.io/assets/img/examples/shiba1.jpg">
+    <!--  profilePicture="https://material.angular.io/assets/img/examples/shiba1.jpg" -->
+    <fs-nav-user-profile-name>Some User</fs-nav-user-profile-name>
+    <fs-nav-user-profile-subname>Enginer</fs-nav-user-profile-subname>
+
+    <fs-nav-user-profile-actions>
+      <button mat-icon-button>
+        <mat-icon>manage_accounts</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>logout</mat-icon>
+      </button>
+    </fs-nav-user-profile-actions>
+  </fs-nav-user-profile>
+  <!-- </fs-nav-frame-sidebar> -->
+
+  <fs-nav-frame-content>
+    <router-outlet></router-outlet>
+  </fs-nav-frame-content>
+</fs-nav-frame>
+```
+
+  </TabItem>
+
+<TabItem value="ts" label="TS">
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { NavFrameConfig, NavRoutes } from '@fullstack-devops/ng-mat-components';
+
+@Component({
+  selector: 'example',
+  templateUrl: 'example.html',
+  styleUrls: ['example.css'],
+})
+export class ExampleComponent implements OnInit {
+  title = 'FS DevOps`s ng mat components';
+  navRoutes: NavRoutes = [
+    {
+      title: 'Home',
+      icon: 'home',
+      path: 'home',
+      description: 'Home - Overview',
+    },
+    {
+      title: 'Nav Frame',
+      icon: 'pivot_table_chart',
+      path: 'nav-frame',
+      description: 'Nav Frame - Showcase',
+    },
+    {
+      title: 'Calendar Panels',
+      icon: 'calendar_month',
+      path: 'calendar-panels',
+      description: 'Calendar Panels - Showcase',
+    },
+    {
+      title: 'Calendar Table',
+      icon: 'event_note',
+      path: 'calendar-table',
+      description: 'Calendar Table - Showcase',
+    },
+    {
+      title: 'Context is very looooooong',
+      icon: 'article',
+      path: 'not-set',
+      description: 'Very loooong context',
+    },
+    {
+      title: 'With children',
+      icon: 'family_restroom',
+      path: 'not-set',
+      description: 'Something with children!',
+      childrens: [
+        {
+          title: 'Test',
+          path: 'test',
+        },
+        {
+          title: 'Test2',
+          path: 'test2',
+        },
+      ],
+    },
+    {
+      title: 'Badge -> nice',
+      icon: 'badge',
+      path: 'not-set',
+      badgeNumber: 4,
+      description: 'There is a badge',
+    },
+  ];
+
+  navFrameConfig: NavFrameConfig = {
+    appName: 'Demo App',
+    appVersion: '0.0.0',
+    // logoSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
+  };
+
+  constructor() {}
+}
+```
+
+</TabItem>
+<TabItem value="scss" label="SCSS">
+
+```css
+
+```
+
+</TabItem>
+</Tabs>

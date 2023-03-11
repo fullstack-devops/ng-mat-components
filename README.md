@@ -37,7 +37,7 @@ add to your local `.npmrc` the following line to be able to use this package:
 
 Live Demo with all current modules at https://fullstack-devops.github.io/ng-mat-components
 
-Api Documentation: https://fullstack-devops.github.io/libraries/ng-mat-components.
+Api Documentation: https://fullstack-devops.github.io/docs/ng-mat-components/overview.
 
 ## Development server
 
