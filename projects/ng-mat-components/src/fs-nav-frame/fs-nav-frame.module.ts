@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { MatListModule } from '@angular/material/list';
 import { FsNavFrameContentDirective } from './directives/fs-nav-frame-content.directive';
 import { FsNavFrameSidebarDirective } from './directives/fs-nav-frame-sidebar.directive';
 import { FsNavFrameComponent } from './fs-nav-frame.component';
@@ -21,7 +20,7 @@ import { FsNavFrameToolbarStartDirective } from './nav-frame-toolbar/directives/
 import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-toolbar.component';
 
 @NgModule({
-  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, RouterModule, MatIconModule, MatButtonModule, MatListModule],
+  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, RouterModule, MatIconModule, MatButtonModule],
   exports: [
     FsNavFrameComponent,
     FsNavFrameToolbarComponent,
