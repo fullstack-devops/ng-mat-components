@@ -28,10 +28,10 @@
 
   $nav-link-border: 5px;
 
-  .sidebar .nav-links li.active::after {
+  .fs-nav-frame-sidebar-item:has(button.active-link)::after {
     content: '';
     position: absolute;
-    top: calc($nav-link-border / 2);
+    margin-top: calc($nav-link-border / 2);
     left: calc($nav-link-border / 2);
     z-index: -1;
     width: calc(100% - $nav-link-border);

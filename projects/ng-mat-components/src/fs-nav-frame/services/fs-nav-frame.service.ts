@@ -5,9 +5,7 @@ export enum MenuState {
   OPENED = 'opened',
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FsNavFrameService {
   isMenuClosed = new EventEmitter<boolean>();
   menuState: MenuState = MenuState.CLOSED;
