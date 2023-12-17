@@ -26,10 +26,6 @@
       flex-shrink: 0;
       object-fit: cover;
     }
-
-    .material-icons {
-      // font-size: 32px;
-    }
   }
 
   .app-info-wrapper {
@@ -47,10 +43,9 @@
 
     .app-version {
       padding: 0 1rem;
-      font-size: .9rem;
+      font-size: 0.9rem;
     }
   }
-
 
   .app-info-wrapper.opened {
     display: flex;
@@ -103,14 +98,14 @@ ul {
   margin: 0;
   padding: 0;
 
-  >li {
+  > li {
     position: relative;
     display: inline-grid;
     grid-template-columns: 1fr 3rem;
     align-items: center;
     width: 100%;
 
-    >button:nth-child(1) {
+    > button:nth-child(1) {
       width: 100%;
       height: $sidebar-width-closed;
       display: inline-flex;
@@ -121,10 +116,6 @@ ul {
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-
-      .material-icons {
-        padding-left: 4px;
       }
 
       .link-name {

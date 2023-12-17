@@ -6,7 +6,7 @@ on:
       - 'main'
 
 jobs:
-  build-gh-pages-demo:
+  build-demo:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,26 +22,25 @@ jobs:
       - name: build workspace application
         run: yarn run build:workspace
 
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "_site/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          ref: gh-pages-demo
-          path: 'gh-pages-demo'
-
-      - name: Clean out old dist and copy new dist
-        run: |
-          rm -rf gh-pages-demo/*
-          cp -R dist/lib-workspace/* gh-pages-demo
-          touch gh-pages-demo/$(date "+%d-%m-%Y_%H-%m-%S")-dummyfile
-
-      - name: push chages to branch
-        working-directory: gh-pages-demo
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-
-          git add .
-          git status
-
-          git commit -a -m "update dist automated by $GITHUB_ACTOR"
-          git push
+          path: dist/lib-workspace
+  deploy:
+    needs: build-demo
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

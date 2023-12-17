@@ -22,8 +22,12 @@
     border-top: 1px solid map-get($foreground, 'divider');
   }
 
-  .sidebar .profile {
+  .sidebar .fs-nav-user-profile {
     border-top: 1px solid map-get($foreground, 'divider');
+  }
+
+  .sidebar .profile-pic-button-wrapper svg {
+    fill: map-get($foreground, 'text');
   }
 
   $nav-link-border: 5px;
