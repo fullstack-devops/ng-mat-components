@@ -15,22 +15,22 @@ fs-nav-frame-sidebar-item button {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
 
-  .icon {
-    margin-left: 12px;
-  }
+    > i {
+      margin-left: 12px;
+    }
 
-  .title {
-    margin-left: 1rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    > span {
+      margin-left: 1rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 }
 
-.sidebar.opened > fs-nav-frame-sidebar > fs-nav-frame-sidebar-item button .title {
+.sidebar.opened > fs-nav-frame-sidebar > fs-nav-frame-sidebar-item button .mdc-button__label > span {
   display: block;
 }
-.sidebar:not(.opened) > fs-nav-frame-sidebar > fs-nav-frame-sidebar-item button .title {
+.sidebar:not(.opened) > fs-nav-frame-sidebar > fs-nav-frame-sidebar-item button .mdc-button__label > span {
   display: none;
 }
