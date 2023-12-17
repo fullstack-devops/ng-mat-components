@@ -23,15 +23,8 @@ export class FsNavFrameComponent implements OnInit, OnDestroy {
 
   profileContentElement!: HTMLElement | null;
   isClosed: boolean = true;
-  isActivePath: string = '';
 
-  constructor(
-    private elementRef: ElementRef,
-    private frameService: FsNavFrameService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private titleService: Title
-  ) {}
+  constructor(private elementRef: ElementRef, private frameService: FsNavFrameService, private titleService: Title) {}
 
   ngOnInit(): void {
     this.frameService.menuStateEvent.subscribe((state: MenuState) => {
@@ -49,20 +42,6 @@ export class FsNavFrameComponent implements OnInit, OnDestroy {
         }
       }
     });
-
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => {
-          const child = this.activatedRoute.firstChild;
-          return child;
-        })
-      )
-      .subscribe((ttl: ActivatedRoute | null) => {
-        ttl?.url.subscribe(obj => {
-          this.isActivePath = obj[0].path;
-        });
-      });
   }
 
   ngAfterViewInit() {
@@ -81,9 +60,5 @@ export class FsNavFrameComponent implements OnInit, OnDestroy {
     if (this.frameService.menuState == MenuState.OPENED) {
       this.frameService.switchMenuState();
     }
-  }
-
-  isNavActive(name: string): boolean {
-    return name === this.isActivePath;
   }
 }
