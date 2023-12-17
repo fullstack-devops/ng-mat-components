@@ -17,7 +17,7 @@
 
     <fs-nav-frame-toolbar-end>
       <div style="font-size: 12px">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" dense>
           <mat-label>Search</mat-label>
           <input matInput placeholder="Searching..." />
         </mat-form-field>
@@ -25,8 +25,28 @@
     </fs-nav-frame-toolbar-end>
   </fs-nav-frame-toolbar>
 
+  <fs-nav-frame-sidebar>
+    <fs-nav-frame-sidebar-item routerLink="home">
+      <mat-icon class="icon">home</mat-icon>
+      <span class="title">Home</span>
+    </fs-nav-frame-sidebar-item>
+    <fs-nav-frame-sidebar-item routerLink="nav-frame">
+      <mat-icon class="icon">pivot_table_chart</mat-icon>
+      <span class="title">Nav Frame</span>
+    </fs-nav-frame-sidebar-item>
+
+    <!-- <fs-nav-frame-sidebar-item routerLink="home"></fs-nav-frame-sidebar-item>
+
+    <fs-nav-frame-sidebar-item routerLink="nav-frame">
+      <fs-sidebar-item-icon>
+        <mat-icon>pivot_table_chart</mat-icon>
+      </fs-sidebar-item-icon>
+      <fs-sidebar-item-title>Nav Frame</fs-sidebar-item-title>
+    </fs-nav-frame-sidebar-item> -->
+  </fs-nav-frame-sidebar>
+
   <!-- <fs-nav-frame-sidebar> -->
-  <fs-nav-user-profile profilePicture="https://material.angular.io/assets/img/examples/shiba1.jpg">
+  <fs-nav-user-profile >
     <!--  profilePicture="https://material.angular.io/assets/img/examples/shiba1.jpg" -->
     <fs-nav-user-profile-name>Some User</fs-nav-user-profile-name>
     <fs-nav-user-profile-subname>Enginer</fs-nav-user-profile-subname>

@@ -5,11 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 
-import { MatListModule } from '@angular/material/list';
+import { FsNavFrameSidebar } from './components/fs-nav-frame-sidebar';
+import { FsNavFrameSidebarItemComponent } from './components/fs-nav-frame-sidebar-item/fs-nav-frame-sidebar-item.component';
 import { FsNavFrameContentDirective } from './directives/fs-nav-frame-content.directive';
-import { FsNavFrameSidebarDirective } from './directives/fs-nav-frame-sidebar.directive';
 import { FsNavFrameComponent } from './fs-nav-frame.component';
 import { FsNavUserProfileActionsDirective } from './fs-nav-user-profile/directives/fs-nav-user-profile-actions.directive';
 import { FsNavUserProfileNameDirective } from './fs-nav-user-profile/directives/fs-nav-user-profile-name.directive';
@@ -19,9 +18,10 @@ import { FsNavFrameToolbarCenterDirective } from './nav-frame-toolbar/directives
 import { FsNavFrameToolbarEndDirective } from './nav-frame-toolbar/directives/fs-nav-frame-toolbar-end.directive';
 import { FsNavFrameToolbarStartDirective } from './nav-frame-toolbar/directives/fs-nav-frame-toolbar-start.directive';
 import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-toolbar.component';
+import { FsNavFrameService } from './services/fs-nav-frame.service';
 
 @NgModule({
-  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, RouterModule, MatIconModule, MatButtonModule, MatListModule],
+  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, RouterModule, FsNavFrameSidebar, MatButtonModule],
   exports: [
     FsNavFrameComponent,
     FsNavFrameToolbarComponent,
@@ -29,8 +29,9 @@ import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-too
     FsNavFrameToolbarCenterDirective,
     FsNavFrameToolbarEndDirective,
 
-    FsNavFrameSidebarDirective,
     FsNavFrameContentDirective,
+    FsNavFrameSidebar,
+    FsNavFrameSidebarItemComponent,
 
     FsNavUserProfileComponent,
     FsNavUserProfileNameDirective,
@@ -44,13 +45,14 @@ import { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-too
     FsNavFrameToolbarCenterDirective,
     FsNavFrameToolbarEndDirective,
 
-    FsNavFrameSidebarDirective,
     FsNavFrameContentDirective,
+    FsNavFrameSidebarItemComponent,
 
     FsNavUserProfileComponent,
     FsNavUserProfileNameDirective,
     FsNavUserProfileSubNameDirective,
     FsNavUserProfileActionsDirective,
   ],
+  providers: [FsNavFrameService],
 })
 export class FsNavFrameModule {}

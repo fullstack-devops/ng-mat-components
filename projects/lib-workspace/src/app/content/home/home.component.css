@@ -5,9 +5,8 @@
   justify-content: center;
 }
 
-.docs-components .mat-card {
-  height: 300px;
-  width: 250px;
+.docs-components mat-card {
+  width: 380px;
   margin: 8px;
   cursor: pointer;
 }

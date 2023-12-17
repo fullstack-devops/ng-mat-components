@@ -1,9 +1,11 @@
+import { FsNavFrameSidebarItemComponent } from './components/fs-nav-frame-sidebar-item/fs-nav-frame-sidebar-item.component';
 /*
  * Public API Surface of ng-mat-components
  */
 
 export { FsNavFrameContentDirective } from './directives/fs-nav-frame-content.directive';
-export { FsNavFrameSidebarDirective } from './directives/fs-nav-frame-sidebar.directive';
+export { FsNavFrameSidebar } from './components/fs-nav-frame-sidebar';
+export { FsNavFrameSidebarItemComponent } from './components/fs-nav-frame-sidebar-item/fs-nav-frame-sidebar-item.component';
 export { FsNavFrameComponent } from './fs-nav-frame.component';
 export { FsNavFrameModule } from './fs-nav-frame.module';
 export * from './fs-nav-frame.modules';
@@ -15,5 +17,3 @@ export { FsNavFrameToolbarCenterDirective } from './nav-frame-toolbar/directives
 export { FsNavFrameToolbarEndDirective } from './nav-frame-toolbar/directives/fs-nav-frame-toolbar-end.directive';
 export { FsNavFrameToolbarStartDirective } from './nav-frame-toolbar/directives/fs-nav-frame-toolbar-start.directive';
 export { FsNavFrameToolbarComponent } from './nav-frame-toolbar/fs-nav-frame-toolbar.component';
-
-

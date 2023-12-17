@@ -19,8 +19,8 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version-file: .nvmrc
+          registry-url: 'https://registry.npmjs.org'
           scope: '@fullstack-devops'
 
       - name: install packages
