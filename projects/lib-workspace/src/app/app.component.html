@@ -25,10 +25,10 @@
   </fs-nav-frame-toolbar>
 
   <fs-nav-frame-sidebar>
-    
+
     <fs-nav-frame-sidebar-item *ngFor="let route of navRoutes" routerLink="{{route.path}}">
-      <mat-icon class="icon">{{route.icon}}</mat-icon>
-      <span class="title">{{route.title}}</span>
+      <i class="material-icons">{{route.icon}}</i>
+      <span>{{route.title}}</span>
     </fs-nav-frame-sidebar-item>
 
   </fs-nav-frame-sidebar>
