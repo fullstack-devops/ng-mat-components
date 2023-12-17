@@ -16,7 +16,6 @@ export class FsNavFrameSidebarItemComponent implements OnInit {
   @ViewChild(TemplateRef) template: TemplateRef<any> | undefined;
 
   closed: boolean = this.frameService.menuState == MenuState.CLOSED;
-  isActivePath: string = '';
 
   constructor(public frameService: FsNavFrameService) {
   }
