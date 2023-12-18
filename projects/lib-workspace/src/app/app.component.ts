@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { Component, OnInit } from '@angular/core';
-import { NavFrameConfig, NavRoutes } from 'projects/ng-mat-components/src/public-api';
+import { NavFrameConfig, NavFrameSizing, NavRoutes } from 'projects/ng-mat-components/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,18 @@ import { NavFrameConfig, NavRoutes } from 'projects/ng-mat-components/src/public
 })
 export class AppComponent implements OnInit {
   title = 'FS DevOps`s ng mat components';
+
+  navFrameConfig: NavFrameConfig = {
+    appName: 'Demo App',
+    appVersion: '0.0.0',
+    // logoSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
+  };
+  sizing: NavFrameSizing = {
+    toolbarHeight: 3,
+    sidebarWidthClosed: 4,
+    sidebarWidthOpened: 18,
+  };
+
   navRoutes: NavRoutes = [
     {
       title: 'Home',
@@ -66,12 +78,6 @@ export class AppComponent implements OnInit {
       description: 'There is a badge',
     },
   ];
-
-  navFrameConfig: NavFrameConfig = {
-    appName: 'Demo App',
-    appVersion: '0.0.0',
-    // logoSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1024px-Angular_full_color_logo.svg.png',
-  };
 
   constructor() {}
 

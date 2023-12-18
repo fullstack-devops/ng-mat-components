@@ -6,9 +6,16 @@
  *  @logoSrc             {string}     (optional) link to logo, can be relative or full URL
  */
 export interface NavFrameConfig {
-  appName: string;
+  appName?: string;
   appVersion?: string;
   logoSrc?: string;
+  sizing?: NavFrameSizing;
+}
+
+export interface NavFrameSizing {
+  toolbarHeight?: number; // in rem
+  sidebarWidthClosed?: number; // in rem
+  sidebarWidthOpened?: number; // in rem
 }
 
 export interface NavItem {

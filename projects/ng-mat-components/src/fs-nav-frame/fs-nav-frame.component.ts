@@ -1,8 +1,8 @@
-import { Component, ContentChild, ElementRef, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, ContentChild, ElementRef, HostBinding, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { NavFrameConfig, NavRoutes } from './fs-nav-frame.modules';
+import { NavFrameConfig, NavFrameSizing } from './fs-nav-frame.modules';
 import { FsNavFrameService, MenuState } from './services/fs-nav-frame.service';
 
 @Component({
@@ -14,19 +14,27 @@ import { FsNavFrameService, MenuState } from './services/fs-nav-frame.service';
   },
 })
 export class FsNavFrameComponent implements OnInit, OnDestroy {
-  @Input() navRoutes: NavRoutes = [];
   @Input() navFrameConfig: NavFrameConfig = {
-    appName: 'Demo App',
+    appName: '',
   };
-
+  @Input() sizing: NavFrameSizing = {
+    toolbarHeight: 3,
+    sidebarWidthClosed: 4,
+    sidebarWidthOpened: 18,
+  };
   @ContentChild('navLinks') navLinks: TemplateRef<any> | undefined;
 
+  body = document.querySelector('body');
   profileContentElement!: HTMLElement | null;
   isClosed: boolean = true;
 
   constructor(private elementRef: ElementRef, private frameService: FsNavFrameService, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.body!.style.setProperty('--toolbar-height', `${this.sizing.toolbarHeight!}rem`);
+    this.body!.style.setProperty('--sidebar-width-closed', `${this.sizing.sidebarWidthClosed!}rem`);
+    this.body!.style.setProperty('--sidebar-width-opened', `${this.sizing.sidebarWidthOpened!}rem`);
+
     this.frameService.menuStateEvent.subscribe((state: MenuState) => {
       if (state == MenuState.OPENED) {
         this.frameService.menuState = MenuState.OPENED;

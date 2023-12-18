@@ -1,21 +1,22 @@
 fs-nav-user-profile {
     position: relative;
-    height: 4rem;
+    height: var(--sidebar-width-closed);
     display: grid;
-    grid-template-columns: 4rem 1fr;
+    grid-template-columns: var(--sidebar-width-closed) 1fr;
 }
 
 .profile-pic-button-wrapper {
-    width: 4rem;
-    height: 4rem;
+    width: var(--sidebar-width-closed);
+    height: var(--sidebar-width-closed);
     display: flex;
     justify-content: center;
     align-items: center;
 
     button {
-        width: 3rem !important;
-        height: 3rem !important;
-        font-size: 3rem;
+        width: var(--sidebar-width-closed) !important;
+        height: var(--sidebar-width-closed) !important;
+        font-size: calc(var(--sidebar-width-closed)*0.8);
+        min-width: var(--sidebar-width-closed) !important;
 
         .mdc-button__label {
             display: inline-flex;
@@ -27,8 +28,8 @@ fs-nav-user-profile {
         }
 
         .pic {
-            height: 3rem;
-            width: 3rem;
+            height: calc(var(--sidebar-width-closed)*0.8);
+            width: calc(var(--sidebar-width-closed)*0.8);
             margin-left: auto;
             margin-right: auto;
             background-size: cover;
@@ -38,16 +39,16 @@ fs-nav-user-profile {
         }
 
         .default-profile-pic {
-            width: 3rem;
-            height: 3rem;
-            font-size: 3rem;
+            width: calc(var(--sidebar-width-closed)*0.8);
+            height: calc(var(--sidebar-width-closed)*0.8);
+            font-size: calc(var(--sidebar-width-closed)*0.8);
         }
     }
 }
 
 .profile-content-wrapper {
     position: relative;
-    height: 4rem;
+    height: var(--sidebar-width-closed);
     display: none;
     align-items: center;
     justify-content: space-between;

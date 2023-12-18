@@ -39,7 +39,7 @@
     left: calc($nav-link-border / 2);
     z-index: -1;
     width: calc(100% - $nav-link-border);
-    height: calc(4rem - $nav-link-border);
+    height: calc(var(--sidebar-width-closed) - $nav-link-border);
     border-radius: $nav-link-border;
     background-color: map-get($primary, 'default');
   }
