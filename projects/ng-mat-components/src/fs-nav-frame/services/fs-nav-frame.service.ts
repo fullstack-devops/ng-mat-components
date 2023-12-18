@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { NavFrameSizing } from '../fs-nav-frame.modules';
 
 export enum MenuState {
   CLOSED = 'closed',
@@ -10,6 +11,12 @@ export class FsNavFrameService {
   isMenuClosed = new EventEmitter<boolean>();
   menuState: MenuState = MenuState.CLOSED;
   menuStateEvent = new EventEmitter<MenuState>();
+
+  sizing: NavFrameSizing = {
+    toolbarHeight: 3,
+    sidebarWidthClosed: 4,
+    sidebarWidthOpened: 18,
+  };
 
   constructor() {}
 
