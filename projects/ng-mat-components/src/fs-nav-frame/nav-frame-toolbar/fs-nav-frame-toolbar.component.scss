@@ -20,6 +20,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  fs-nav-frame-toolbar-start,
+  fs-nav-frame-toolbar-center,
+  fs-nav-frame-toolbar-end {
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 .mat-badge-medium.mat-badge-above .mat-badge-content {
