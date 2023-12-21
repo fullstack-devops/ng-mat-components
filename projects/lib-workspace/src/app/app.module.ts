@@ -13,6 +13,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import * as dateFnsLocales from 'date-fns/locale';
@@ -40,6 +41,7 @@ const locales: any = dateFnsLocales;
     MatSelectModule,
     MatCardModule,
     MatSlideToggleModule,
+    MatDialogModule,
     /* Lib modules */
     FsNavFrameModule,
     FsCalendarModule,
